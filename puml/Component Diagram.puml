@@ -1,0 +1,123 @@
+@startuml
+
+package "Angular" {
+	node "Components" {
+		frame "Use main data" {
+		[Dashboard]
+		[Profile]
+		[Personnel]
+		}
+		[Program Application]
+		[Budget Proposal]
+		[Expense Report]
+		[Status Report]
+	}
+
+	node "View Models to Dynamics" {
+		frame "Generic Outgoing App Data" {
+		[Convert to Org function]
+		}
+		[Convert to Schedule G]
+		[Convert to Schedule F part 1]
+		[Convert to Schedule F part 2]
+		[Convert to Monthly Statistics]
+	}
+
+	node "Dynamics to View Models" {
+		frame "Generic Incoming App Data" {
+		[Transmogrifier]
+		}
+		[Transmogrifier Program Application]
+		[Transmogrifier Budget Proposal]
+		[Transmogrifier Expense Report]
+		[Transmogrifier Status Report]
+		}
+
+	node "Services" {
+		[State Service]
+		[Main Service]
+		[Profile Service]
+		[Personnel Service]
+		[Program Application Service]
+		[Budget Proposal Service]
+		[Expense Report Service]
+		[Status Report Service]
+	}
+	[Interceptor]
+}
+
+[Dashboard] <-- [Transmogrifier]
+[Profile] <-- [Transmogrifier]
+[Personnel] <-- [Transmogrifier]
+[Program Application] <-- [Transmogrifier Program Application]
+[Budget Proposal] <-- [Transmogrifier Budget Proposal]
+[Expense Report] <-- [Transmogrifier Expense Report]
+[Status Report] <-- [Transmogrifier Status Report]
+
+[Transmogrifier] <-- [Main Service]
+[Transmogrifier] <-- [Profile Service]
+[Transmogrifier] <-- [Personnel Service]
+[Transmogrifier Program Application] <-- [Program Application Service]
+[Transmogrifier Budget Proposal] <-- [Budget Proposal Service]
+[Transmogrifier Expense Report] <-- [Expense Report Service]
+[Transmogrifier Status Report] <-- [Status Report Service]
+
+[Convert to Org function] <-- [Dashboard]
+[Convert to Org function] <-- [Profile]
+[Convert to Org function] <-- [Personnel]
+[Convert to Schedule G] <-- [Program Application]
+[Convert to Schedule F part 1] <-- [Budget Proposal]
+[Convert to Schedule F part 2] <-- [Expense Report]
+[Convert to Monthly Statistics] <-- [Status Report]
+
+[Interceptor] -- HTTP
+
+[Main Service] <--> [Interceptor]
+[Profile Service] <--> [Interceptor]
+[Personnel Service] <--> [Interceptor]
+[Program Application Service] <--> [Interceptor]
+[Budget Proposal Service] <--> [Interceptor]
+[Expense Report Service] <--> [Interceptor]
+[Status Report Service] <--> [Interceptor]
+
+[Main Service] <... [Convert to Org function]
+[Program Application Service] <... [Convert to Schedule G]
+[Budget Proposal Service] <... [Convert to Schedule F part 1]
+[Expense Report Service] <... [Convert to Schedule F part 2]
+[Status Report Service] <... [Convert to Monthly Statistics]
+
+package "OpenShift API"{
+	node "Routes" {
+		[Dynamics Blob] -up- HTTP
+		[Dynamics Org] -up- HTTP
+		[Dynamics Schedule F] -up- HTTP
+		[Dynamics Schedule G] -up- HTTP
+	}
+	node "Models" {
+		[Various For building]
+		[Blob]
+		[CrmContact]
+		[CrmContract]
+		[CrmSchedule]
+		[CrmTask]
+		[Org]
+		[Organization]
+		[Schedule F]
+		[Schedule G Collection]
+		[Schedule G Line Item Collection]
+	}
+	[Auth] -- HTTP
+}
+
+[Dynamics Blob] -- [Various For building]
+[Dynamics Org] -- [Various For building]
+[Dynamics Schedule F] -- [Various For building]
+[Dynamics Schedule G] -- [Various For building]
+package "Dynamics Authentication" {
+	HTTP -- [Token]
+}
+package "Dynamics API" {
+	HTTP -- [Route pairs to endpoint]
+}
+
+@enduml

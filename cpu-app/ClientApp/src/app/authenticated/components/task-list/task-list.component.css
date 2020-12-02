@@ -1,0 +1,39 @@
+.download-link {
+    text-decoration: underline !important;
+    cursor: pointer;
+    color: #1a5a96;
+}
+
+.download-link:hover {
+    color: #0000f3;
+}
+
+.upload-documents-container {
+    padding-left: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.no-bottom-border {
+    border-bottom: none !important;
+}
+.no-top-border {
+    border-top: none !important;
+}
+.centered-header {
+    text-align: center;
+}
+.border-right {
+    border-right: 3px solid #ced4da;
+}
+
+.loading-indicator {
+    position: absolute;
+}
+
+.dark-overlay {
+    opacity: 0.5;
+}
+
+.task-list-container {
+    position: relative;
+}

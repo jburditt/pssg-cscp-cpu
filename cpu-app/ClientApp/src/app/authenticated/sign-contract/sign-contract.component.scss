@@ -1,0 +1,49 @@
+.file-name {
+  margin-right: 10px;
+  padding-left: 10px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.download-file-div {
+  margin-left: 25px;
+  height: 45px;
+  position: relative;
+  border: 1px solid black;
+}
+
+.download-button {
+  position: absolute;
+  right: 5%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.previous-button {
+  margin-right: 10px;
+}
+
+.submit-button {
+  right: 0;
+  position: absolute;
+}
+
+.min-row-height {
+  min-height: 54px;
+}
+
+.pdf-container {
+  width: 100%;
+  height: 65vh;
+}
+
+.pdf-object {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+.appendix-link {
+    cursor: pointer;
+    color: #1a5a96 !important;
+    /* text-decoration: underline !important; */
+}
+
+.appendix-link:hover {
+    color: #0000f3 !important;
+}
+
+.appendix-link:hover {
+    text-decoration: underline !important;
+}

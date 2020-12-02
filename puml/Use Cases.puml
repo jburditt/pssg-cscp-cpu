@@ -1,0 +1,29 @@
+@startuml
+
+title CPU Use Cases 
+
+:Organization user: as User
+rectangle Portal {
+	User -down-> (View account, info, and tasks)
+	User -down-> (Perform a task)
+	note right of (View account, info, and tasks) : Dashboard area lets the user\nevaluate tasks at a glance.
+	(Perform a task) -down-> (Renew a contract)
+	(Perform a task) -down-> (Send program status report)
+	(Perform a task) -down-> (Send quarterly financial report)
+	(Perform a task) -down-> (Sent estimated budget)
+	(Perform a task) -down-> (Sign and upload files)
+	(Perform a task) -down-> (Edit organization data)
+ 	note right of (Edit organization data) : staffing details\ncontact info\norganization structure
+}
+ (Renew a contract) -down-> (Dynamics data)
+ (Send program status report) -down-> (Dynamics data)
+ (Send quarterly financial report) -down-> (Dynamics data)
+ (Sent estimated budget) -down-> (Dynamics data)
+ (Sign and upload files) -down-> (Dynamics data)
+ (Edit organization data) -down-> (Dynamics data)
+
+:Government Employee: as GU
+
+GU -right-> (<b>Dynamics Web UI\nDo a bunch of processes with data\nthe user has provided)
+(<b>Dynamics Web UI\nDo a bunch of processes with data\nthe user has provided)->(Dynamics data)
+@enduml

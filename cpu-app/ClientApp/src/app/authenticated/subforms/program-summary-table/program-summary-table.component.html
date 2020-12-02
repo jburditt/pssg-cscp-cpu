@@ -1,0 +1,141 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2" scope="col" class="review-section-header">Main Program Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Program Name</th>
+      <td>{{pa?.name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Program Type</th>
+      <td>{{pa?.programTypeName}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Assignment Area</th>
+      <td>{{pa?.assignmentArea}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Program Location</th>
+      <td>{{pa?.programLocation}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Estimated Contract Value</th>
+      <td>{{pa?.estimatedContractValue | currency}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Contracted Service Hours per Week</th>
+      <td>{{pa?.numberOfHours}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Email Address</th>
+      <td>{{pa?.emailAddress}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Phone Number</th>
+      <td>{{pa?.phoneNumber | phone}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Fax Number</th>
+      <td>{{pa?.faxNumber | phone}}</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2" scope="col" class="review-section-header">Location Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Address Line 1</th>
+      <td>{{pa?.mainAddress?.line1}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Address Line 2</th>
+      <td>{{pa?.mainAddress?.line2}}</td>
+    </tr>
+    <tr>
+      <th scope="row">City</th>
+      <td>{{pa?.mainAddress?.city}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Province</th>
+      <td>{{pa?.mainAddress?.province}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Postal Code</th>
+      <td>{{pa?.mainAddress?.postalCode}}</td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="pa?.mailingAddress" class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2" scope="col" class="review-section-header">Mailing Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Address Line 1</th>
+      <td>{{pa?.mailingAddress?.line1}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Address Line 2</th>
+      <td>{{pa?.mailingAddress?.line2}}</td>
+    </tr>
+    <tr>
+      <th scope="row">City</th>
+      <td>{{pa?.mailingAddress?.city}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Province</th>
+      <td>{{pa?.mailingAddress?.province}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Postal Code</th>
+      <td>{{pa?.mailingAddress?.postalCode}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-person-table [title]="'Program Contact'" [person]="pa?.programContact"></app-person-table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2" scope="col" class="review-section-header">Program Staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="!pa.additionalStaff.length">
+      <th scope="row">Staff</th>
+      <td>No staff declared on {{pa.name}}</td>
+    </tr>
+    <tr *ngFor="let person of pa.additionalStaff;let i=index">
+      <th scope="row">Person {{i+1}}</th>
+      <td>{{person.firstName}} {{person.middleName}} {{person.lastName}}{{person.title?' - '+person.title:''}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2" scope="col" class="review-section-header">Subcontracted Staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="!pa.subContractedStaff.length">
+      <th scope="row">Subcontracted Staff</th>
+      <td>No subcontracted staff declared on {{pa.name}}</td>
+    </tr>
+    <tr *ngFor="let person of pa.subContractedStaff;let i=index">
+      <th scope="row">Person {{i+1}}</th>
+      <td>{{person.firstName}} {{person.middleName}} {{person.lastName}}{{person.title?' - '+person.title:''}}</td>
+    </tr>
+  </tbody>
+</table>

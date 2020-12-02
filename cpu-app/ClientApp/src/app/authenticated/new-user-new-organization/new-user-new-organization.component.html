@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <div class="page-header">
+                <h1>Register New Organization</h1>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="organizationName">Organization Name</label>
+                        <input type="text" class="form-control" id="organizationName" name="organizationName" [(ngModel)]="trans.serviceProvider.name" #organizationName="ngModel">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(organizationName)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(organizationName)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="orgEmailAddress">Email</label>
+                        <input type="text" class="form-control" id="orgEmailAddress" name="orgEmailAddress" [(ngModel)]="trans.serviceProvider.email" #orgEmailAddress="ngModel" (input)="formHelper.trimInput($event.target)" [pattern]="emailRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(orgEmailAddress)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(orgEmailAddress)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="orgPhoneNumber">Phone Number</label>
+                        <input type="text" mask='(000) 000 0000' class="form-control" id="orgPhoneNumber" name="orgPhoneNumber" [(ngModel)]="trans.serviceProvider.phone" #orgPhoneNumber="ngModel" [pattern]="phoneRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(orgPhoneNumber)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(orgPhoneNumber)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="orgFaxNumber">Fax Number (Optional)</label>
+                        <input type="text" mask='(000) 000 0000' class="form-control" id="orgFaxNumber" name="orgFaxNumber" [(ngModel)]="trans.serviceProvider.fax" #orgFaxNumber="ngModel" [pattern]="phoneRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(orgFaxNumber)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(orgFaxNumber)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-address2 [(address)]="trans.serviceProvider.address"></app-address2>
+
+            <div class="page-header">
+                <h1>Register Contractor Contact</h1>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-check">
+                        <input [(ngModel)]="trans.isContractorContact" class="form-check-input" type="checkbox" id="mainAddressSameAsAgency" name="mainAddressSameAsAgency">
+                        <label class="form-check-label" for="mainAddressSameAsAgency">
+                            Select if you are the contractor contact for the above organization (This person will be contacted for all contract related matter)
+                        </label>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <span>
+                            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="trans.person.firstName" #firstName="ngModel" [pattern]="nameRegex">
+                            <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(firstName)">
+                                Ok
+                            </div>
+                            <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(firstName)">
+                                Try Again
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="middleName">Middle Name (Optional)</label>
+                        <input type="text" class="form-control" id="middleName" name="middleName" [(ngModel)]="trans.person.middleName" #middleName="ngModel">
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <span>
+                            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="trans.person.lastName" #lastName="ngModel" [pattern]="nameRegex">
+                            <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(lastName)">
+                                Ok
+                            </div>
+                            <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(lastName)">
+                                Try Again
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="trans.person.title" #title="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="emailAddress">Email</label>
+                        <input type="text" class="form-control" id="emailAddress" name="emailAddress" [(ngModel)]="trans.person.email" #emailAddress="ngModel" (input)="formHelper.trimInput($event.target)" [pattern]="emailRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(emailAddress)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(emailAddress)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" mask='(000) 000 0000' class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="trans.person.phone" #phoneNumber="ngModel" [pattern]="phoneRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(phoneNumber)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(phoneNumber)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="faxNumber">Fax Number (Optional)</label>
+                        <input type="text" mask='(000) 000 0000' class="form-control" id="faxNumber" name="faxNumber" [(ngModel)]="trans.person.fax" #faxNumber="ngModel" [pattern]="phoneRegex">
+                        <div class="valid-feedback" [hidden]="formHelper.showValidFeedback(faxNumber)">
+                            Ok
+                        </div>
+                        <div class="invalid-feedback" [hidden]="formHelper.showInvalidFeedbackOld(faxNumber)">
+                            Try Again
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-address2 [(address)]="trans.person.address"></app-address2>
+        </div>
+    </div>
+
+    <button [class.is-disabled]="saving" class="btn btn-primary mt-2 mr-2" (click)="registerNewUser()">Register</button>
+    <p>You will receive access to the Community Program Unit Portal 5-7 business days upon submission</p>
+</div>

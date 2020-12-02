@@ -1,0 +1,14 @@
+<app-contact-information2 [(contactInformation)]="contactInformation"></app-contact-information2>
+
+<h2 class="blue-header">Organization Contact(s)</h2>
+<p>If the executive or board contact information has inaccuracy please update personnel contact information for your organization before submitting this program application.</p>
+<app-person-picker [title]="'Executive Contact'" [(person)]="contactInformation.executiveContact"></app-person-picker>
+<div class="form-check mt-2">
+  <input [(ngModel)]="hasBoardOfDirectors" (change)="cleanBoardContact()" type="checkbox" id="hasBoardOfDirectors" name="hasBoardOfDirectors" class="form-check-input">
+  <label for="hasBoardOfDirectors">
+    Please select this check box if your organization has a Board of Directors.
+  </label>
+</div>
+<span *ngIf="this.hasBoardOfDirectors">
+  <app-person-picker [title]="'Board Contact (For societies only)'" [(person)]="contactInformation.boardContact"></app-person-picker>
+</span>

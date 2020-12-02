@@ -1,0 +1,1 @@
+These diagrams are generated using PlantUML. Modify the .puml files and you get a new .png file.

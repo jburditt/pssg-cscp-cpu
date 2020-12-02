@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+      <section class="application-nav sticky-top">
+        <div style="max-height: 90%;">
+          <app-icon-stepper></app-icon-stepper>
+        </div>
+        <button class="btn btn-primary mt-2 mr-2" (click)="add()">Add Staff</button>
+        <button class="btn btn-primary mt-2" [class.is-disabled]="saving" (click)="save()">Save</button>
+      </section>
+    </div>
+
+    <div class="col">
+      <div *ngIf="stepperElements && currentStepperElement">
+        <div *ngFor="let person of trans.persons">
+          <span *ngIf="person.personId===currentStepperElement.object['personId']">
+            <div class="page-header">
+              <h1>{{nameAssemble(person.firstName, person.middleName, person.lastName)||'Person'}}</h1>
+            </div>
+            <app-person-editor [(person)]="person" [(invalidFields)]="missingFields" (setAddress)="setAddressSameAsAgency($event)" (clearAddress)="clearAddress($event)"></app-person-editor>
+            <button *ngIf="!person.me" [class.is-disabled]="saving" class="btn btn-danger mt-2 mr-2" (click)="remove(person)">Deactivate Staff</button>
+            <button [class.is-disabled]="saving" class="btn btn-primary mt-2 mr-2" (click)="cancel(person)">Cancel</button>
+            <button [class.is-disabled]="saving" class="btn btn-primary mt-2 mr-2" (click)="saveAndExit(person)">Save and Exit</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
