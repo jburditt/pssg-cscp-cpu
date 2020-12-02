@@ -1,0 +1,39 @@
+<div class="card">
+  <table>
+    <tr>
+      <td style="vertical-align:top; width: 300px">
+        <p class="card-text" style="border: 1px; border-style:solid; border-color:black; padding: 1em;">
+          Organization: <b>BC Social Work Societies</b><br />
+          Contract No: <b>1097583-20</b>
+        </p>
+      </td>
+      <td style="vertical-align:top">
+        <div class="card-body">
+          <h5 class="card-title">Write Message</h5>
+          <hr />
+          <!-- Some missing fields on the component for this, commenting this out so the solution can build. -->
+          <!-- <p class="card-text">
+            <label for="yourName" [class.required]="required">Your Name</label>
+            <input type="text" class="form-control required" id="yourName" name="yourName" formControlName="yourName" [required]="formHelper.isRequired(yourName,required)" width="100">
+
+            <label for="contactNumber" [class.required]="required">Contact Number</label>
+            <input type="text" class="form-control required" id="contactNumber" name="contactNumber" formControlName="contactNumber" [required]="formHelper.isRequired(contactNumber,required)" width="100">
+
+            <label for="program" [class.required]="required">Program</label>
+            <input type="text" class="form-control required" id="program" name="program" formControlName="program" [required]="formHelper.isRequired(program,required)" width="100">
+
+            <label for="location" [class.required]="required">Location</label>
+            <input type="text" class="form-control required" id="location" name="location" formControlName="location" [required]="formHelper.isRequired(location,required)" width="100">
+
+            <label for="message" [class.required]="required">Message</label>
+            <textarea class="form-control" id="message" rows="3" placeholder="Type here&hellip;"></textarea>
+          </p> -->
+        </div>
+        <div class="card-body" style="text-align:right">
+            <!-- <button (click)="save()" [class.is-disabled]="saving" class="btn btn-primary">Send</button> -->
+            <button class="btn btn-primary ml-2" (click)="onExit()">Exit</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

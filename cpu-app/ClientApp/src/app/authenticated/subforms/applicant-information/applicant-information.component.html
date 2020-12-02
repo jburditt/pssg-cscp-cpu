@@ -1,0 +1,39 @@
+<div>
+    <h2 class="blue-header">
+        Applicant Organization Legal Name
+    </h2>
+    <div class="form-row">
+        <div class="col-md">
+            <div class="form-group">
+                <label for="orgName">Legal Name of Organization</label>
+                <input [value]="trans.organizationName" type="text" class="form-control" id="orgName" name="orgName" disabled>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="blue-header mt-4">Mailing Address</h2>
+    <app-address2 [(address)]="trans.applicantInformation.mailingAddress" [isDisabled]="isCompleted"></app-address2>
+
+    <h2 class="blue-header mt-4">General Information</h2>
+
+    <!-- insert new checkboxes for VS-4037 -->
+
+    <div>
+        <label>
+            <strong>
+                Are you applying for Social Services Group Liability Program (SSGLP) insurance coverage for for the next fiscal year?
+            </strong>
+        </label>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <input [disabled]="isCompleted" [(ngModel)]="trans.applyingForInsurance" class="form-check-input" type="radio" name="applyingForInsurance" id="applyingForInsurance1" [value]="true">
+                <label class="form-check-label" for="applyingForInsurance1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input [disabled]="isCompleted" [(ngModel)]="trans.applyingForInsurance" class="form-check-input" type="radio" name="applyingForInsurance" id="applyingForInsurance2" [value]="false">
+                <label class="form-check-label" for="applyingForInsurance2">No</label>
+            </div>
+        </div>
+    </div>
+
+</div>

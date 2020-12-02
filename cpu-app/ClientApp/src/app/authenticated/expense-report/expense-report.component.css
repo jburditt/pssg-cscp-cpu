@@ -1,0 +1,19 @@
+.expense-category {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.amount-category {
+    background-color: rgba(244, 201, 203, 0.5);
+}
+
+.quarterly-category {
+    background-color: rgba(202, 222, 201, 0.5);
+}
+
+.ytd-category {
+    background-color: rgba(226, 237, 248, 0.5);
+}
+
+.centered-header {
+    text-align: center;
+}

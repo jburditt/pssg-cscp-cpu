@@ -1,0 +1,18 @@
+<h2 class="blue-header">Primary Program Contact Information</h2>
+<app-primary-contact-info [(contactInformation)]="contactInformation"></app-primary-contact-info>
+<app-address2 [(address)]="contactInformation.mainAddress"></app-address2>
+
+<div class="form-check">
+  <input [(ngModel)]="contactInformation.hasMailingAddress" class="form-check-input" type="checkbox" id="mailingAddressCheckbox">
+  <label class="form-check-label" for="mailingAddressCheckbox">
+    Different mailing address from main address.
+  </label>
+</div>
+<span *ngIf="contactInformation.hasMailingAddress">
+  <h2 class="blue-header mt-4">Mailing Address</h2>
+  <app-address2 [(address)]="contactInformation.mailingAddress"></app-address2>
+</span>
+
+<h2 class="blue-header mt-4">Organization Contact(s)</h2>
+<p>If the executive or board contact information has inaccuracy please update personnel contact information for your organization before submitting this program application.</p>
+<app-person-picker [title]="'Executive Contact'" [(person)]="contactInformation.executiveContact"></app-person-picker>

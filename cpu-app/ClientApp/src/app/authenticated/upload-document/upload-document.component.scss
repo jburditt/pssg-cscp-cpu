@@ -1,0 +1,114 @@
+.file-name {
+  margin-right: 10px;
+  padding-left: 10px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.download-file-div {
+  margin-left: 25px;
+  height: 45px;
+  position: relative;
+  border: 1px solid black;
+}
+
+.download-button {
+  position: absolute;
+  right: 5%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.previous-button {
+  margin-right: 10px;
+}
+
+.submit-button {
+  right: 0;
+  position: absolute;
+}
+
+.min-row-height {
+  min-height: 54px;
+}
+
+.display-inline {
+  display: inline-block;
+}
+
+.existing-documents-row {
+  margin-top: 20px;
+}
+
+.list-container {
+  width: 98%;
+  padding-left: 15px;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+}
+
+.file-info-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-type-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.file-type-container {
+  display: flex;
+  margin-right: 15px;
+}
+
+.file-type-select {
+  width: auto;
+  max-width: 216px;
+  margin-left: 10px;
+}
+
+.file-type-label {
+  margin-bottom: 0;
+  margin-top: 8px;
+  min-width: 65px;
+}
+
+.other-input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.download-link {
+  text-decoration: underline !important;
+  cursor: pointer;
+  color: #1a5a96;
+}
+
+.download-link:hover {
+  color: #0000f3;
+}
+
+.upload-documents-page-container {
+  position: relative;
+}
+
+.loading-indicator {
+  position: absolute;
+}
+
+.dark-overlay {
+  opacity: 0.5;
+}

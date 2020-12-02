@@ -1,0 +1,13 @@
+.go-bottoms {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 5px;
+}
+
+th {
+  width: 40%;
+}
+
+.prev-next-div {
+  margin-bottom: 10px;
+}

@@ -1,0 +1,8 @@
+.stepper-item {
+    cursor: pointer;
+}
+
+.stepper-selected {
+    color: white !important;
+    -webkit-text-fill-color: white;
+}

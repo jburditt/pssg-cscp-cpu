@@ -1,0 +1,75 @@
+.inline-col {
+  display: inherit;
+  padding-top: 9px;
+}
+
+.hours-input {
+  width: 40%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.hours-label {
+  padding-top: 6px;
+}
+
+.retain-height {
+  height: 43px;
+}
+
+.message-container {
+  position: relative;
+}
+
+.info-message {
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.extra-padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.inline-card {
+  display: flex;
+}
+
+.shared-cost-contact-div {
+  margin-top: 10px;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-container > div {
+  /* width: 260px; */
+  /* margin-right: 10px; */
+  padding-left: 0 !important;
+}
+
+.btn-add-program-staff {
+  margin-bottom: 10px;
+}
+
+.bottom-spacing {
+  padding-bottom: 10px;
+}
+
+.flex-display {
+  display: flex;
+}
+
+.italics {
+  font-style: italic;
+}
+
+.white-icon span i {
+  color: white;
+}

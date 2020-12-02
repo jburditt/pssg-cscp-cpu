@@ -1,0 +1,25 @@
+.submit-button {
+    right: 0;
+    position: absolute;
+}
+
+.amount-totals-container {
+    width: fit-content;
+    text-align: right;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0 !important;
+}
+
+.centered-header {
+    text-align: center;
+}
+
+.quarter-expenditure-col {
+    width: 100px;
+}
+
+.actual-expenditures-category {
+    background-color: rgba(226, 237, 248, 0.5);
+}
