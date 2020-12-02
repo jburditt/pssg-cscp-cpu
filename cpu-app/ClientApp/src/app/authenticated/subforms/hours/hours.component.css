@@ -1,0 +1,13 @@
+.time-input {
+    width: 75px;
+    margin-right: 10px;
+}
+
+.form-inline {
+    margin-bottom: 10px;
+}
+
+.invalid-feedback {
+    position: absolute;
+    top: 38px;
+}

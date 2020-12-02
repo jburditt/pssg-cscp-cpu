@@ -1,0 +1,200 @@
+@import "@bcgov/bc-sans/css/BCSans.css";
+@import "assets/BCGov-material-theme.css";
+
+@media screen {
+  // @import "../node_modules/bootstrap/dist/css/bootstrap.min";
+}
+
+// BC Sans is so ugly I'm commenting it out regardless of how correct it is to use it.
+// If you want to uncomment this line that is on you. It supports indigenous languages.
+// *{  font-family: 'BCSans', 'Myriad-Pro', 'Calibri', 'Helvetica' ,'Arial', sans-serif; }
+
+/* You can add global styles to this file, and also import other style files */
+// forms: these override the bootstrap display none.
+.valid-feedback {
+  display: inherit;
+}
+.invalid-feedback {
+  display: inherit;
+}
+// a handy red asterisk for marking required fields
+.required {
+  &::after {
+    content: " *";
+    color: #d93e45;
+    font-weight: 700;
+  }
+}
+
+.blue-header {
+  background-color: #38598a;
+  color: #fff;
+  padding: 10px 7px 7px 15px;
+  font-size: 16px;
+  font-weight: semi-bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+// get rid of ugly red borders around fields
+:not(output):-moz-ui-invalid:not(:focus) {
+  box-shadow: none;
+}
+
+:not(output):-moz-ui-invalid:-moz-focusring:not(:focus) {
+  box-shadow: none;
+}
+
+.is-disabled {
+  cursor: default;
+  opacity: 0.5;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.is-required::before {
+  color: red;
+  content: " *";
+}
+
+.add-row-td {
+  width: 34px;
+  height: 55px;
+}
+
+.add-row-button {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.remove-row-button {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.long-header-name {
+  padding-right: 0 !important;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 0.55rem;
+}
+
+.nav-tab:hover {
+  color: #fff;
+  -webkit-text-fill-color: white;
+  background-color: #7590b9;
+}
+
+.nav-tab {
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.nav-tab.active {
+  color: #fff !important;
+  background-color: #38598a !important;
+}
+
+.nav-tab-table:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-tab-table {
+  cursor: pointer;
+}
+
+.nav-tab-table.active {
+  color: #495057 !important;
+  -webkit-text-fill-color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #dee2e6 #dee2e6 #fff !important;
+}
+
+.nav-home {
+  cursor: pointer;
+}
+
+.nav-home:hover {
+  text-decoration: underline !important;
+}
+
+.nav-login:hover {
+  text-decoration: underline !important;
+  color: lightgrey !important;
+}
+
+.nav-login {
+  text-decoration: none !important;
+}
+
+::placeholder {
+  opacity: 0.6 !important;
+}
+
+.organization-box {
+  margin-bottom: 10px;
+}
+
+.sticky-top {
+  z-index: 1000 !important;
+  background-color: white;
+}
+
+.review-section-header {
+  background: #e2edf8;
+}
+
+.previous-button {
+  margin-right: 10px;
+}
+
+.submit-button {
+  right: 0;
+  position: absolute;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.organization-box-width {
+  max-width: 730px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.address-info-message {
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+.align-right {
+  float: right;
+}
+
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 6em;
+  width: 6em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

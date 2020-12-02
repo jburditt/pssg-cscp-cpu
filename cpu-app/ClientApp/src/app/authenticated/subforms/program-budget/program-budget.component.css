@@ -1,0 +1,7 @@
+.sticky-bottom-border {
+    border-bottom: 2px solid black;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0 !important;
+}

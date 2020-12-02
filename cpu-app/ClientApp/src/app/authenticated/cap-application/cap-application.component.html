@@ -1,0 +1,82 @@
+<div *ngIf="trans" class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <section class="application-nav sticky-top">
+                <div style="max-height: 90%;">
+                    <div class="card organization-box" *ngIf="trans">
+                        <div class="card-header">
+                            {{ trans.organizationName ||'Organization'}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <strong>Program Type</strong><br>
+                                {{trans.contractNumber}}
+                            </p>
+                            <p class="card-text">
+                                <strong>Fiscal Year</strong><br>
+                                {{trans.fiscalYear}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="max-height: 90%;">
+                    <app-icon-stepper></app-icon-stepper>
+                </div>
+                <button class="btn btn-primary mt-2 mr-2" *ngIf="!isCompleted" [class.is-disabled]="saving || trans.signature.signatureDate" (click)="save(true, true)">Save and Exit</button>
+                <button class="btn btn-primary mt-2" *ngIf="!isCompleted" [class.is-disabled]="saving" (click)="save()">Save</button>
+                <button class="btn btn-primary mt-2" *ngIf="isCompleted" (click)="exit()">Exit</button>
+
+                <div class="additional-info-container">
+                    <div class="additional-info">
+                        <h5>Addition Information - CAP Guidelines and Liability Program Eligibility</h5>
+                        <p>Click below to open a new window and view information on CAP Guidelines and Liability Program Eligibility.</p>
+                        <p>You will not lose your progress on this application.</p>
+                        <p><button class="btn btn-secondary btn-wrappable" (click)="showCAPGuidelines()">View CAP Guidelines</button></p>
+                        <p><button class="btn btn-secondary btn-wrappable" (click)="showProgramEligibility()">Liability Program Egilibility</button></p>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+
+        <div class="col-md-8">
+            <div *ngIf="stepperElements && currentStepperElement">
+                <div class="page-header">
+                    <h1>{{currentStepperElement.itemName}}</h1>
+                </div>
+                <div *ngFor="let item of stepperElements">
+                    <div *ngIf="isCurrentStepperElement(item)">
+                        <div *ngIf="item.discriminator === discriminators[0]">
+                            <app-funding-criteria></app-funding-criteria>
+                        </div>
+                        <div *ngIf="item.discriminator === discriminators[1]">
+                            <app-applicant-information [trans]="trans" [isCompleted]="isCompleted"></app-applicant-information>
+                        </div>
+                        <div *ngIf="item.discriminator === discriminators[2]">
+                            <span *ngFor="let program of trans.capPrograms">
+                                <span *ngIf="program.programId===item.object.data['programId']">
+                                    <app-cap-program [(program)]="program" [isCompleted]="isCompleted"></app-cap-program>
+                                </span>
+                            </span>
+                        </div>
+                        <div *ngIf="item.discriminator === discriminators[3]">
+                            <app-program-authorizer [(signature)]="trans.signature" [isDisabled]="isCompleted" formType="CAP Contract Application"></app-program-authorizer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <span><button *ngIf="stepperIndex > 0" class="btn btn-primary mt-2 previous-button" (click)="setPreviousStepper()">Previous</button></span>
+            <span><button *ngIf="stepperIndex < stepperElements.length - 1" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">{{isCompleted?'':'Save and '}}Continue</button></span>
+            <span><button *ngIf="stepperIndex == stepperElements.length -1  && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.signature.signatureDate || saving" (click)="submit()">Submit</button></span>
+        </div>
+    </div>
+</div>
