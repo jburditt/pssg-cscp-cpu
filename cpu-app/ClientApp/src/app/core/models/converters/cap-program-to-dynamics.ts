@@ -18,6 +18,11 @@ export function convertCAPProgramToDynamics(trans: TransmogrifierCAPApplication)
             vsd_signingofficersname: trans.signature.signer ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
             vsd_signingofficertitle: trans.signature.signer ? trans.signature.signer.title : null,
             vsd_cpu_insuranceoptions: trans.applyingForInsurance ? 100000001 : 100000000,
+            vsd_collaborationwithkeystakeholders: trans.collaborationWithKeyStakeholders ? 100000001 : 100000000,
+            vsd_complaintandfeedbackprocessforparticipant: trans.complaintProcessForParticipant ? 100000001 : 100000000,
+            vsd_criminalrecordchecks: trans.criminalRecordChecks,
+            vsd_letterofreferencefromreferralsources: trans.letterOfReference ? 100000001 : 100000000,
+            vsd_establishedconfidentialityguidelines: trans.establishedConfidentialityGuidelines ? 100000001 : 100000000,
         }],
         Organization: {
             accountid: trans.accountId,

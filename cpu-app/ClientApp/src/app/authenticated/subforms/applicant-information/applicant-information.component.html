@@ -36,4 +36,49 @@
         </div>
     </div>
 
+
+    <div class="form-row form-check">
+        <div class="col-md">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="trans.letterOfReference" name="letterOfReference" id="letterOfReference" [checked]="trans.letterOfReference" />
+                <label for="letterOfReference" class="form-check-label">Have you included a letter of reference from one of your referral sources?</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row form-check">
+        <div class="col-md">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="trans.criminalRecordChecks" name="criminalRecordChecks" id="criminalRecordChecks" [checked]="trans.criminalRecordChecks" />
+                <label for="criminalRecordChecks" class="form-check-label">Are criminal record checks done on all facilitators and mentors?</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row form-check">
+        <div class="col-md">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="trans.establishedConfidentialityGuidelines" name="establishedConfidentialityGuidelines" id="establishedConfidentialityGuidelines" [checked]="trans.establishedConfidentialityGuidelines" />
+                <label for="establishedConfidentialityGuidelines" class="form-check-label">Does the program comply with established confidentiality guidelines?</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row form-check">
+        <div class="col-md">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="trans.complaintProcessForParticipant" name="complaintProcessForParticipant" id="complaintProcessForParticipant" [checked]="trans.complaintProcessForParticipant" />
+                <label for="complaintProcessForParticipant" class="form-check-label">Is there a complaints/feedback process available to all participants?</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row form-check">
+        <div class="col-md">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="trans.collaborationWithKeyStakeholders" name="collaborationWithKeyStakeholders" id="collaborationWithKeyStakeholders" [checked]="trans.collaborationWithKeyStakeholders" />
+                <label for="collaborationWithKeyStakeholders" class="form-check-label">Is your program collaborating with key stakeholder groups (e.g., victim services, youth services, etc.)?</label>
+            </div>
+        </div>
+    </div>
 </div>
