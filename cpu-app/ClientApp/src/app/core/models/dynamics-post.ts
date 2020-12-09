@@ -142,6 +142,11 @@ export interface iDynamicsCrmContractPost {
   vsd_authorizedsigningofficersignature?: string;
   vsd_signingofficertitle?: string;
   vsd_signingofficersname?: string;
+  vsd_collaborationwithkeystakeholders?: number;
+  vsd_complaintandfeedbackprocessforparticipant?: number;
+  vsd_criminalrecordchecks?: boolean;
+  vsd_letterofreferencefromreferralsources?: number;
+  vsd_establishedconfidentialityguidelines?: number;
 }
 export interface iDynamicsDocumentPost {
   filename: string;

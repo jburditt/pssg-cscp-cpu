@@ -32,6 +32,11 @@ export class TransmogrifierCAPApplication {
     capPrograms: iCAPProgram[];
     signature: iSignature;
     userId: string;
+    collaborationWithKeyStakeholders: boolean;
+    complaintProcessForParticipant: boolean;
+    criminalRecordChecks: boolean;
+    letterOfReference: boolean;
+    establishedConfidentialityGuidelines: boolean;
 
     constructor(g: iDynamicsScheduleFCAPResponse) {
         this.accountId = g.Organization.accountid;
@@ -39,6 +44,11 @@ export class TransmogrifierCAPApplication {
         this.contractName = g.Contract.vsd_name;
         this.contractNumber = g.Contract.vsd_name;
         this.applyingForInsurance = g.Contract.vsd_cpu_insuranceoptions === 100000001 ? true : g.Contract.vsd_cpu_insuranceoptions === 100000000 ? false : null;
+        this.collaborationWithKeyStakeholders = g.Contract.vsd_collaborationwithkeystakeholders === 100000001 ? true : g.Contract.vsd_collaborationwithkeystakeholders === 100000000 ? false : null;
+        this.complaintProcessForParticipant = g.Contract.vsd_complaintandfeedbackprocessforparticipant === 100000001 ? true : g.Contract.vsd_complaintandfeedbackprocessforparticipant === 100000000 ? false : null;
+        this.criminalRecordChecks = g.Contract.vsd_criminalrecordchecks;
+        this.letterOfReference = g.Contract.vsd_letterofreferencefromreferralsources === 100000001 ? true : g.Contract.vsd_letterofreferencefromreferralsources === 100000000 ? false : null;
+        this.establishedConfidentialityGuidelines = g.Contract.vsd_establishedconfidentialityguidelines === 100000001 ? true : g.Contract.vsd_establishedconfidentialityguidelines === 100000000 ? false : null;
         this.insuranceProvider = ""; //TODO - get this field added in dynamics
         this.organizationId = g.Businessbceid;
         this.organizationName = g.Organization.name;

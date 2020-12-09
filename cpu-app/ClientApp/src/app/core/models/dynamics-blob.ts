@@ -79,6 +79,11 @@ export interface iDynamicsCrmContract {
   vsd_fiscalenddate?: string;
   vsd_fiscalstartdate?: string;
   vsd_name?: string;
+  vsd_collaborationwithkeystakeholders?: number;
+  vsd_complaintandfeedbackprocessforparticipant?: number;
+  vsd_criminalrecordchecks?: boolean;
+  vsd_letterofreferencefromreferralsources?: number;
+  vsd_establishedconfidentialityguidelines?: number;
 }
 export interface iDynamicsMinistryUser {
   address1_telephone1?: string;

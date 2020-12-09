@@ -14,5 +14,11 @@ namespace Gov.Cscp.Victims.Public.Models
         public string vsd_authorizedsigningofficersignature { get; set; }
         public string vsd_signingofficersname { get; set; }
         public string vsd_signingofficertitle { get; set; }
+
+        public int? vsd_collaborationwithkeystakeholders { get; set; }
+        public int? vsd_complaintandfeedbackprocessforparticipant { get; set; }
+        public bool vsd_criminalrecordchecks { get; set; }
+        public int? vsd_letterofreferencefromreferralsources { get; set; }
+        public int? vsd_establishedconfidentialityguidelines { get; set; }
     }
 }
