@@ -39,7 +39,7 @@
         Is this Program location a transition house or safe home?
       </label>
     </div>
-    <app-address2 [(address)]="programApplication.mainAddress" [isDisabled]="isDisabled"></app-address2>
+    <app-address2 [(address)]="programApplication.mainAddress" [isDisabled]="isDisabled" [addressRequired]="!programApplication.isTransitionHouse"></app-address2>
 
 
 
@@ -50,7 +50,7 @@
         Please select this check box if mailing address is the same as Primary Program Contact Address
       </label>
     </div>
-    <app-address2 [isDisabled]="programApplication.mailingAddressSameAsMainAddress" [(address)]="programApplication.mailingAddress" [isDisabled]="isDisabled"></app-address2>
+    <app-address2 [isDisabled]="programApplication.mailingAddressSameAsMainAddress" [(address)]="programApplication.mailingAddress" [isDisabled]="isDisabled" [addressRequired]="!programApplication.isTransitionHouse && !programApplication.mailingAddressSameAsMainAddress"></app-address2>
 
     <span class="mb-4">
       <h2 class="blue-header">Program Contact</h2>

@@ -53,16 +53,21 @@ export class ProgramApplication implements iProgramApplication {
 
     private REQUIRED_FIELDS: string[] = ["emailAddress", "phoneNumber", "mainAddress", "mainAddress.line1", "mainAddress.city", "mainAddress.postalCode",
         "mailingAddress", "mailingAddress.line1", "mailingAddress.city", "mailingAddress.postalCode"];
-    private REQUIRED_FIELDS_TRANSITION_HOUSE: string[] = ["emailAddress", "phoneNumber", "mailingAddress", "mailingAddress.line1", "mailingAddress.city",
-        "mailingAddress.postalCode"];
-    private REQUIRED_FIELDS_TRANSITION_HOUSE_AND_SAME_MAILING_ADDRESS: string[] = ["emailAddress", "phoneNumber"];
+
+    private MAIN_ADDRESS: string[] = ["mainAddress", "mainAddress.line1", "mainAddress.city", "mainAddress.postalCode"];
+
+    private MAILING_ADDRESS: string[] = ["mailingAddress", "mailingAddress.line1", "mailingAddress.city", "mailingAddress.postalCode"];
 
     hasRequiredFields() {
         let req_fields = this.REQUIRED_FIELDS;
         if (this.isTransitionHouse) {
-            req_fields = this.REQUIRED_FIELDS_TRANSITION_HOUSE;
-            if (this.mailingAddressSameAsMainAddress) req_fields = this.REQUIRED_FIELDS_TRANSITION_HOUSE_AND_SAME_MAILING_ADDRESS;
+            //main address not required
+            req_fields = req_fields.filter((field) => !this.MAIN_ADDRESS.includes(field));
+
+            //mailing address not required
+            if (this.mailingAddressSameAsMainAddress) req_fields = req_fields.filter((field) => !this.MAILING_ADDRESS.includes(field));
         }
+
         for (let i = 0; i < req_fields.length; ++i) {
             if (!this.formHelper.fetchFromObject(this, req_fields[i])) {
                 return false;
@@ -94,8 +99,11 @@ export class ProgramApplication implements iProgramApplication {
     getMissingFields() {
         let req_fields = this.REQUIRED_FIELDS;
         if (this.isTransitionHouse) {
-            req_fields = this.REQUIRED_FIELDS_TRANSITION_HOUSE;
-            if (this.mailingAddressSameAsMainAddress) req_fields = this.REQUIRED_FIELDS_TRANSITION_HOUSE_AND_SAME_MAILING_ADDRESS;
+            //main address not required
+            req_fields = req_fields.filter((field) => !this.MAIN_ADDRESS.includes(field));
+
+            //mailing address not required
+            if (this.mailingAddressSameAsMainAddress) req_fields = req_fields.filter((field) => !this.MAILING_ADDRESS.includes(field));
         }
         let ret = [];
         for (let i = 0; i < req_fields.length; ++i) {
