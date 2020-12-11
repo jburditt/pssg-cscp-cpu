@@ -22,6 +22,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OrganizationPost model)
         {
+            if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
             if (model == null)
             {
                 return StatusCode(502);
@@ -41,6 +46,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpPost("SetStaff", Name = "SetStaff")]
         public async Task<IActionResult> SetStaff([FromBody] OrganizationPost model)
         {
+            if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                
             if (model == null)
             {
                 return StatusCode(502);

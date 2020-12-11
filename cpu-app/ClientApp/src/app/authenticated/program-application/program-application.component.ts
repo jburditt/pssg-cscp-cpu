@@ -175,7 +175,7 @@ export class ProgramApplicationComponent implements OnInit {
     this.stepperService.setToFirstStepperElement();
   }
   save(showNotification: boolean = true, shouldExit: boolean = false) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       try {
         let originalStepper = _.cloneDeep(this.currentStepperElement);
         let currentTabHasInvalidClass = originalStepper.formState === "invalid" ? 1 : 0;
@@ -195,6 +195,7 @@ export class ProgramApplicationComponent implements OnInit {
 
         this.saving = true;
         this.out = convertProgramApplicationToDynamics(this.trans);
+        console.log(this.out);
         this.programApplicationService.setProgramApplication(this.out).subscribe(
           r => {
             if (r.IsSuccess) {
