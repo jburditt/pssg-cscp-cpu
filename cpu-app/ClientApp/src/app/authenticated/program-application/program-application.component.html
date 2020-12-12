@@ -54,9 +54,7 @@
               </div>
               <h2 class="blue-header">Primary Organization Contact Information</h2>
               <app-primary-contact-info [(contactInformation)]="trans.contactInformation" [isDisabled]="isCompleted"></app-primary-contact-info>
-              <app-address2 [(address)]="trans.contactInformation.mainAddress" [isDisabled]="isCompleted" ></app-address2>
-              <!-- [addressRequired]="true" -->
-              <!-- not for this prod release -->
+              <app-address2 [(address)]="trans.contactInformation.mainAddress" [isDisabled]="isCompleted" [addressRequired]="true"></app-address2>
 
               <h2 class="blue-header mt-4">Mailing Address</h2>
               <div class="form-check">
