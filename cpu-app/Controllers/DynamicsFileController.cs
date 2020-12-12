@@ -108,14 +108,12 @@ namespace Gov.Cscp.Victims.Public.Controllers
             // return null because this needs to be handled as files.
             try
             {
-                if (portalModel == null)
+                if (!ModelState.IsValid)
                 {
-                    return StatusCode(502);
+                    return BadRequest(ModelState);
                 }
 
                 string endpointUrl = "tasks(" + taskId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUContractPackage";
-
-
                 SignedContractPostToDynamics data = new SignedContractPostToDynamics();
                 data.BusinessBCeID = portalModel.BusinessBCeID;
                 data.UserBCeID = portalModel.UserBCeID;
@@ -176,6 +174,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
             // return null because this needs to be handled as files.
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 string endpointUrl = endpointUrl = "accounts(" + accountId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUAccountDocuments";
 
                 // make options for the json serializer
@@ -196,6 +199,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
             // return null because this needs to be handled as files.
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 string endpointUrl = endpointUrl = "vsd_contracts(" + contractId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUContractDocuments";
 
                 // make options for the json serializer

@@ -45,11 +45,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                
-                if (model == null)
-                {
-                    return StatusCode(502);
-                }
 
                 string endpointUrl = "vsd_SetCPUOrgContracts";
                 // turn the model into a string
