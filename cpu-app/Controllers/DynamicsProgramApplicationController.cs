@@ -45,6 +45,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 if (model == null)
                 {
                     return StatusCode(502);

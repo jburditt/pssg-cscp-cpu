@@ -54,7 +54,7 @@
               </div>
               <h2 class="blue-header">Primary Organization Contact Information</h2>
               <app-primary-contact-info [(contactInformation)]="trans.contactInformation" [isDisabled]="isCompleted"></app-primary-contact-info>
-              <app-address2 [(address)]="trans.contactInformation.mainAddress" [isDisabled]="isCompleted"></app-address2>
+              <app-address2 [(address)]="trans.contactInformation.mainAddress" [isDisabled]="isCompleted" [addressRequired]="true"></app-address2>
 
               <h2 class="blue-header mt-4">Mailing Address</h2>
               <div class="form-check">
@@ -63,7 +63,7 @@
                   Please select this check box if mailing address is the same as Primary Organization Contact Address
                 </label>
               </div>
-              <app-address2 [isDisabled]="trans.contactInformation.mailingAddressSameAsMainAddress" [(address)]="trans.contactInformation.mailingAddress" [isDisabled]="isCompleted"></app-address2>
+              <app-address2 [isDisabled]="trans.contactInformation.mailingAddressSameAsMainAddress" [(address)]="trans.contactInformation.mailingAddress" [isDisabled]="isCompleted" [addressRequired]="!trans.contactInformation.mailingAddressSameAsMainAddress"></app-address2>
 
               <h2 class="blue-header mt-4">Organization Contact(s)</h2>
               <p>If the contractor contact or board contact information has changed, please update personal contact information.</p>
