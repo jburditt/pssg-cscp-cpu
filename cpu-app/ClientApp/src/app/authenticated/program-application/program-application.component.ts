@@ -195,7 +195,6 @@ export class ProgramApplicationComponent implements OnInit {
 
         this.saving = true;
         this.out = convertProgramApplicationToDynamics(this.trans);
-        console.log(this.out);
         this.programApplicationService.setProgramApplication(this.out).subscribe(
           r => {
             if (r.IsSuccess) {

@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label for="numberOfHours">Contracted Service Hours per Week</label>
-      <input [disabled]="isDisabled" [(ngModel)]="programApplication.numberOfHours" suffix=" Hours" mask="0000" type="text" id="numberOfHours" name="numberOfHours" class="form-control" disabled [validation]="false">
+      <input [disabled]="isDisabled" [(ngModel)]="programApplication.numberOfHours" suffix=" Hours" mask="9999" type="text" id="numberOfHours" name="numberOfHours" class="form-control" disabled [validation]="false">
     </div>
 
     <h2 class="blue-header">Primary Program Contact Information</h2>
