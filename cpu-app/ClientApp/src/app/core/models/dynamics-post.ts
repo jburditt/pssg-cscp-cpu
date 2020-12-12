@@ -293,7 +293,7 @@ export interface iDynamicsCrmProgramPost {
   vsd_city?: string;
   vsd_costshare?: boolean;
   vsd_country?: string;
-  vsd_cpu_numberofhours?: number;
+  // vsd_cpu_numberofhours?: number;
   vsd_cpu_per?: number;
   vsd_cpu_programstaffsubcontracted?: boolean;
   vsd_emailaddress?: string;

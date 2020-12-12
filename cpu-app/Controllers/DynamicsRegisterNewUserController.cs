@@ -6,31 +6,26 @@ using System.Threading.Tasks;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
-	[Route("api/[controller]")]
-	[Authorize]
-	public class DynamicsRegisterNewUserController: Controller
+    [Route("api/[controller]")]
+    [Authorize]
+    public class DynamicsRegisterNewUserController : Controller
     {
-		private readonly IDynamicsResultService _dynamicsResultService;
+        private readonly IDynamicsResultService _dynamicsResultService;
 
-		public DynamicsRegisterNewUserController(IDynamicsResultService dynamicsResultService)
-		{
-			this._dynamicsResultService = dynamicsResultService;
-		}
+        public DynamicsRegisterNewUserController(IDynamicsResultService dynamicsResultService)
+        {
+            this._dynamicsResultService = dynamicsResultService;
+        }
 
-		
-		[HttpPost]
-		public async Task<IActionResult> RegisterNewUser([FromBody] RegisterNewUserPost model)
-		{
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterNewUser([FromBody] RegisterNewUserPost model)
+        {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
-                }
-                
-                if (model == null)
-                {
-                    return StatusCode(502);
                 }
 
                 string endpointUrl = "vsd_SetCPUOrgContracts";
@@ -48,5 +43,5 @@ namespace Gov.Cscp.Victims.Public.Controllers
             }
             finally { }
         }
-	}
+    }
 }

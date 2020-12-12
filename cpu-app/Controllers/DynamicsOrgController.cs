@@ -23,14 +23,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
         public async Task<IActionResult> Create([FromBody] OrganizationPost model)
         {
             if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-            if (model == null)
             {
-                return StatusCode(502);
-
+                return BadRequest(ModelState);
             }
 
             string endpointUrl = "vsd_SetCPUOrgContracts";
@@ -47,15 +41,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
         public async Task<IActionResult> SetStaff([FromBody] OrganizationPost model)
         {
             if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                
-            if (model == null)
             {
-                return StatusCode(502);
+                return BadRequest(ModelState);
             }
-
+           
             string endpointUrl = "vsd_SetCPUOrgContracts";
             string modelString = System.Text.Json.JsonSerializer.Serialize(model);
             modelString = Helpers.Helpers.updateFortunecookieBindNull(modelString);

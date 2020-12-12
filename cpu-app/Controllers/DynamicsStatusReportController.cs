@@ -34,7 +34,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             }
             finally { }
         }
-		[HttpGet("monthly_stats/{businessBceid}/{userBceid}/{contractId}")]
+        [HttpGet("monthly_stats/{businessBceid}/{userBceid}/{contractId}")]
         public async Task<IActionResult> GetMonthlyStats(string businessBceid, string userBceid, string contractId)
         {
             try
@@ -74,6 +74,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 string endpointUrl = "tasks(" + taskId + ")/Microsoft.Dynamics.CRM.vsd_SetCPUMonthlyStatisticsAnswers";
                 // make options for the json serializer
                 // JsonSerializerOptions options = new JsonSerializerOptions();
