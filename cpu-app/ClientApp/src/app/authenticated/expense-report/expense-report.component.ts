@@ -196,7 +196,7 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
       .reduce((prev, curr) => prev + curr);
   }
   save(shouldExit: boolean = false) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       try {
         if (!this.formHelper.isFormValid(this.notificationQueueService)) {
           resolve();

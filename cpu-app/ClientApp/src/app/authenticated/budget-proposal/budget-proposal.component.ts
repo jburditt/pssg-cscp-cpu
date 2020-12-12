@@ -138,7 +138,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
     this.stepperService.setToFirstStepperElement();
   }
   save(shouldExit: boolean = false) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       try {
         let originalStepper = _.cloneDeep(this.currentStepperElement);
         let currentTabHasInvalidClass = originalStepper.formState === "invalid" ? 1 : 0;
@@ -340,7 +340,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
 
 
   saveSingleProgramBudget(programBudget: iProgramBudget) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       try {
 
         this.saving = true;
