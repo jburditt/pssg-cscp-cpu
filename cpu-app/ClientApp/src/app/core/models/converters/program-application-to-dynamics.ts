@@ -122,7 +122,12 @@ export function convertProgramApplicationToDynamics(trans: TransmogrifierProgram
       vsd_city: p.mainAddress.city,
       vsd_costshare: p.hasSharedCostContact,
       vsd_country: p.mainAddress.country,
+
+      //this field should get removed since it is read only
+      //not for this prod release
       vsd_cpu_numberofhours: p.numberOfHours,
+
+
       vsd_cpu_per: p.perType,
       vsd_cpu_programstaffsubcontracted: p.hasSubContractedStaff,
       vsd_emailaddress: p.emailAddress,

@@ -177,7 +177,7 @@ export class CAPApplicationComponent implements OnInit {
         this.stepperService.setToFirstStepperElement();
     }
     save(showNotification: boolean = true, shouldExit: boolean = false) {
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             try {
                 this.saving = true;
                 console.log("saving...");
