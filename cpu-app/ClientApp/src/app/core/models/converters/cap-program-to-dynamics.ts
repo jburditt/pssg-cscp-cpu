@@ -64,7 +64,7 @@ export function convertCAPProgramToDynamics(trans: TransmogrifierCAPApplication)
         programCollection.push({
             vsd_ContactLookupfortunecookiebind: program.programContact ? program.programContact.personId : null,
             vsd_programid: program.programId,
-            vsd_cpu_subtotalcomponentvalue: parseFloat(program.applicationAmount ? program.applicationAmount.toString() : "0"),
+            vsd_cpu_fundingamountrequested: parseFloat(program.applicationAmount ? program.applicationAmount.toString() : "0"),
             vsd_cpu_programmodeltypes: program.typesOfModels,
             vsd_otherprogrammodels: program.otherModel,
             vsd_cpu_programevaluationefforts: program.evaluation ? boolOptionSet.isTrue : boolOptionSet.isFalse,

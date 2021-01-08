@@ -9,7 +9,7 @@ namespace Gov.Cscp.Victims.Public.Models
     {
         public string fortunecookietype { get { return "Microsoft.Dynamics.CRM.vsd_program"; } }
         public string vsd_programid { get; set; }
-        public float vsd_cpu_subtotalcomponentvalue { get; set; }
+        public float vsd_cpu_fundingamountrequested { get; set; }
         public string vsd_cpu_programmodeltypes { get; set; }
         public string vsd_otherprogrammodels { get; set; }
         public int vsd_cpu_programevaluationefforts { get; set; }
