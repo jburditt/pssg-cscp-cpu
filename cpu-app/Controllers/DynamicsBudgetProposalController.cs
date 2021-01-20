@@ -29,7 +29,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 string endpointUrl = "vsd_contracts(" + contractId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUBudgetProposal";
 
                 // get the response
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
@@ -52,7 +52,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 modelString = Helpers.Helpers.updateFortunecookieBindNull(modelString);
                 modelString = Helpers.Helpers.removeNullsForBudgetProposal(modelString);
 
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }

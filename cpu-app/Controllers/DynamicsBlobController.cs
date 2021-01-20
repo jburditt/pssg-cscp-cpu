@@ -27,7 +27,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
 				string endpointUrl = "vsd_GetCPUOrgContracts";
 
 				// get the response
-				DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+				HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
 				return StatusCode((int)result.statusCode, result.result.ToString());
 			}

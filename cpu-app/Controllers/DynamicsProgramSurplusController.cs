@@ -29,7 +29,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 string endpointUrl = "vsd_surplusplanreports(" + surplusId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUSurplusPlan";
 
                 // get the response
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
@@ -52,7 +52,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 // turn the model into a string
                 string modelString = System.Text.Json.JsonSerializer.Serialize(model, options);
                 modelString = Helpers.Helpers.updateFortunecookieBindNull(modelString);
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
