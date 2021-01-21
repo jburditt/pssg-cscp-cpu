@@ -29,17 +29,12 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 }
 
                 string endpointUrl = "vsd_SetCPUOrgContracts";
-                // turn the model into a string
                 string modelString = System.Text.Json.JsonSerializer.Serialize(model);
                 modelString = Helpers.Helpers.updateFortunecookieBindNull(modelString);
                 modelString = Helpers.Helpers.removeNullsForProgramApplication(modelString);
-                //_ownerid_value on the Organization is already ignored by the CRM API, so don't need to remove it
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
-
-
-                // return StatusCode((int)result.statusCode, "test");
             }
             finally { }
         }

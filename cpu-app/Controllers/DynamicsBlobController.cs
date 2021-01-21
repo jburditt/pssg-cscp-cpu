@@ -21,12 +21,9 @@ namespace Gov.Cscp.Victims.Public.Controllers
 		{
 			try
 			{
-				// convert the parameters to a json string
 				string requestJson = "{\"UserBCeID\":\"" + userBceid + "\",\"BusinessBCeID\":\"" + businessBceid + "\"}";
-				// set the endpoint action
 				string endpointUrl = "vsd_GetCPUOrgContracts";
-
-				// get the response
+				
 				HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
 				return StatusCode((int)result.statusCode, result.result.ToString());
