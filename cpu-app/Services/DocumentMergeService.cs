@@ -39,7 +39,6 @@ namespace Gov.Cscp.Victims.Public.Services
         private async Task<HttpClientResult> DocumentMerge(HttpMethod method, string requestJson)
         {
             string endpointUrl = _configuration["JAG_DOCUMENT_MERGE_URL"];
-            requestJson = requestJson.Replace("fortunecookie", "@odata.");
 
             Console.WriteLine(endpointUrl);
             Console.WriteLine(requestJson);
@@ -57,12 +56,7 @@ namespace Gov.Cscp.Victims.Public.Services
             HttpClientResult result = new HttpClientResult();
             result.statusCode = _statusCode;
             result.responseMessage = _httpResponse;
-            result.result = new Newtonsoft.Json.Linq.JObject();
-            if (_statusCode == HttpStatusCode.OK)
-            {
-                string clean = _responseContent.Replace("@odata.", "fortunecookie");
-                result.result = Newtonsoft.Json.Linq.JObject.Parse(clean);
-            }
+            result.result = Newtonsoft.Json.Linq.JObject.Parse(_responseContent);
 
             Console.WriteLine(result.result);
 
