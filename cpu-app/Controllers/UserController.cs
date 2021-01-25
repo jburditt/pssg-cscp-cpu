@@ -37,7 +37,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
 
         [HttpGet("current")]
-        //[RequiresPermission(Permission.Login, Permission.NewUserRegistration)]
         public virtual IActionResult UsersCurrentGet()
         {
             try

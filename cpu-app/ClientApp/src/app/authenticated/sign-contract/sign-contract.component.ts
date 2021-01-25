@@ -108,6 +108,12 @@ export class SignContractComponent implements OnInit, OnDestroy {
       this.out = convertContractPackageToDynamics(this.userId, this.organizationId, this.documentCollection, this.signature);
       this.fileService.uploadSignedContract(this.out, this.taskId).subscribe(
         r => {
+          //for testing document combining, see if it works - setup backend to return the combined document instead of sending it forward to CRM
+          // let file = "data:application/pdf;base64," + r.document;
+          // let fileName = "Test combined doc";
+          // let obj = { fileData: file, fileName: fileName };
+          // this.stepperService.addStepperElement(obj, fileName, 'untouched', 'document');
+
           if (r.IsSuccess) {
             this.saving = false;
             this.notificationQueueService.addNotification(`You have successfully signed the contract.`, 'success');
@@ -157,7 +163,7 @@ export class SignContractComponent implements OnInit, OnDestroy {
 
     if (this.stepperElements.length > 0) {
       this.getSignaturePage().then((file: string) => {
-        let body = file.split(',').slice(-1)[0];
+        let body = file.split(',').pop();
 
         this.documentCollection.push({
           subject: "signing page",

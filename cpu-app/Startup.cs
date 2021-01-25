@@ -47,6 +47,7 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IDynamicsResultService, DynamicsResultService>().AddHttpMessageHandler<TokenHandler>();
+            services.AddHttpClient<IDocumentMergeService, DocumentMergeService>();
 
             services.AddMemoryCache();
 

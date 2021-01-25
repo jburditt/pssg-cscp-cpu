@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -20,13 +21,15 @@ namespace Gov.Cscp.Victims.Public.Controllers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IDynamicsResultService _dynamicsResultService;
+        private readonly IDocumentMergeService _documentMergeService;
         private readonly IConfiguration _configuration;
 
-        public DynamicsFileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IDynamicsResultService dynamicsResultService)
+        public DynamicsFileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IDynamicsResultService dynamicsResultService, IDocumentMergeService documentMergeService)
         {
             this._httpContextAccessor = httpContextAccessor;
             this._configuration = configuration;
             this._dynamicsResultService = dynamicsResultService;
+            this._documentMergeService = documentMergeService;
         }
 
         [HttpGet("{businessBceid}/{userBceid}/documents/contract/{contractId}")]
@@ -34,13 +37,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
-                // convert the parameters to a json string
                 string requestJson = "{\"UserBCeID\":\"" + userBceid + "\",\"BusinessBCeID\":\"" + businessBceid + "\"}";
-                // set the endpoint action
                 string endpointUrl = "vsd_contracts(" + contractId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUContractDocuments";
 
-                // get the response
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
@@ -52,13 +52,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
-                // convert the parameters to a json string
                 string requestJson = "{\"UserBCeID\":\"" + userBceid + "\",\"BusinessBCeID\":\"" + businessBceid + "\"}";
-                // set the endpoint action
                 string endpointUrl = "accounts(" + accountId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUAccountDocuments";
 
-                // get the response
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
@@ -70,15 +67,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
-                // convert the parameters to a json string
-                // string requestJson = "{\"UserBCeID\":\"" + userBceid + "\",\"BusinessBCeID\":\"" + businessBceid + "\"}";
-                // set the endpoint action
                 string endpointUrl = "vsd_sharepointurls(" + docId + ")/Microsoft.Dynamics.CRM.vsd_DownloadDocumentFromSharePoint";
-
-                // get the response
-                //requestJson
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, "");
-
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, "");
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
             finally { }
@@ -89,14 +79,9 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
-                // convert the parameters to a json string
                 string requestJson = "{\"UserBCeID\":\"" + userBceid + "\",\"BusinessBCeID\":\"" + businessBceid + "\"}";
-                // set the endpoint action
                 string endpointUrl = "tasks(" + taskId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUContractPackage";
-
-                // get the response
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
-
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
             finally { }
@@ -105,7 +90,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpPost("signed_contract/{taskId}")]
         public async Task<IActionResult> UploadSignedContract([FromBody] SignedContractPostFromPortal portalModel, string taskId)
         {
-            // return null because this needs to be handled as files.
             try
             {
                 if (!ModelState.IsValid)
@@ -113,51 +97,72 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     return BadRequest(ModelState);
                 }
 
+                DocMergeRequest docMergeRequest = new DocMergeRequest();
+                docMergeRequest.documents = new JAGDocument[portalModel.DocumentCollection.Length];
+                docMergeRequest.options = new JAGOptions();
+
                 string endpointUrl = "tasks(" + taskId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUContractPackage";
                 SignedContractPostToDynamics data = new SignedContractPostToDynamics();
                 data.BusinessBCeID = portalModel.BusinessBCeID;
                 data.UserBCeID = portalModel.UserBCeID;
 
-                List<byte[]> byteArray = new List<byte[]>();
-                int signaturePosition = -1;
+                bool addedSignature = false;
 
                 for (int i = 0; i < portalModel.DocumentCollection.Length - 1; ++i)
                 {
-                    byteArray.Add(System.Convert.FromBase64String(portalModel.DocumentCollection[i].body));
-                    if (portalModel.DocumentCollection[i].filename.Contains("TUA"))
+                    docMergeRequest.documents[i] = new JAGDocument(portalModel.DocumentCollection[i].body, i);
+
+                    if (portalModel.DocumentCollection[i].filename.Contains("TUA") && !addedSignature)
                     {
-                        signaturePosition = i;
+                        //Signature page should display in contract package immediately after the TUA page
+                        ++i;
+                        byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[i].body);
+                        string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
+                        var offset = signatureString.IndexOf(',') + 1;
+                        var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
+
+                        string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
+                        docMergeRequest.documents[i] = new JAGDocument(signedPage, i);
+                        addedSignature = true;
                     }
                 }
 
-                if (signaturePosition < 0) signaturePosition = portalModel.DocumentCollection.Length - 1;
+                //if there was no TUA page, then the signature page should be at the end
+                if (!addedSignature)
+                {
+                    int signaturePosition = portalModel.DocumentCollection.Length - 1;
+                    byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[signaturePosition].body);
+                    string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
+                    var offset = signatureString.IndexOf(',') + 1;
+                    var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
 
-                byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[portalModel.DocumentCollection.Length - 1].body);
+                    string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
+                    docMergeRequest.documents[signaturePosition] = new JAGDocument(signedPage, signaturePosition);
+                }
 
-                string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
-                signatureString = signatureString.Replace("data:image/png;base64,", "");
-                var offset = signatureString.IndexOf(',') + 1;
-                var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
+                JsonSerializerOptions mergeOptions = new JsonSerializerOptions();
+                mergeOptions.IgnoreNullValues = true;
+                string mergeString = System.Text.Json.JsonSerializer.Serialize(docMergeRequest, mergeOptions);
 
-                byte[] combinedArray = concatAndAddContent(byteArray, signaturePage, signaturePosition, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
+                HttpClientResult mergeResult = await _documentMergeService.Post(mergeString);
+                if (mergeResult.statusCode != HttpStatusCode.OK)
+                {
+                    return StatusCode((int)mergeResult.statusCode, mergeResult.result.ToString());
+                }
 
-                string combinedDoc = System.Convert.ToBase64String(combinedArray);
+                string combinedDoc = GetJArrayValue(mergeResult.result, "document");
+                //for testing document merge
+                // return StatusCode((int)mergeResult.statusCode, mergeResult.result.ToString());
 
                 data.SignedContract = new DynamicsDocumentPost();
                 data.SignedContract.body = combinedDoc;
                 data.SignedContract.filename = "Contract Package Signed by Service Provider.pdf";
 
-                //for testing the document combining
-                // return StatusCode((int)result.statusCode, data);
-
-                //make options for the json serializer
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.IgnoreNullValues = true;
-                //turn the model into a string
                 string modelString = System.Text.Json.JsonSerializer.Serialize(data, options);
 
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
-
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
             catch (Exception exception)
@@ -168,10 +173,22 @@ namespace Gov.Cscp.Victims.Public.Controllers
             finally { }
         }
 
+        private string GetJArrayValue(Newtonsoft.Json.Linq.JObject yourJArray, string key)
+        {
+            foreach (KeyValuePair<string, Newtonsoft.Json.Linq.JToken> keyValuePair in yourJArray)
+            {
+                if (key == keyValuePair.Key)
+                {
+                    return keyValuePair.Value.ToString();
+                }
+            }
+
+            return string.Empty;
+        }
+
         [HttpPost("account/{accountId}")]
         public async Task<IActionResult> UploadAccountDocument([FromBody] FilePost model, string accountId)
         {
-            // return null because this needs to be handled as files.
             try
             {
                 if (!ModelState.IsValid)
@@ -181,12 +198,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 string endpointUrl = endpointUrl = "accounts(" + accountId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUAccountDocuments";
 
-                // make options for the json serializer
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.IgnoreNullValues = true;
-                // turn the model into a string
                 string modelString = System.Text.Json.JsonSerializer.Serialize(model, options);
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
@@ -196,7 +211,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpPost("contract/{contractId}")]
         public async Task<IActionResult> UploadContractDocument([FromBody] FilePost model, string contractId)
         {
-            // return null because this needs to be handled as files.
             try
             {
                 if (!ModelState.IsValid)
@@ -206,72 +220,22 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 string endpointUrl = endpointUrl = "vsd_contracts(" + contractId + ")/Microsoft.Dynamics.CRM.vsd_UploadCPUContractDocuments";
 
-                // make options for the json serializer
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.IgnoreNullValues = true;
-                // turn the model into a string
                 string modelString = System.Text.Json.JsonSerializer.Serialize(model, options);
-                DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
+                HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
             finally { }
         }
 
-        public static byte[] concatAndAddContent(List<byte[]> pdfByteContent, byte[] signaturePage, int signaturePosition, byte[] signature, String signingOfficerName, String signingOfficerTitle)
+        public static string stampSignaturePage(byte[] signaturePage, byte[] signature, String signingOfficerName, String signingOfficerTitle)
         {
             using (var ms = new MemoryStream())
             {
-                using (var doc = new Document())
-                {
-                    using (var copy = new PdfSmartCopy(doc, ms))
-                    {
-                        doc.Open();
-                        int index = 0;
-                        bool addedSignature = false;
-
-                        //Loop through each byte array
-                        foreach (var p in pdfByteContent)
-                        {
-
-                            //Create a PdfReader bound to that byte array
-                            using (var reader = new PdfReader(p))
-                            {
-
-                                //Add the entire document instead of page-by-page
-                                copy.AddDocument(reader);
-                            }
-
-                            if (index == signaturePosition && !addedSignature)
-                            {
-                                appendSignaturePage(copy, signaturePage, signature, signingOfficerName, signingOfficerTitle);
-                                addedSignature = true;
-                            }
-
-                            ++index;
-                        }
-
-                        if (!addedSignature)
-                        {
-                            appendSignaturePage(copy, signaturePage, signature, signingOfficerName, signingOfficerTitle);
-                            addedSignature = true;
-                        }
-
-                        doc.Close();
-                    }
-                }
-
-                //Return just before disposing
-                return ms.ToArray();
-            }
-        }
-
-        public static void appendSignaturePage(PdfSmartCopy copy, byte[] signaturePage, byte[] signature, String signingOfficerName, String signingOfficerTitle)
-        {
-            using (var second_ms = new MemoryStream())
-            {
                 PdfReader pdfr = new PdfReader(signaturePage);
-                PdfStamper pdfs = new PdfStamper(pdfr, second_ms);
+                PdfStamper pdfs = new PdfStamper(pdfr, ms);
                 Image image = iTextSharp.text.Image.GetInstance(signature);
                 Rectangle rect;
                 PdfContentByte content;
@@ -300,7 +264,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 : "th";
                 String dayString = today.Day.ToString() + daySuffix;
 
-
                 content.SetColorFill(BaseColor.BLACK);
                 content.BeginText();
                 content.SetFontAndSize(BaseFont.CreateFont(), 9);
@@ -315,13 +278,9 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 pdfs.Close();
 
-                using (var reader = new PdfReader(second_ms.ToArray()))
-                {
-                    //Add the entire document instead of page-by-page
-                    copy.AddDocument(reader);
-                }
+                byte[] signedPage = ms.ToArray();
+                return System.Convert.ToBase64String(signedPage);
             }
         }
-
     }
 }

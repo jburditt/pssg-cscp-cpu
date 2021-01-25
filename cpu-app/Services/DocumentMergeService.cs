@@ -7,44 +7,45 @@ using System;
 
 namespace Gov.Cscp.Victims.Public.Services
 {
-    public interface IDynamicsResultService
+    public interface IDocumentMergeService
     {
-        Task<HttpClientResult> Get(string endpointUrl);
-        Task<HttpClientResult> Post(string endpointUrl, string requestJson);
+        // Task<HttpClientResult> Get(string endpointUrl);
+        Task<HttpClientResult> Post(string requestJson);
     }
 
-    public class DynamicsResultService : IDynamicsResultService
+    public class DocumentMergeService : IDocumentMergeService
     {
         private HttpClient _client;
         private IConfiguration _configuration;
 
-        public DynamicsResultService(IConfiguration configuration, HttpClient httpClient)
+        public DocumentMergeService(IConfiguration configuration, HttpClient httpClient)
         {
             _client = httpClient;
             _configuration = configuration;
         }
 
-        public async Task<HttpClientResult> Get(string endpointUrl)
+        // public async Task<HttpClientResult> Get(string endpointUrl)
+        // {
+        //     HttpClientResult blob = await DocumentMerge(HttpMethod.Get, endpointUrl, "");
+        //     return blob;
+        // }
+
+        public async Task<HttpClientResult> Post(string modelJson)
         {
-            HttpClientResult blob = await DynamicsResultAsync(HttpMethod.Get, endpointUrl, "");
+            HttpClientResult blob = await DocumentMerge(HttpMethod.Post, modelJson);
             return blob;
         }
 
-        public async Task<HttpClientResult> Post(string endpointUrl, string modelJson)
+        private async Task<HttpClientResult> DocumentMerge(HttpMethod method, string requestJson)
         {
-            HttpClientResult blob = await DynamicsResultAsync(HttpMethod.Post, endpointUrl, modelJson);
-            return blob;
-        }
-
-        private async Task<HttpClientResult> DynamicsResultAsync(HttpMethod method, string endpointUrl, string requestJson)
-        {
-            endpointUrl = _configuration["DYNAMICS_ODATA_URI"] + endpointUrl;
-            requestJson = requestJson.Replace("fortunecookie", "@odata.");
+            string endpointUrl = _configuration["JAG_DOCUMENT_MERGE_URL"];
 
             Console.WriteLine(endpointUrl);
             Console.WriteLine(requestJson);
 
             HttpRequestMessage _httpRequest = new HttpRequestMessage(method, endpointUrl);
+            _httpRequest.Headers.Add("X-Correlation-ID", _configuration["JAG_CORRELATION_ID"]);
+            _httpRequest.Headers.Add("X-Client-ID", _configuration["JAG_CLIENT_ID"]);
             _httpRequest.Content = new StringContent(requestJson, System.Text.Encoding.UTF8, "application/json");
 
             HttpResponseMessage _httpResponse = await _client.SendAsync(_httpRequest);
@@ -55,8 +56,7 @@ namespace Gov.Cscp.Victims.Public.Services
             HttpClientResult result = new HttpClientResult();
             result.statusCode = _statusCode;
             result.responseMessage = _httpResponse;
-            string clean = _responseContent.Replace("@odata.", "fortunecookie");
-            result.result = Newtonsoft.Json.Linq.JObject.Parse(clean);
+            result.result = Newtonsoft.Json.Linq.JObject.Parse(_responseContent);
 
             Console.WriteLine(result.result);
 

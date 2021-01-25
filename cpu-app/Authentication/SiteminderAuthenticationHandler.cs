@@ -372,7 +372,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     string requestJson = "{\"UserBCeID\":\"" + siteMinderGuid + "\",\"BusinessBCeID\":\"" + siteMinderBusinessGuid + "\"}";
                     // set the endpoint action
                     string endpointUrl = "vsd_GetCPUOrgContracts";
-                    DynamicsResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
+                    HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
                     // Console.WriteLine("Dynamics result info:");
                     string resultString = result.ToString();
                     string resultResult = result.result.ToString();
