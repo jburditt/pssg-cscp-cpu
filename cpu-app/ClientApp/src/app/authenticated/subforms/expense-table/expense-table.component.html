@@ -16,7 +16,7 @@
         <input [disabled]="isDisabled" class="form-control" (input)="formHelper.moneyMaskToNumber($event.target, line, 'cost'); calculateTotals()" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.costMask" min="0" id="{{type}}_total_cost_{{line.uuid}}">
       </td>
       <td>
-        <input [disabled]="isDisabled" class="form-control" (input)="formHelper.moneyMaskToNumber($event.target, line, 'fundedFromVscp', line.cost); calculateTotals()" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.fundedFromVscpMask" min="0" id="{{type}}_vscp_{{line.uuid}}">
+        <input [disabled]="isDisabled" class="form-control" (input)="formHelper.moneyMaskToNumber($event.target, line, 'fundedFromVscp', line.cost, true); calculateTotals()" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.fundedFromVscpMask" min="0" id="{{type}}_vscp_{{line.uuid}}">
       </td>
       <td>
         <!-- For spacing only -->

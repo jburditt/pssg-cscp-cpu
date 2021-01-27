@@ -88,7 +88,7 @@ export class FormHelper {
     }
     return true;
   }
-  isDialogValid(notificationQueueService: NotificationQueueService = null) { 
+  isDialogValid(notificationQueueService: NotificationQueueService = null) {
     if (document.querySelectorAll(".mat-dialog-container .ng-invalid").length > 0) {
       if (notificationQueueService) notificationQueueService.addNotification('All fields must be in a valid format.', 'warning');
       return false;
@@ -128,10 +128,11 @@ export class FormHelper {
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  moneyMaskToNumber(e: any, context: any, varName, max: number = 0) {
+  moneyMaskToNumber(e: any, context: any, varName, max: number = 0, alwaysEnforceMax: boolean = false) {
+    if (!max) max = 0;
     let moneyString = e.value.replace(/[$,]/g, '');
     let val = parseFloat(moneyString);
-    if (max > 0 && val > max) {
+    if ((max > 0 || alwaysEnforceMax) && val > max) {
       val = max;
       e.value = "$" + this.numberWithCommas(val);
     }
