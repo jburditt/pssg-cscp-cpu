@@ -70,13 +70,9 @@ export class ExpenseTableComponent implements OnInit {
       }
     }
 
-
     let activeExpenseItems = this.expenseItemsForm.filter(ex => ex.isActive);
     let totalCostDefaults = 0;
     let totalCostCustom = 0;
-
-
-
 
     if (this.defaultExpenseItemsForm.length > 0) {
       totalCostDefaults = this.defaultExpenseItemsForm.map(rs => (rs.cost || 0)).reduce(reducer) || 0;
@@ -116,10 +112,5 @@ export class ExpenseTableComponent implements OnInit {
       totalVscp: this.totalVscp,
       vscpApprovedAmount: this.vscpApprovedAmount
     });
-
-
-    console.log("calc totals");
-    console.log(this.defaultExpenseItemsForm);
-    console.log(activeExpenseItems);
   }
 }
