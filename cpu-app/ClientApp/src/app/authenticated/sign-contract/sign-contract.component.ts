@@ -114,15 +114,14 @@ export class SignContractComponent implements OnInit, OnDestroy {
           // let obj = { fileData: file, fileName: fileName };
           // this.stepperService.addStepperElement(obj, fileName, 'untouched', 'document');
 
+          this.saving = false;
           if (r.IsSuccess) {
-            this.saving = false;
             this.notificationQueueService.addNotification(`You have successfully signed the contract.`, 'success');
             this.stateService.refresh();
             this.router.navigate(['/authenticated/dashboard']);
           }
           else {
             this.notificationQueueService.addNotification('The was a problem saving the signed contract. If this problem is persisting please contact your ministry representative.', 'danger');
-            this.saving = false;
           }
         },
         err => {
