@@ -24,7 +24,7 @@
           <input class="form-control" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.totalCostMask" min="0" id="{{type}}_total_cost_{{i}}" disabled>
         </td>
         <td>
-          <input [disabled]="isDisabled" class="form-control" (input)="formHelper.moneyMaskToNumber($event.target, line, 'fundedFromVscp', line.totalCost); calculateTotals()" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.fundedFromVscpMask" min="0" id="{{type}}_vscp_{{i}}">
+          <input [disabled]="isDisabled" class="form-control" (input)="formHelper.moneyMaskToNumber($event.target, line, 'fundedFromVscp', line.totalCost, true); calculateTotals()" type="text" prefix="$" mask="separator.2" thousandSeparator="," separatorLimit="10000000" [(ngModel)]="line.fundedFromVscpMask" min="0" id="{{type}}_vscp_{{i}}">
         </td>
         <td class="align-middle">
           <div (click)="removeExpenseItem(i)" class="remove-row-button" *ngIf="!isDisabled">
