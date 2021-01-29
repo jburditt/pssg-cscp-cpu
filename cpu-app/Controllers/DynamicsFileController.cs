@@ -107,37 +107,36 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 data.UserBCeID = portalModel.UserBCeID;
 
                 bool addedSignature = false;
+                int merge_insert_index = 0;
+
+                //signature page is always the last doc sent over
+                //get signature page and stamp it with the signature image
+                int signatureIndex = portalModel.DocumentCollection.Length - 1;
+                byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[signatureIndex].body);
+                string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
+                var offset = signatureString.IndexOf(',') + 1;
+                var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
+                string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
+
 
                 for (int i = 0; i < portalModel.DocumentCollection.Length - 1; ++i)
                 {
-                    docMergeRequest.documents[i] = new JAGDocument(portalModel.DocumentCollection[i].body, i);
+                    docMergeRequest.documents[merge_insert_index] = new JAGDocument(portalModel.DocumentCollection[i].body, merge_insert_index);
+                    ++merge_insert_index;
 
                     if (portalModel.DocumentCollection[i].filename.Contains("TUA") && !addedSignature)
                     {
                         //Signature page should display in contract package immediately after the TUA page
-                        ++i;
-                        byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[i].body);
-                        string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
-                        var offset = signatureString.IndexOf(',') + 1;
-                        var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
-
-                        string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
-                        docMergeRequest.documents[i] = new JAGDocument(signedPage, i);
+                        docMergeRequest.documents[merge_insert_index] = new JAGDocument(signedPage, merge_insert_index);
                         addedSignature = true;
+                        ++merge_insert_index;
                     }
                 }
 
                 //if there was no TUA page, then the signature page should be at the end
                 if (!addedSignature)
                 {
-                    int signaturePosition = portalModel.DocumentCollection.Length - 1;
-                    byte[] signaturePage = System.Convert.FromBase64String(portalModel.DocumentCollection[signaturePosition].body);
-                    string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
-                    var offset = signatureString.IndexOf(',') + 1;
-                    var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
-
-                    string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
-                    docMergeRequest.documents[signaturePosition] = new JAGDocument(signedPage, signaturePosition);
+                    docMergeRequest.documents[signatureIndex] = new JAGDocument(signedPage, signatureIndex);
                 }
 
                 JsonSerializerOptions mergeOptions = new JsonSerializerOptions();
