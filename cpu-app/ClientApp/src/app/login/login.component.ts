@@ -45,6 +45,9 @@ export class LoginPageComponent implements OnInit {
         // this.stateService.logout();
         this.router.navigate([this.stateService.homeRoute.getValue()]);
       }
+    }, (err) => {
+      this.notificationQueueService.addNotification(`Error retrieving user information.`, 'danger');
+      console.error(err);
     });
   }
 
