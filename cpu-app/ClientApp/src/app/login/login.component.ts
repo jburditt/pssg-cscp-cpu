@@ -16,6 +16,8 @@ export class LoginPageComponent implements OnInit {
     private notificationQueueService: NotificationQueueService,
     private stateService: StateService) {
 
+    console.log("login component");
+
     this.userData.getCurrentUser().subscribe((userInfo: UserSettings) => {
       if (userInfo && userInfo.userId && userInfo.accountId) {
         this.stateService.loggedIn.next(true);
@@ -47,7 +49,7 @@ export class LoginPageComponent implements OnInit {
       }
     }, (err) => {
       this.notificationQueueService.addNotification(`Error retrieving user information.`, 'danger');
-      console.error(err);
+      console.log(err);
     });
   }
 

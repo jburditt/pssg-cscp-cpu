@@ -15,6 +15,8 @@ export class UserDataService {
   ) { }
 
   getCurrentUser() {
+    console.log("getCurrentUser");
+    console.log(`${this.apiUrl}/current`);
     return this.http.get(`${this.apiUrl}/current`, { headers: this.headers }).pipe(
       retry(3),
       catchError(this.handleError)
