@@ -46,11 +46,12 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 if (!String.IsNullOrEmpty(storedSettingsString))
                 {
                     Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
-                    
+
                     return StatusCode(200, userSettings);
                 }
                 else
                 {
+                    Console.WriteLine("No user settings found");
                     UserSettingsPayload ret = new UserSettingsPayload
                     {
                         Message = "No user settings found",
@@ -60,8 +61,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     return StatusCode(200, ret);
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine("Error getting user settings");
+                Console.WriteLine(e);
                 UserSettingsPayload ret = new UserSettingsPayload
                 {
                     Message = "Error getting user settings",
