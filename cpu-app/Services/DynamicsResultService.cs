@@ -58,7 +58,7 @@ namespace Gov.Cscp.Victims.Public.Services
             string clean = _responseContent.Replace("@odata.", "fortunecookie");
             result.result = Newtonsoft.Json.Linq.JObject.Parse(clean);
 
-            Console.WriteLine(result.result);
+            // Console.WriteLine(result.result);
 
             return result;
         }
