@@ -8,7 +8,7 @@ export class UserSettings implements iUserSettings {
   userDisplayName: string;
   businessLegalName: string;
   userType: string;
-  user: any;
+  user?: any;
   isNewUserRegistration: boolean;
   isNewUserAndNewOrganizationRegistration: boolean;
   contactExistsButNotApproved: boolean;

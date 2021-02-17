@@ -6,7 +6,7 @@ export interface iUserSettings {
   userDisplayName: string;
   businessLegalName: string;
   userType: string;
-  user: any;
+  user?: any;
   isNewUserRegistration: boolean;
   isNewUserAndNewOrganizationRegistration: boolean;
   contactExistsButNotApproved: boolean;
