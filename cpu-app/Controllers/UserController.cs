@@ -46,6 +46,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 if (!String.IsNullOrEmpty(storedSettingsString))
                 {
                     Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
+                    Console.WriteLine("Returning user settings:");
+                    Console.WriteLine(userSettings);
 
                     return StatusCode(200, userSettings);
                 }
