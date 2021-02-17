@@ -41,13 +41,15 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
+                Console.WriteLine("GET Current User Info");
                 // determine if we are a new registrant.
                 string storedSettingsString = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                Console.WriteLine(storedSettingsString);
                 if (!String.IsNullOrEmpty(storedSettingsString))
                 {
                     Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
                     Console.WriteLine("Returning user settings:");
-                    Console.WriteLine(userSettings);
+                    // Console.WriteLine(userSettings.ToString());
 
                     return StatusCode(200, userSettings);
                 }
