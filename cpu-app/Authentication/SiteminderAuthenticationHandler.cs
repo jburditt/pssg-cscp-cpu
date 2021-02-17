@@ -231,7 +231,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
             _logger.LogInformation("Test information");
             _logger.LogTrace("Test Trace");
 
-            Console.WriteLine("Parsing the HTTP headers for SiteMinder authentication credential");
+            // Console.WriteLine("Parsing the HTTP headers for SiteMinder authentication credential");
 
             SiteMinderAuthOptions options = new SiteMinderAuthOptions();
             bool isDeveloperLogin = false;
@@ -274,7 +274,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 catch
                 {
                     //do nothing
-                    Console.WriteLine("No UserSettings found");
+                    // Console.WriteLine("No UserSettings found");
                     _logger.LogDebug("No UserSettings found");
                 }
 
@@ -284,7 +284,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                          !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.LogDebug("User already authenticated with active session: " + userSettings.UserId);
-                    Console.WriteLine("User already authenticated with active session: " + userSettings.GetJson());
+                    // Console.WriteLine("User already authenticated with active session: " + userSettings.GetJson());
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
@@ -308,7 +308,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 if (string.IsNullOrEmpty(userId))
                 {
                     _logger.LogDebug("Getting user data from headers");
-                    Console.WriteLine("Getting user data from headers");
+                    // Console.WriteLine("Getting user data from headers");
 
                     userId = context.Request.Headers[options.SiteMinderUserNameKey];
                     if (string.IsNullOrEmpty(userId))
@@ -368,7 +368,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 {
                     var businessBceid = siteMinderBusinessGuid;
 
-                    Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
+                    // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                     _logger.LogDebug("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
 
                     userSettings.AuthenticatedUser = new User(new Guid(siteMinderGuid), "Bill", "Octoroc", true, "BO", "octoroc@foo.gov", siteMinderGuid, siteMinderBusinessGuid, siteMinderUserType, null);
@@ -384,8 +384,8 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     string messageString = result.responseMessage.ToString();
                     int code = (int)result.statusCode;
 
-                    Console.WriteLine("resultResult");
-                    Console.WriteLine(resultResult);
+                    // Console.WriteLine("resultResult");
+                    // Console.WriteLine(resultResult);
                     // Console.WriteLine("messageString");
                     // Console.WriteLine(messageString);
 
@@ -402,7 +402,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
 
                     if (resultResult.Contains(NEW_USER))
                     {
-                        Console.WriteLine("New User Registration");
+                        // Console.WriteLine("New User Registration");
 
                         userSettings.IsNewUserRegistration = true;
                         userSettings.IsNewUserAndNewOrganizationRegistration = false;
@@ -412,7 +412,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     }
                     else if (resultResult.Contains(NEW_USER_AND_NEW_ORGANIZATION))
                     {
-                        Console.WriteLine("New User and New Organization Registration");
+                        // Console.WriteLine("New User and New Organization Registration");
 
                         userSettings.IsNewUserRegistration = false;
                         userSettings.IsNewUserAndNewOrganizationRegistration = true;
@@ -423,7 +423,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     else if (resultResult.Contains(CONTACT_NOT_APPROVED))
                     {
                         //error state - should hopefully never happen
-                        Console.WriteLine("Error, contact already exists but is not approved");
+                        // Console.WriteLine("Error, contact already exists but is not approved");
 
                         userSettings.ContactExistsButNotApproved = true;
                         principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
@@ -444,11 +444,11 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     {
                         //TODO - should verify we did in fact get a success response
 
-                        Console.WriteLine("Found User Data");
+                        // Console.WriteLine("Found User Data");
                         // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                         userSettings.IsNewUserRegistration = false;
                         userSettings.IsNewUserAndNewOrganizationRegistration = false;
-                        Console.WriteLine("UserSettings: " + userSettings.GetJson());
+                        // Console.WriteLine("UserSettings: " + userSettings.GetJson());
                         principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
                         UserSettings.SaveUserSettings(userSettings, context);
 

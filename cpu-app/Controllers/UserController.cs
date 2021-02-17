@@ -39,7 +39,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpGet("current")]
         public virtual IActionResult UsersCurrentGet()
         {
-            Console.WriteLine("GET Current User Info");
+            Console.WriteLine("UsersCurrentGet()");
             try
             {
                 // determine if we are a new registrant.
