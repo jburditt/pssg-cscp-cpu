@@ -9,8 +9,8 @@ import { iProgramApplication } from '../../../core/models/program-application.in
 })
 export class ReviewApplicationComponent implements OnInit {
   @Input() trans: TransmogrifierProgramApplication;
-  @Input() currentTab: string;
-  @Output() tabChange = new EventEmitter<string>();
+  @Input() currentTab: number;
+  @Output() tabChange = new EventEmitter<number>();
 
   tabs: string[] = ['Application Information'];
   tabIndex: number = 0;
@@ -20,24 +20,23 @@ export class ReviewApplicationComponent implements OnInit {
   ngOnInit() {
     this.trans.programApplications.forEach((p: iProgramApplication) => { this.tabs.push(p.name) });
   }
-  setCurrentTab(tab: string) {
-    this.currentTab = tab;
-    this.tabIndex = this.tabs.indexOf(this.currentTab);
+  setCurrentTab(index: number) {
+    this.currentTab = index;
     this.tabChange.emit(this.currentTab);
   }
   nextPage() {
-    const index = this.tabs.indexOf(this.currentTab);
+    const index = this.currentTab;
     if (!(index >= this.tabs.length - 1)) {
-      this.currentTab = this.tabs[index + 1];
+      this.currentTab = index + 1;
       this.tabIndex = index + 1;
       this.tabChange.emit(this.currentTab);
       window.scrollTo(0, 0);
     }
   }
   prevPage() {
-    const index = this.tabs.indexOf(this.currentTab);
+    const index = this.currentTab;
     if (index > 0) {
-      this.currentTab = this.tabs[index - 1];
+      this.currentTab = index - 1;
       this.tabIndex = index - 1;
       this.tabChange.emit(this.currentTab);
       window.scrollTo(0, 0);

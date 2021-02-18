@@ -40,8 +40,8 @@ namespace Gov.Cscp.Victims.Public.Services
         {
             string endpointUrl = _configuration["JAG_DOCUMENT_MERGE_URL"];
 
-            Console.WriteLine(endpointUrl);
-            Console.WriteLine(requestJson);
+            // Console.WriteLine(endpointUrl);
+            // Console.WriteLine(requestJson);
 
             HttpRequestMessage _httpRequest = new HttpRequestMessage(method, endpointUrl);
             _httpRequest.Headers.Add("X-Correlation-ID", _configuration["JAG_CORRELATION_ID"]);

@@ -19,6 +19,15 @@ import { ProgramApplication } from '../../core/models/program-application.class'
 import { MatDialog } from '@angular/material';
 import { AddPersonDialog } from '../dialogs/add-person/add-person.dialog';
 
+const PAGES = {
+  CONTACT_INFO: "contact_information",
+  ADMIN_INFO: "administrative_information",
+  CGLI: "commercial_general_liability_insurance",
+  PROGRAM: "program",
+  REVIEW: "review_application",
+  AUTH: "authorization",
+};
+
 @Component({
   selector: 'app-program-application',
   templateUrl: './program-application.component.html',
@@ -34,9 +43,10 @@ export class ProgramApplicationComponent implements OnInit {
 
   programTabs = ['Program Information', 'Program Hours of Operations'];
   reviewApplicationTabs: string[] = ['Application Information'];
-  currentReviewApplicationTab: string = 'Application Information';
+  currentReviewApplicationTab: number = 0;
 
   discriminators: string[] = ['contact_information', 'administrative_information', 'commercial_general_liability_insurance', 'program', 'review_application', 'authorization'];
+
   saving: boolean = false;
   isCompleted: boolean = false;
 
@@ -323,8 +333,8 @@ export class ProgramApplicationComponent implements OnInit {
       }
     }
 
-    if (originalStepper.discriminator === this.discriminators[3]) {
-      let current_program: iProgramApplication = this.trans.programApplications.find(pa => pa.name === originalStepper.itemName);
+    if (originalStepper.discriminator === PAGES.PROGRAM) {
+      let current_program: iProgramApplication = this.trans.programApplications.find(pa => pa.programId === originalStepper.object.data.programId);
       if (current_program) {
         let index = this.programTabs.findIndex(t => t === current_program.currentTab);
         if (index < (this.programTabs.length - 1)) {
@@ -342,10 +352,11 @@ export class ProgramApplicationComponent implements OnInit {
       return;
     }
 
-    if (originalStepper.discriminator === this.discriminators[4]) {
-      let index = this.reviewApplicationTabs.findIndex(t => t === this.currentReviewApplicationTab);
+    if (originalStepper.discriminator === PAGES.REVIEW) {
+      let index = this.currentReviewApplicationTab;
+      console.log(index);
       if (index < (this.reviewApplicationTabs.length - 1)) {
-        this.currentReviewApplicationTab = this.reviewApplicationTabs[index + 1];
+        ++this.currentReviewApplicationTab;
         window.scrollTo(0, 0);
         return;
       }
@@ -375,7 +386,7 @@ export class ProgramApplicationComponent implements OnInit {
       }
     }
     if (nextStepper.discriminator === this.discriminators[4]) {
-      this.currentReviewApplicationTab = this.reviewApplicationTabs[0];
+      this.currentReviewApplicationTab = 0;
     }
 
     this.stepperService.setCurrentStepperElement(this.stepperElements[this.stepperIndex].id);
@@ -394,9 +405,9 @@ export class ProgramApplicationComponent implements OnInit {
     }
 
     if (this.currentStepperElement.discriminator === this.discriminators[4]) {
-      let index = this.reviewApplicationTabs.findIndex(t => t === this.currentReviewApplicationTab);
+      let index = this.currentReviewApplicationTab;
       if (index > 0) {
-        this.currentReviewApplicationTab = this.reviewApplicationTabs[index - 1];
+        --this.currentReviewApplicationTab;
         window.scrollTo(0, 0);
         return;
       }
@@ -411,13 +422,13 @@ export class ProgramApplicationComponent implements OnInit {
       }
     }
     if (nextStepper.discriminator === this.discriminators[4]) {
-      this.currentReviewApplicationTab = this.reviewApplicationTabs[this.reviewApplicationTabs.length - 1];
+      this.currentReviewApplicationTab = this.reviewApplicationTabs.length - 1;
     }
 
     this.stepperService.setCurrentStepperElement(this.stepperElements[this.stepperIndex].id);
   }
-  reviewApplicationTabChange(tab: string) {
-    this.currentReviewApplicationTab = tab;
+  reviewApplicationTabChange(index: number) {
+    this.currentReviewApplicationTab = index;
   }
   setMailingAddressSameAsMainAddress() {
     if (this.trans.contactInformation.mailingAddressSameAsMainAddress) {

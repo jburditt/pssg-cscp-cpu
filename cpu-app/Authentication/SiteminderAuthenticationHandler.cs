@@ -269,7 +269,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     _logger.LogInformation("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
                     _logger.LogDebug("UserSettings found: " + userSettings.GetJson());
-                    Console.WriteLine("UserSettings found: " + userSettings.GetJson());
+                    // Console.WriteLine("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
                 {
@@ -433,7 +433,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     else if (resultResult.Contains(CONTACT_NOT_CPU))
                     {
                         //error state - should hopefully never happen
-                        Console.WriteLine("Error, contact does not belong to CPU...");
+                        // Console.WriteLine("Error, contact does not belong to CPU...");
 
                         userSettings.ContactExistsButNotApproved = true;
                         principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
