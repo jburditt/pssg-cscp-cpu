@@ -39,23 +39,18 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpGet("current")]
         public virtual IActionResult UsersCurrentGet()
         {
-            Console.WriteLine("UsersCurrentGet()");
+            // Console.WriteLine("UsersCurrentGet()");
             try
             {
                 // determine if we are a new registrant.
                 string storedSettingsString = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-                Console.WriteLine(storedSettingsString);
                 if (!String.IsNullOrEmpty(storedSettingsString))
                 {
                     Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
-                    Console.WriteLine("Returning user settings:");
-                    // Console.WriteLine(userSettings.ToString());
-
                     return StatusCode(200, userSettings);
                 }
                 else
                 {
-                    Console.WriteLine("No user settings found");
                     UserSettingsPayload ret = new UserSettingsPayload
                     {
                         Message = "No user settings found",
@@ -67,7 +62,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error getting user settings");
                 Console.WriteLine(e);
                 UserSettingsPayload ret = new UserSettingsPayload
                 {

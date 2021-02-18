@@ -1,9 +1,9 @@
 <ul class="nav nav-pills mb-2">
-  <li *ngFor="let tab of tabs" class="nav-item">
-    <a class="nav-link nav-tab" [class.active]="tab===currentTab" (click)="setCurrentTab(tab)">{{tab}}</a>
+  <li *ngFor="let tab of tabs; let i = index" class="nav-item">
+    <a class="nav-link nav-tab" [class.active]="i===currentTab" (click)="setCurrentTab(i)">{{tab}}</a>
   </li>
 </ul>
-<div *ngIf="currentTab===tabs[0]">
+<div *ngIf="currentTab===0">
   <h2 class="blue-header">Agency Contact Information</h2>
   <table class="table table-striped">
     <thead>
@@ -160,7 +160,7 @@
 </div>
 
 <div *ngFor="let programApplication of trans?.programApplications; let i=index">
-  <span *ngIf="currentTab===tabs[i+1]">
+  <span *ngIf="currentTab===(i+1)">
     <h2 class="blue-header">Program: {{programApplication.name}}</h2>
     <app-program-summary-table [pa]="programApplication"></app-program-summary-table>
   </span>
