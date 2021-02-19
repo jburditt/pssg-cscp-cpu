@@ -1,9 +1,10 @@
 using Gov.Cscp.Victims.Public.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Rest;
+using Serilog;
 using System.Net.Http;
 using System.Net;
 using System.Threading.Tasks;
-using System;
 
 namespace Gov.Cscp.Victims.Public.Services
 {
@@ -17,11 +18,13 @@ namespace Gov.Cscp.Victims.Public.Services
     {
         private HttpClient _client;
         private IConfiguration _configuration;
+        private readonly ILogger _logger;
 
         public DynamicsResultService(IConfiguration configuration, HttpClient httpClient)
         {
             _client = httpClient;
             _configuration = configuration;
+            _logger = Log.Logger;
         }
 
         public async Task<HttpClientResult> Get(string endpointUrl)
@@ -57,6 +60,11 @@ namespace Gov.Cscp.Victims.Public.Services
             result.responseMessage = _httpResponse;
             string clean = _responseContent.Replace("@odata.", "fortunecookie");
             result.result = Newtonsoft.Json.Linq.JObject.Parse(clean);
+
+            if (result.result.ContainsKey("IsSuccess") && result.result["IsSuccess"].ToString().Equals("False"))
+            {
+                _logger.Error(new HttpOperationException($"Error calling API function {endpointUrl}. Source = CPU"), $"Error calling API function {endpointUrl}. Source = CPU. Error is:\n{result.result}\n\nJSON sent:{requestJson}", result.result, requestJson);
+            }
 
             // Console.WriteLine(result.result);
 

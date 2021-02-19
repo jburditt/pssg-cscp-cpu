@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using Serilog;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -23,6 +24,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
         private readonly IDynamicsResultService _dynamicsResultService;
         private readonly IDocumentMergeService _documentMergeService;
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
         public DynamicsFileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IDynamicsResultService dynamicsResultService, IDocumentMergeService documentMergeService)
         {
@@ -30,6 +32,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             this._configuration = configuration;
             this._dynamicsResultService = dynamicsResultService;
             this._documentMergeService = documentMergeService;
+            _logger = Log.Logger;
         }
 
         [HttpGet("{businessBceid}/{userBceid}/documents/contract/{contractId}")]
@@ -43,6 +46,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting contract documents info 'vsd_GetCPUContractDocuments'. contract id = {contractId}. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -59,6 +67,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting account documents info 'vsd_GetCPUAccountDocuments'. account id = {accountId}. Source = CPU");
+                return BadRequest();
+            }
             finally { }
         }
 
@@ -70,6 +83,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 string endpointUrl = "vsd_sharepointurls(" + docId + ")/Microsoft.Dynamics.CRM.vsd_DownloadDocumentFromSharePoint";
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, "");
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting document info 'vsd_DownloadDocumentFromSharePoint'. Document id = {docId}. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -83,6 +101,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 string endpointUrl = "tasks(" + taskId + ")/Microsoft.Dynamics.CRM.vsd_GetCPUContractPackage";
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting contract package info 'vsd_GetCPUContractPackage'. Task id = {taskId}. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -164,10 +187,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Console.WriteLine(exception);
-                throw;
+                _logger.Error(e, "Unexpected error while submitting contract package. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -204,6 +227,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Unexpected error while uploading account document. Source = CPU");
+                return BadRequest();
+            }
             finally { }
         }
 
@@ -225,6 +253,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Unexpected error while uploading contract document. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }

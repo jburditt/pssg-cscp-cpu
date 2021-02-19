@@ -260,7 +260,7 @@ namespace Gov.Cscp.Victims.Public
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
 
-                Log.Logger.Information("COAST Portal Container Started");
+                Log.Logger.Information("CPU Portal Container Started");
 
             }
             else
