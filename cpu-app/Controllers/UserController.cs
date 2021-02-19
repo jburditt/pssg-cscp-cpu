@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Serilog;
+using System;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -26,12 +28,14 @@ namespace Gov.Cscp.Victims.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger _logger;
 
 
         public UserController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _logger = Log.Logger;
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
@@ -62,7 +66,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.Error(e, "Unexpected error while getting user info. Source = CPU");
                 UserSettingsPayload ret = new UserSettingsPayload
                 {
                     Message = "Error getting user settings",
@@ -109,6 +113,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     LogoutUrl = logoutPath
                 };
                 return StatusCode(200, ret);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Unexpected error while getting log out url. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }

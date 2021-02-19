@@ -31,10 +31,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [AllowAnonymous]
         public ActionResult Logout(string path)
         {
-            //     // clear session
+            // clear session
             HttpContext.Session.Clear();
 
-            //     // Removing Cookies
+            // Removing Cookies
             CookieOptions option = new CookieOptions();
             if (Request.Cookies[".AspNetCore.Session"] != null)
             {
@@ -47,43 +47,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 option.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Append("AuthenticationToken", "", option);
             }
-
-            //     if (! _env.IsProduction()) // clear dev tokens
-            //     {
-            //         string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-            //         if (temp == null)
-            //         {
-            //             temp = "";
-            //         }
-            //         // expire "dev" user cookie
-            //         Response.Cookies.Append(
-            //             _options.DevAuthenticationTokenKey,
-            //             temp,
-            //             new CookieOptions
-            //             {
-            //                 Path = "/",
-            //                 SameSite = SameSiteMode.None,
-            //                 Expires = DateTime.UtcNow.AddDays(-1)
-            //             }
-            //         );
-            //         // expire "dev" user cookie
-            //         temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
-            //         if (temp == null)
-            //         {
-            //             temp = "";
-            //         }
-            //         Response.Cookies.Append(
-            //             _options.DevBCSCAuthenticationTokenKey,
-            //             temp,
-            //             new CookieOptions
-            //             {
-            //                 Path = "/",
-            //                 SameSite = SameSiteMode.None,
-            //                 Expires = DateTime.UtcNow.AddDays(-1)
-            //             }
-            //         );
-
-            //     }
 
             string logoutPath = string.IsNullOrEmpty(_configuration["SITEMINDER_LOGOUT_URL"]) ? "/" : _configuration["SITEMINDER_LOGOUT_URL"];
             return Redirect(logoutPath + $"?returl={_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}&retnow=1");

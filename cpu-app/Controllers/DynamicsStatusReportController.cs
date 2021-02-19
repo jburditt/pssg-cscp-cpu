@@ -3,6 +3,8 @@ using Gov.Cscp.Victims.Public.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Serilog;
+using System;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -11,10 +13,12 @@ namespace Gov.Cscp.Victims.Public.Controllers
     public class DynamicsStatusReportController : Controller
     {
         private readonly IDynamicsResultService _dynamicsResultService;
+        private readonly ILogger _logger;
 
         public DynamicsStatusReportController(IDynamicsResultService dynamicsResultService)
         {
             this._dynamicsResultService = dynamicsResultService;
+            _logger = Log.Logger;
         }
 
         [HttpGet("{businessBceid}/{userBceid}/{taskId}")]
@@ -28,6 +32,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting stats questions info 'vsd_GetCPUMonthlyStatisticsQuestions'. Task id = {taskId}. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -43,6 +52,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting monthly stats info 'vsd_GetCPUMonthlyStatistics'. Contract id = {contractId}. Source = CPU");
+                return BadRequest();
+            }
             finally { }
         }
         [HttpGet("data_collection/{businessBceid}/{userBceid}/{dataCollectionId}")]
@@ -56,6 +70,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, requestJson);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, $"Unexpected error while getting submitted stats info 'vsd_GetCPUMonthlyStatisticsAnswers'. Data collection id = {dataCollectionId}. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
@@ -76,6 +95,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 HttpClientResult result = await _dynamicsResultService.Post(endpointUrl, modelString);
 
                 return StatusCode((int)result.statusCode, result.result.ToString());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Unexpected error while submitting stats answers. Source = CPU");
+                return BadRequest();
             }
             finally { }
         }
