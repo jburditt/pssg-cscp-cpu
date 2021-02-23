@@ -117,6 +117,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    _logger.Error($"API call to 'UploadSignedContract' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
@@ -215,6 +216,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    _logger.Error($"API call to 'UploadAccountDocument' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
@@ -242,6 +244,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    _logger.Error($"API call to 'UploadContractDocument' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
