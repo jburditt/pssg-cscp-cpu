@@ -45,7 +45,7 @@
     <div class="col-md">
       <div class="form-group">
         <label for="title">Title</label>
-        <input [disabled]="isDisabled" type="text" class="form-control" id="title{{idNum}}" name="title" [(ngModel)]="person.title" #title="ngModel">
+        <input [disabled]="isDisabled" type="text" class="form-control" id="title{{idNum}}" name="title" [(ngModel)]="person.title" #title="ngModel" maxlength="100">
       </div>
     </div>
   </div>
