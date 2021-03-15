@@ -43,11 +43,15 @@ namespace Gov.Cscp.Victims.Public
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddTransient<TokenHandler>();
+            services.AddTransient<KeycloakHandler>();
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
+            services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();
+            
             services.AddHttpClient<IDynamicsResultService, DynamicsResultService>().AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IDocumentMergeService, DocumentMergeService>();
+            services.AddHttpClient<IDocumentMergeService, DocumentMergeService>().AddHttpMessageHandler<KeycloakHandler>();
 
             services.AddMemoryCache();
 
