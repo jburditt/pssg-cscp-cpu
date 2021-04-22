@@ -252,7 +252,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
         totalFundedFromVSCP += (ac.fundedFromVscp || 0);
       });
 
-      if (vscpApprovedAmount !== totalFundedFromVSCP) {
+      if (vscpApprovedAmount.toFixed(2) !== totalFundedFromVSCP.toFixed(2)) {
         let stepperWithError = this.stepperElements.find(s => s.discriminator === pb.programId);
         if (stepperWithError) {
           this.stepperService.setStepperElementProperty(stepperWithError.id, "formState", "invalid");
