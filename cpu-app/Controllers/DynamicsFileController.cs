@@ -302,11 +302,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 content.SetColorFill(BaseColor.BLACK);
                 content.BeginText();
                 content.SetFontAndSize(BaseFont.CreateFont(), 9);
-                content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, signingOfficerName, 84.0F, 420.0F, 0.0F);
-                content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, signingOfficerTitle, 84.0F, 370.0F, 0.0F);
-                content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, dayString, 152.0F, 624.0F, 0.0F);
-                content.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, monthString, 285.0F, 624.0F, 0.0F);
-                content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, yearString, 304.0F, 624.5F, 0.0F);
+                if (!String.IsNullOrEmpty(signingOfficerName)) content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, signingOfficerName, 84.0F, 420.0F, 0.0F);
+                if (!String.IsNullOrEmpty(signingOfficerTitle)) content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, signingOfficerTitle, 84.0F, 370.0F, 0.0F);
+                if (!String.IsNullOrEmpty(dayString)) content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, dayString, 152.0F, 624.0F, 0.0F);
+                if (!String.IsNullOrEmpty(monthString)) content.ShowTextAligned(PdfContentByte.ALIGN_RIGHT, monthString, 285.0F, 624.0F, 0.0F);
+                if (!String.IsNullOrEmpty(yearString)) content.ShowTextAligned(PdfContentByte.ALIGN_LEFT, yearString, 304.0F, 624.5F, 0.0F);
                 content.EndText();
 
                 content.EndLayer();
