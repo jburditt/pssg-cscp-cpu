@@ -11,6 +11,7 @@ import { UserSettings } from '../core/models/user-settings.class';
 })
 export class LoginPageComponent implements OnInit {
   loading: boolean = true;
+  willLogOut: boolean = false;
   constructor(private router: Router,
     private userData: UserDataService,
     private notificationQueueService: NotificationQueueService,
@@ -33,9 +34,17 @@ export class LoginPageComponent implements OnInit {
         }
         else if (userInfo.contactExistsButNotApproved) {
           this.notificationQueueService.addNotification(`User is not approved for portal access. Please contact an administrator.`, 'danger');
+          this.willLogOut = true;
           setTimeout(() => {
             this.stateService.logout();
-          }, 1200);
+          }, 6000);
+        }
+        else if (userInfo.noRolesAssigned) {
+          this.notificationQueueService.addNotification(`User has no portal roles. Please contact an administrator.`, 'danger');
+          this.willLogOut = true;
+          setTimeout(() => {
+            this.stateService.logout();
+          }, 6000);
         }
         else {
           this.stateService.login();

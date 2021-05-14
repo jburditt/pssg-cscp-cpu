@@ -47,8 +47,8 @@ export class StateService {
 
     if (window.location.href.includes("localhost")) {
       //Victimservices
-      userId = 'D7742187EC2347378704A200273F87D9';
-      orgId = '8859118D4FB54A74AEDFC4CD368C36B1';
+      // userId = 'D7742187EC2347378704A200273F87D9';
+      // orgId = '8859118D4FB54A74AEDFC4CD368C36B1';
 
       //Victimservices1
       // userId = 'FB55AB99F20E471186B8143B3F21F6E7';
@@ -57,6 +57,10 @@ export class StateService {
       //Victimservices2
       // userId = 'C0FD151410544705A39FAF2A5504D4E7';
       // orgId = 'D25E31FFC5AA4C3A9B7557CED3A5DDA5';
+
+      //Victimservices4
+      userId = '136339471ABD4770A82227AF6AD2C01C';
+      orgId = '53AFBD4EB74B4156BAC2042593FBC5F1';
 
       //Victimservices18
       // userId = '968458E00053498798D0D8D815A2DCB8';
@@ -125,6 +129,13 @@ export class StateService {
           console.log(m);
           console.log("Did you update user secrets??");
           this.notificationQueueService.addNotification('User does not have required privileges to access portal.', 'danger');
+          this.loading.next(false);
+          return;
+        }
+        else if (m.Result.includes('No roles assigned to the contact')) {
+          console.log(m);
+          console.log("Need to assign roles in CRM");
+          this.notificationQueueService.addNotification('User does not have any roles assigned.', 'danger');
           this.loading.next(false);
           return;
         }

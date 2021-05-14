@@ -399,6 +399,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     string NEW_USER_AND_NEW_ORGANIZATION = "No organization and contact found with the supplied BCeID";
                     string CONTACT_NOT_APPROVED = "Contact is not approved for portal access";
                     string CONTACT_NOT_CPU = "Contact doesn't belong to CPU";
+                    string NO_ROLES_ASSIGNED = "No roles assigned to the contact";
 
                     if (resultResult.Contains(NEW_USER))
                     {
@@ -426,6 +427,15 @@ namespace Gov.Cscp.Victims.Public.Authentication
                         // Console.WriteLine("Error, contact already exists but is not approved");
 
                         userSettings.ContactExistsButNotApproved = true;
+                        principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
+                        UserSettings.SaveUserSettings(userSettings, context);
+                        return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
+                    }
+                    else if (resultResult.Contains(NO_ROLES_ASSIGNED))
+                    {
+                        // Console.WriteLine("New User and New Organization Registration");
+
+                        userSettings.NoRolesAssigned = true;
                         principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(options.Scheme, userSettings.UserType);
                         UserSettings.SaveUserSettings(userSettings, context);
                         return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
