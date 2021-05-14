@@ -10,6 +10,7 @@ export interface iUserSettings {
   isNewUserRegistration: boolean;
   isNewUserAndNewOrganizationRegistration: boolean;
   contactExistsButNotApproved: boolean;
+  noRolesAssigned: boolean;
   contactId: string;
   accountId: string;
   authenticatedUser: any;

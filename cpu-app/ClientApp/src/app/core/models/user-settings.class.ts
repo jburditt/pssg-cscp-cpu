@@ -11,6 +11,7 @@ export class UserSettings implements iUserSettings {
   user?: any;
   isNewUserRegistration: boolean;
   isNewUserAndNewOrganizationRegistration: boolean;
+  noRolesAssigned: boolean;
   contactExistsButNotApproved: boolean;
   contactId: string;
   accountId: string;
