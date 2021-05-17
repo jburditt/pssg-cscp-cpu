@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Serilog;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -198,7 +199,8 @@ namespace Gov.Cscp.Victims.Public.Authentication
     /// </summary>
     public class SiteminderAuthenticationHandler : AuthenticationHandler<SiteMinderAuthOptions>
     {
-        private readonly ILogger _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
+        private readonly Serilog.ILogger _splunkLogger;
         private IDynamicsResultService _dynamicsResultService;
 
         /// <summary>
@@ -218,6 +220,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
         {
             _logger = loggerFactory.CreateLogger(typeof(SiteminderAuthenticationHandler));
             _dynamicsResultService = dynamicsResultService;
+            _splunkLogger = Log.Logger;
         }
 
         /// <summary>
@@ -257,6 +260,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 string url = context.Request.GetDisplayUrl().ToLower();
                 if (url.Contains(".js"))
                 {
+                    _splunkLogger.Error("Unexpected error while in siteminder auth handler - url contains .js - returning NoResult(). Source = CPU");
                     return AuthenticateResult.NoResult();
                 }
 
@@ -327,17 +331,20 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     if (string.IsNullOrEmpty(userId))
                     {
                         _logger.LogDebug(options.MissingSiteMinderUserIdError);
+                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderGuidError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
 
                     if (string.IsNullOrEmpty(siteMinderGuid))
                     {
                         _logger.LogDebug(options.MissingSiteMinderGuidError);
+                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderGuidError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                     if (string.IsNullOrEmpty(siteMinderUserType))
                     {
                         _logger.LogDebug(options.MissingSiteMinderUserTypeError);
+                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderUserTypeError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderUserTypeError);
                     }
                 }
@@ -368,7 +375,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 {
                     var businessBceid = siteMinderBusinessGuid;
 
-                    // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
+                    Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                     _logger.LogDebug("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
 
                     userSettings.AuthenticatedUser = new User(new Guid(siteMinderGuid), "Bill", "Octoroc", true, "BO", "octoroc@foo.gov", siteMinderGuid, siteMinderBusinessGuid, siteMinderUserType, null);
@@ -465,9 +472,14 @@ namespace Gov.Cscp.Victims.Public.Authentication
                         return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                     }
                 }
+                else {
+                    _splunkLogger.Error("Unexpected error while in siteminder auth handler - No DynamicsResultService configured. Source = CPU");
+                    return AuthenticateResult.Fail("No DynamicsResultService configured");
+                }
             }
             catch (Exception exception)
             {
+                _splunkLogger.Error(exception, "Unexpected error while in siteminder auth handler. Source = CPU");
                 _logger.LogError(exception.Message);
                 Console.WriteLine(exception);
                 throw;
