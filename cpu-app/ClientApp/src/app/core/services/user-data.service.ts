@@ -13,6 +13,12 @@ export class UserDataService {
     private http: HttpClient,
   ) { }
 
+  checkIfLoggedIn() {
+    return this.http.get(`${this.apiUrl}/isLoggedIn`, { headers: this.headers }).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
   getCurrentUser() {
     return this.http.get(`${this.apiUrl}/current`, { headers: this.headers }).pipe(
       retry(3),

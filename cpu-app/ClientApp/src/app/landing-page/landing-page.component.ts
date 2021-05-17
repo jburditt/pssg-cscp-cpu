@@ -18,23 +18,29 @@ export class LandingPageComponent implements OnInit {
     private userData: UserDataService,
     private stateService: StateService) {
 
-    this.userData.getCurrentUser().subscribe((userSettings: UserSettings) => {
-      // console.log("returned user info:");
-      // console.log(userSettings);
-      if (userSettings && userSettings.userAuthenticated) {
-        // console.log("setting user data as logged in");
+    this.userData.checkIfLoggedIn().subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.userData.getCurrentUser().subscribe((userSettings: UserSettings) => {
+          // console.log("returned user info:");
+          // console.log(userSettings);
+          if (userSettings && userSettings.userAuthenticated) {
+            // console.log("setting user data as logged in");
+            this.stateService.loggedIn.next(true);
+            this.stateService.userSettings.next(userSettings);
+            this.isNewUserRegistration = userSettings.isNewUserRegistration;
+            this.contactExistsButNotApproved = userSettings.contactExistsButNotApproved;
 
-        this.stateService.loggedIn.next(true);
-        this.stateService.userSettings.next(userSettings);
-        this.isNewUserRegistration = userSettings.isNewUserRegistration;
-        this.contactExistsButNotApproved = userSettings.contactExistsButNotApproved;
-
-        this.stateService.getUserName();
+            this.stateService.getUserName();
+          }
+          else {
+            this.stateService.loggedIn.next(false);
+          }
+        });
       }
-      else {
-        this.stateService.loggedIn.next(false);
-      }
+    }, (err) => {
+      console.log(err);
     });
+
   }
 
   ngOnInit() {
