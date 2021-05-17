@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Serilog;
-using System;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -39,6 +38,31 @@ namespace Gov.Cscp.Victims.Public.Controllers
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
+
+        [HttpGet("isLoggedIn")]
+        [AllowAnonymous]
+        public virtual IActionResult GetIsLoggedIn()
+        {
+            try
+            {
+                string storedSettingsString = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                if (!String.IsNullOrEmpty(storedSettingsString))
+                {
+                    Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
+                    return StatusCode(200, userSettings.UserAuthenticated);
+                }
+                else
+                {
+                    return StatusCode(200, false);
+                }
+
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Unexpected error while getting user info. Source = CPU");
+                return StatusCode(500, false);
+            }
+        }
 
         [HttpGet("current")]
         public virtual IActionResult UsersCurrentGet()

@@ -484,7 +484,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 Console.WriteLine(exception);
                 throw;
             }
-            return AuthenticateResult.NoResult();
+            // return AuthenticateResult.NoResult();
         }
     }
 }
