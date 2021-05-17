@@ -331,20 +331,17 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     if (string.IsNullOrEmpty(userId))
                     {
                         _logger.LogDebug(options.MissingSiteMinderUserIdError);
-                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderGuidError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
 
                     if (string.IsNullOrEmpty(siteMinderGuid))
                     {
                         _logger.LogDebug(options.MissingSiteMinderGuidError);
-                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderGuidError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderGuidError);
                     }
                     if (string.IsNullOrEmpty(siteMinderUserType))
                     {
                         _logger.LogDebug(options.MissingSiteMinderUserTypeError);
-                        _splunkLogger.Error("Unexpected error while in siteminder auth handler - MissingSiteMinderUserTypeError. Source = CPU");
                         return AuthenticateResult.Fail(options.MissingSiteMinderUserTypeError);
                     }
                 }
