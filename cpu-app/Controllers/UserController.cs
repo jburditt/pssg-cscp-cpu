@@ -45,8 +45,17 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             try
             {
-                return StatusCode(200, _httpContextAccessor.HttpContext.Session.GetString("UserSettings") != null);
-                
+                string storedSettingsString = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+                if (!String.IsNullOrEmpty(storedSettingsString))
+                {
+                    Authentication.UserSettings userSettings = JsonConvert.DeserializeObject<Authentication.UserSettings>(storedSettingsString);
+                    return StatusCode(200, userSettings.UserAuthenticated);
+                }
+                else
+                {
+                    return StatusCode(200, false);
+                }
+
             }
             catch (Exception e)
             {
