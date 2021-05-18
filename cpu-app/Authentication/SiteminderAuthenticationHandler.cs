@@ -241,7 +241,6 @@ namespace Gov.Cscp.Victims.Public.Authentication
             bool isBCSCDeveloperLogin = false;
             try
             {
-                //             IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
                 IHostingEnvironment hostingEnv = (IHostingEnvironment)context.RequestServices.GetService(typeof(IHostingEnvironment));
@@ -371,8 +370,9 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 if (_dynamicsResultService != null)
                 {
                     var businessBceid = siteMinderBusinessGuid;
+                    businessBceid = null;
 
-                    Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
+                    // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                     _logger.LogDebug("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
 
                     userSettings.AuthenticatedUser = new User(new Guid(siteMinderGuid), "Bill", "Octoroc", true, "BO", "octoroc@foo.gov", siteMinderGuid, siteMinderBusinessGuid, siteMinderUserType, null);
@@ -470,6 +470,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     }
                 }
                 else {
+                    // Console.WriteLine("No DynamicsResultService configured.");
                     _splunkLogger.Error("Unexpected error while in siteminder auth handler - No DynamicsResultService configured. Source = CPU");
                     return AuthenticateResult.Fail("No DynamicsResultService configured");
                 }
@@ -478,6 +479,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
             {
                 _splunkLogger.Error(exception, "Unexpected error while in siteminder auth handler. Source = CPU");
                 _logger.LogError(exception.Message);
+                Console.WriteLine("Hit exception in siteminder auth handler.");
                 Console.WriteLine(exception);
                 throw;
             }
