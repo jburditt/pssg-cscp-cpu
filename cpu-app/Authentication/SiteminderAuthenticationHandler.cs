@@ -320,8 +320,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     }
 
                     siteMinderGuid = context.Request.Headers[options.SiteMinderUserGuidKey];
-                    // siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
-                    siteMinderBusinessGuid = context.Request.Headers["blargg"];
+                    siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
                     siteMinderUserType = context.Request.Headers[options.SiteMinderUserTypeKey];
 
 
@@ -370,8 +369,6 @@ namespace Gov.Cscp.Victims.Public.Authentication
 
                 if (_dynamicsResultService != null)
                 {
-                    var businessBceid = siteMinderBusinessGuid;
-
                     // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                     _logger.LogDebug("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
 

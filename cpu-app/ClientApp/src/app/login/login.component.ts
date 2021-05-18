@@ -25,11 +25,9 @@ export class LoginPageComponent implements OnInit {
         this.stateService.userSettings.next(userInfo);
         // console.log(userInfo);
         if (userInfo.isNewUserRegistration) {
-          // this.notificationQueueService.addNotification(`New User Detected.`, 'success');
           this.router.navigate(['/authenticated/new_user']);
         }
         else if (userInfo.isNewUserAndNewOrganizationRegistration) {
-          // this.notificationQueueService.addNotification(`New User Detected.`, 'success');
           this.router.navigate(['/authenticated/new_user_new_organization']);
         }
         else if (userInfo.contactExistsButNotApproved) {
@@ -52,9 +50,10 @@ export class LoginPageComponent implements OnInit {
       }
       else {
         this.notificationQueueService.addNotification(`No associated CRM account. Please contact an administrator.`, 'warning');
-        // this.stateService.loggedIn.next(false);
-        // this.stateService.logout();
-        this.router.navigate([this.stateService.homeRoute.getValue()]);
+        this.willLogOut = true;
+        setTimeout(() => {
+          this.stateService.logout();
+        }, 6000);
       }
     }, (err) => {
       this.notificationQueueService.addNotification(`Error retrieving user information.`, 'danger');
