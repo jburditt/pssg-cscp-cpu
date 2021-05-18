@@ -369,8 +369,6 @@ namespace Gov.Cscp.Victims.Public.Authentication
 
                 if (_dynamicsResultService != null)
                 {
-                    var businessBceid = siteMinderBusinessGuid;
-
                     // Console.WriteLine("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
                     _logger.LogDebug("We're \"Logged in\", businessBCeID: " + siteMinderBusinessGuid + ", UserBCeID: " + siteMinderGuid);
 
