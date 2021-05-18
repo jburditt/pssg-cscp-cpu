@@ -320,8 +320,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                     }
 
                     siteMinderGuid = context.Request.Headers[options.SiteMinderUserGuidKey];
-                    // siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
-                    siteMinderBusinessGuid = context.Request.Headers["blargg"];
+                    siteMinderBusinessGuid = context.Request.Headers[options.SiteMinderBusinessGuidKey];
                     siteMinderUserType = context.Request.Headers[options.SiteMinderUserTypeKey];
 
 
