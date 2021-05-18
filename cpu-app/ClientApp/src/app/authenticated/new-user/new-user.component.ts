@@ -51,7 +51,7 @@ export class NewUserComponent implements OnInit {
           this.saving = false;
           setTimeout(() => {
             this.stateService.logout();
-          }, 1200);
+          }, 4000);
         }
         else {
           this.notificationQueueService.addNotification('The new user could not be saved. If this problem is persisting please contact your ministry representative.', 'danger');
