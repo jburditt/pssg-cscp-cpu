@@ -55,7 +55,7 @@ export class NewUserNewOrganizationComponent implements OnInit {
           this.notificationQueueService.addNotification(`You have successfully registered a new user and organization.`, 'success');
           setTimeout(() => {
             this.stateService.logout();
-          }, 1200);
+          }, 4000);
         }
         else {
           this.notificationQueueService.addNotification('The new user could not be saved. If this problem is persisting please contact your ministry representative.', 'danger');
