@@ -29,6 +29,8 @@ export class ProgramAuthorizerComponent implements OnInit {
   signatureData: string;
   signingDate: string;
   terms: [string, boolean][] = [];
+  CRM_HEIGHT = 125;
+  CRM_WIDTH = 300;
 
   constructor(
     private stateService: StateService,
@@ -72,7 +74,15 @@ export class ProgramAuthorizerComponent implements OnInit {
 
   acceptSignature() {
     if (this.wasSigned) {
-      this.signature.signature = this.signaturePad.toDataURL();
+      var resizedCanvas = document.createElement("canvas");
+      var resizedContext = resizedCanvas.getContext("2d");
+      resizedCanvas.height = this.CRM_HEIGHT;
+      resizedCanvas.width = this.CRM_WIDTH;
+      var canvas = document.querySelectorAll(".signature-pad > signature-pad > canvas")[0] as CanvasImageSource;
+      resizedContext.drawImage(canvas, 0, 0, this.CRM_WIDTH, this.CRM_HEIGHT);
+      let signatureData = resizedCanvas.toDataURL();;
+      
+      this.signature.signature = signatureData;
       this.signature.signatureDate = new Date();
     }
   }
