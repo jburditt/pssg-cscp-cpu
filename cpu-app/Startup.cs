@@ -49,7 +49,7 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();
-            
+
             services.AddHttpClient<IDynamicsResultService, DynamicsResultService>().AddHttpMessageHandler<TokenHandler>();
             services.AddHttpClient<IDocumentMergeService, DocumentMergeService>().AddHttpMessageHandler<KeycloakHandler>();
 
@@ -135,7 +135,10 @@ namespace Gov.Cscp.Victims.Public
 
             });
 
-            services.AddSession();
+            services.AddSession(x =>
+            {
+                x.IdleTimeout = TimeSpan.FromHours(1.0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
