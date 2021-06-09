@@ -16,6 +16,7 @@ export interface iQuestion {
   multiChoiceAnswers?: iMultipleChoice[];
   parent_id?: string;
   isChildQuestionExplanationRequired?: boolean;
+  tooltip?: string;
 }
 
 export interface iMultipleChoice {
