@@ -58,6 +58,7 @@ export class TransmogrifierStatusReport {
               numberMask: d.vsd_number ? d.vsd_number.toString() : null,
               boolean: d.vsd_yesno === boolOptionSet.isTrue ? true : d.vsd_yesno === boolOptionSet.isFalse ? false : null,
               string: d.vsd_textanswer || null,
+              tooltip: d.vsd_tooltip || null,
             }
             // instantiate the correct property with the freshest null value
             q[type] = null;
@@ -79,6 +80,7 @@ export class TransmogrifierStatusReport {
             multiChoiceAnswers: this.getMultipleChoice(d.vsd_cpustatisticsmasterdataid, g.MultipleChoiceCollection),
             parent_id: d._vsd_parentid_value,
             isChildQuestionExplanationRequired: false,
+            tooltip: d.vsd_tooltip || null,
           }
           // instantiate the correct property with the freshest null value
           q[type] = null;

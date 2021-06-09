@@ -532,6 +532,7 @@ export interface iDynamicsMonthlyStatisticsChildQuestion {
   vsd_name?: string;
   vsd_questionorder?: number;
   vsd_questiontype?: number;
+  vsd_tooltip?: string;
 }
 export interface iDynamicsMonthlyStatisticsQuestionsMcQuestion {
   vsd_cpustatisticsmasterdataanswerid?: string;
