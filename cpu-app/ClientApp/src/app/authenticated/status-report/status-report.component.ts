@@ -62,6 +62,8 @@ export class StatusReportComponent implements OnInit, OnDestroy {
               if (thisTask) title = thisTask.taskTitle;
             }
 
+            console.log(this.trans);
+            
             this.trans.title = title;
             this.constructDefaultstepperElements();
           }

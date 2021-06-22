@@ -56,14 +56,14 @@
               <span *ngIf="q.type==='boolean'">
                 <p class="mb-0 is-required">{{i+1}}. {{q.label}} <app-tool-tip [trigger]="questionTooltip" *ngIf="q.tooltip"></app-tool-tip></p>
                 <div class="form-check form-check-inline">
-                  <input [(ngModel)]="q.boolean" class="form-check-input" type="radio" [name]="q.uuid" [id]="q.uuid" [value]="true" (change)="checkForRequiredChildQuestion(q, group.questions)">
+                  <input [(ngModel)]="q.boolean" class="form-check-input" type="radio" [name]="q.uuid" [attr.name]="q.uuid" [id]="q.uuid" [value]="true" (change)="checkForRequiredChildQuestion(q, group.questions)">
                   <label class="form-check-label" [for]="q.uuid">
                     Yes
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input [(ngModel)]="q.boolean" class="form-check-input" type="radio" [name]="q.uuid" [id]="q.uuid" [value]="false" (change)="checkForRequiredChildQuestion(q, group.questions)">
-                  <label class="form-check-label" [for]="q.uuid">
+                  <input [(ngModel)]="q.boolean" class="form-check-input" type="radio" [name]="q.uuid" [attr.name]="q.uuid" [id]="q.uuid+'2'" [value]="false" (change)="checkForRequiredChildQuestion(q, group.questions)">
+                  <label class="form-check-label" [for]="q.uuid+'2'">
                     No
                   </label>
                 </div>

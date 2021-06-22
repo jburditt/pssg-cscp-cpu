@@ -13,7 +13,7 @@ namespace Gov.Cscp.Victims.Public.Models
         }
         public string vsd_name { get; set; }
         public string vsd_questioncategory { get; set; }
-        public int? vsd_number { get; set; }
+        public double? vsd_number { get; set; }
         public int vsd_questiontype1 { get; set; }
         public int vsd_questionorder { get; set; }
         public string vsd_textanswer { get; set; }
