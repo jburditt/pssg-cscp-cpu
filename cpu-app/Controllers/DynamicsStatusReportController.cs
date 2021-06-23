@@ -86,7 +86,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _logger.Error($"API call to 'AnswerQuestions' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
+                    _logger.Error(new Exception(ModelState.ToString()), $"API call to 'AnswerQuestions' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
