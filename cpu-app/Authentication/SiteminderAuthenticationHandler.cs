@@ -259,7 +259,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 string url = context.Request.GetDisplayUrl().ToLower();
                 if (url.Contains(".js"))
                 {
-                    _splunkLogger.Error("Unexpected error while in siteminder auth handler - url contains .js - returning NoResult(). Source = CPU");
+                    _splunkLogger.Error(new Exception("url contains .js"), "Unexpected error while in siteminder auth handler - url contains .js - returning NoResult(). Source = CPU");
                     return AuthenticateResult.NoResult();
                 }
 
@@ -468,7 +468,7 @@ namespace Gov.Cscp.Victims.Public.Authentication
                 }
                 else {
                     // Console.WriteLine("No DynamicsResultService configured.");
-                    _splunkLogger.Error("Unexpected error while in siteminder auth handler - No DynamicsResultService configured. Source = CPU");
+                    _splunkLogger.Error(new Exception("No DynamicsResultService configured."), "Unexpected error while in siteminder auth handler - No DynamicsResultService configured. Source = CPU");
                     return AuthenticateResult.Fail("No DynamicsResultService configured");
                 }
             }

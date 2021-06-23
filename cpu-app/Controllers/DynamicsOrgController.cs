@@ -34,7 +34,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     string messages = string.Join("\n", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
-                    _logger.Error(new Exception(messages), $"API call to 'Create' made with invalid model state. Error is:\n{messages}. Source = CPU");
+                    _logger.Error(new Exception(messages), $"API call to 'Create' made with invalid model state. Error is:\n{messages}\nSource = CPU");
                     return BadRequest(ModelState);
                 }
 
@@ -65,7 +65,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     string messages = string.Join("\n", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
-                    _logger.Error(new Exception(messages), $"API call to 'SetStaff' made with invalid model state. Error is:\n{messages}. Source = CPU");
+                    _logger.Error(new Exception(messages), $"API call to 'SetStaff' made with invalid model state. Error is:\n{messages}\nSource = CPU");
                     return BadRequest(ModelState);
                 }
 
