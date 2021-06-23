@@ -10,6 +10,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using Serilog;
@@ -117,7 +118,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _logger.Error(new Exception(ModelState.ToString()), $"API call to 'UploadSignedContract' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    _logger.Error(new Exception(messages), $"API call to 'UploadSignedContract' made with invalid model state. Error is:\n{messages}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
@@ -216,7 +220,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _logger.Error(new Exception(ModelState.ToString()), $"API call to 'UploadAccountDocument' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    _logger.Error(new Exception(messages), $"API call to 'UploadAccountDocument' made with invalid model state. Error is:\n{messages}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
@@ -244,7 +251,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _logger.Error(new Exception(ModelState.ToString()), $"API call to 'UploadContractDocument' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
+                    string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    _logger.Error(new Exception(messages), $"API call to 'UploadContractDocument' made with invalid model state. Error is:\n{messages}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
