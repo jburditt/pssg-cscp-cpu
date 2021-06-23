@@ -118,7 +118,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    string messages = string.Join("; ", ModelState.Values
+                    string messages = string.Join("\n", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
                     _logger.Error(new Exception(messages), $"API call to 'UploadSignedContract' made with invalid model state. Error is:\n{messages}. Source = CPU");
@@ -220,7 +220,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    string messages = string.Join("; ", ModelState.Values
+                    string messages = string.Join("\n", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
                     _logger.Error(new Exception(messages), $"API call to 'UploadAccountDocument' made with invalid model state. Error is:\n{messages}. Source = CPU");
@@ -251,7 +251,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    string messages = string.Join("; ", ModelState.Values
+                    string messages = string.Join("\n", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
                     _logger.Error(new Exception(messages), $"API call to 'UploadContractDocument' made with invalid model state. Error is:\n{messages}. Source = CPU");

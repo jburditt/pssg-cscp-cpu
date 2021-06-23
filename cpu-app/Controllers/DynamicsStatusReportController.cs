@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Serilog;
 using System;
+using System.Linq;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -86,7 +87,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _logger.Error(new Exception(ModelState.ToString()), $"API call to 'AnswerQuestions' made with invalid model state. Error is:\n{ModelState}. Source = CPU");
+                    string messages = string.Join("\n", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    _logger.Error(new Exception(messages), $"API call to 'AnswerQuestions' made with invalid model state. Model error is:\n{messages}. Source = CPU");
                     return BadRequest(ModelState);
                 }
 
