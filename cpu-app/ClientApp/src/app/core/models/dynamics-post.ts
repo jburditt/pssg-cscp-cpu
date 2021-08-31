@@ -242,6 +242,7 @@ export interface iDynamicsScheduleGLineItemPost {
   vsd_actualexpensescurrentquarter?: number;
   vsd_yeartodatevariance?: number;
   vsd_quarterlyvariance?: number;
+  vsd_explanationforvariance?: string;
 }
 export interface iDynamicsCrmContactPost {
   _parentcustomerid_value?: string;

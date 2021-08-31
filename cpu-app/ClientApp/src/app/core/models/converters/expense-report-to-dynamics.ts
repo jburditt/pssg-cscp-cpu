@@ -60,7 +60,8 @@ export function convertExpenseReportToDynamics(trans: TransmogrifierExpenseRepor
       vsd_actualexpensescurrentquarter: y.actual || 0,
       vsd_quarterlyvariance: (y.quarterlyBudget || 0) - (y.actual || 0),
       vsd_actualexpendituresyeartodate: (y.actual || 0) + (y.actualYearToDate || 0),
-      vsd_yeartodatevariance: (y.annualBudget || 0) - ((y.actual || 0) + (y.actualYearToDate || 0))
+      vsd_yeartodatevariance: (y.annualBudget || 0) - ((y.actual || 0) + (y.actualYearToDate || 0)),
+      vsd_explanationforvariance: y.description
     };
     glis.push(lineItem);
   }

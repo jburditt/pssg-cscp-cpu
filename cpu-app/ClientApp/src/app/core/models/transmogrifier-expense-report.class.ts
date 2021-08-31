@@ -73,7 +73,7 @@ export class TransmogrifierExpenseReport {
           quarterlyVariance: item.vsd_quarterlyvariance || 0,
           actualYearToDate: (item.vsd_actualexpendituresyeartodate || 0) - (item.vsd_actualexpensescurrentquarter || 0),
           yearToDateVariance: (item.vsd_yeartodatevariance || 0) - (item.vsd_actualexpensescurrentquarter || 0),
-          description: ''
+          description: item.vsd_explanationforvariance
         });
       }
     }

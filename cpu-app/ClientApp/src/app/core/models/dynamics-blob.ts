@@ -268,6 +268,7 @@ export interface iDynamicsScheduleGLineItem {
   vsd_actualexpensescurrentquarter?: number;
   vsd_yeartodatevariance?: number;
   vsd_quarterlyvariance?: number;
+  vsd_explanationforvariance?: string;
 }
 export interface iDynamicsScheduleGResponse {
   fortunecookiecontext?: string;
