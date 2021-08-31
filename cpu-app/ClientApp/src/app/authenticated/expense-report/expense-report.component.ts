@@ -154,28 +154,28 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
     let self = this;
     this.lineItemSums['annualBudgetSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.annualBudget)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['quarterlyBudgetSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.quarterlyBudget)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['actualSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.actual)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['quarterlyVarianceSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.quarterlyBudget - l.actual)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['paidYearToDateSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.annualBudget / 4 * self.trans.expenseReport.reportingPeriod.multiplier)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['actualYearToDateSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.actualYearToDate + l.actual)
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['annualVarianceSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => (l.annualBudget / 4 * self.trans.expenseReport.reportingPeriod.multiplier) - (l.actualYearToDate + l.actual))
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
     this.lineItemSums['annualRemainingSum'] = this.trans.expenseReport.programExpenseLineItems
       .map(l => l.annualBudget - (l.actualYearToDate + l.actual))
-      .reduce((prev, curr) => prev + curr);
+      .reduce((prev, curr) => prev + curr, 0);
   }
   updateLineItemSums() {
     let self = this;

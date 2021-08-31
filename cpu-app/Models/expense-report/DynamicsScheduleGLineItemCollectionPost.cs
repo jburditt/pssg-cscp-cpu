@@ -13,5 +13,6 @@ namespace Gov.Cscp.Victims.Public.Models
 		public float vsd_yeartodatevariance { get; set; }
 		public string fortunecookietype { get { return "Microsoft.Dynamics.CRM.vsd_scheduleglineitem"; } }
 		public string vsd_scheduleglineitemid { get; set; }
+		public string vsd_explanationforvariance { get; set; }
 	}
 }

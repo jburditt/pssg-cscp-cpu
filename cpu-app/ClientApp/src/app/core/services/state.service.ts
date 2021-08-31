@@ -46,7 +46,7 @@ export class StateService {
     let orgId = "";// = 'E4637B1557A6457891D7549067B20635';
 
     if (window.location.href.includes("localhost")) {
-      //Victimservices
+      //Victimservices - North Island Crisis Center Society
       userId = 'D7742187EC2347378704A200273F87D9';
       orgId = '8859118D4FB54A74AEDFC4CD368C36B1';
 
@@ -54,15 +54,23 @@ export class StateService {
       // userId = 'FB55AB99F20E471186B8143B3F21F6E7';
       // orgId = 'E4637B1557A6457891D7549067B20635';
 
-      //Victimservices2
+      //Victimservices2 - Summit Community Services
       // userId = 'C0FD151410544705A39FAF2A5504D4E7';
       // orgId = 'D25E31FFC5AA4C3A9B7557CED3A5DDA5';
 
-      //Victimservices4
+      //Victimservices4 - Family Service of Greater Vancouver
       // userId = '136339471ABD4770A82227AF6AD2C01C';
       // orgId = '53AFBD4EB74B4156BAC2042593FBC5F1';
 
-      //Victimservices18
+      //Victimservices9 - Encounters an error - BusinessBCeID doesn't exist..
+      //userId = '6BBE5A08665147548B083B07C7963554';
+      //orgId = 'F52E7303B961471A8B92188F4874B2FB';
+
+      //Victimservices17 - City of Campbell River
+      // userId = '41BD0A96CDF644A9B0FC85A2C700A4EB';
+      // orgId = 'FCBAF5FEC8B14BF295BF385D553D0CA8';
+
+      //Victimservices18 - District of North Vancouver
       // userId = '968458E00053498798D0D8D815A2DCB8';
       // orgId = '7B0C03E9C4C84068865655EE8EDD7DA3';
 
