@@ -66,7 +66,7 @@ namespace Gov.Cscp.Victims.Public.Services
             {
                 _logger.Information(new HttpOperationException($"Received a fail response from {endpointUrl}. Source = CPU"), $"Error calling API function {endpointUrl}. \nSource = CPU. \nError is:\n{result.result}\n\nJSON sent:{requestJson}", result.result, requestJson);
             }
-            if (_statusCode == HttpStatusCode.InternalServerError)
+            if (!(new HttpResponseMessage((HttpStatusCode)_statusCode).IsSuccessStatusCode))
             {
                 _logger.Error(new HttpOperationException($"Error calling API function {endpointUrl}. Source = CPU"), $"Error calling API function {endpointUrl}. \nSource = CPU. \nError is:\n{result.result}\n\nJSON sent:{requestJson}", result.result, requestJson);
             }
