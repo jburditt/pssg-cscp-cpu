@@ -115,16 +115,16 @@
               <td><i class="text-secondary spinner-border spinner-border-sm"></i></td>
             </tr>
             <tr *ngFor="let data of dataCollection; let i=index;">
-              <td>{{completedStats.ProgramCollection[0].vsd_name}}</td>
+              <td>{{data.program_name}}</td>
               <td>{{data.reportingPeriod}}</td>
               <td>
                 <ng-container *ngIf="data.statuscode == StatusReasons.Approved">
                   <a routerLink="/authenticated/completed_status_report/{{data.vsd_datacollectionid}}">
-                    Statistics report ({{completedStats.ProgramCollection[0].vsd_name}})
+                    Statistics report ({{data.program_name}})
                   </a>
                 </ng-container>
                 <ng-container *ngIf="data.statuscode != StatusReasons.Approved">
-                  Statistics report ({{completedStats.ProgramCollection[0].vsd_name}})
+                  Statistics report ({{data.program_name}})
                 </ng-container>
               </td>
               <td>{{data.vsd_submissiondate | date}}</td>
