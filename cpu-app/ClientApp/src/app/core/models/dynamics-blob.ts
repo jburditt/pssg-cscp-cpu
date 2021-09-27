@@ -643,6 +643,7 @@ export interface iDynamicsDataCollection {
   createdon?: Date;
   _vsd_program_value?: string;
   vsd_name?: string;
+  program_name?: string;
 }
 
 export interface iDynamicsContact {

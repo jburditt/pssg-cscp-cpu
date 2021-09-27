@@ -62,6 +62,10 @@ export class StateService {
       // userId = '136339471ABD4770A82227AF6AD2C01C';
       // orgId = '53AFBD4EB74B4156BAC2042593FBC5F1';
 
+      //Victimservices7 - City of Burnaby
+      userId = '3DFB2AE927C04063A1399BA059134AE8';
+      orgId = 'B368932DC7C14D5EB792A65DFCEA6B1F';
+
       //Victimservices9 - Encounters an error - BusinessBCeID doesn't exist..
       //userId = '6BBE5A08665147548B083B07C7963554';
       //orgId = 'F52E7303B961471A8B92188F4874B2FB';
@@ -71,8 +75,8 @@ export class StateService {
       // orgId = 'FCBAF5FEC8B14BF295BF385D553D0CA8';
 
       //Victimservices18 - District of North Vancouver
-      userId = '968458E00053498798D0D8D815A2DCB8';
-      orgId = '7B0C03E9C4C84068865655EE8EDD7DA3';
+      // userId = '968458E00053498798D0D8D815A2DCB8';
+      // orgId = '7B0C03E9C4C84068865655EE8EDD7DA3';
 
       let settings = new UserSettings();
       settings.userId = userId;
