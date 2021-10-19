@@ -32,6 +32,7 @@ export class SignContractComponent implements OnInit, OnDestroy {
   stepperElements: iStepperElement[];
   currentStepperElement: iStepperElement;
   stepperIndex: number = 0;
+  isModificationAgreement: boolean = false;
 
   documentCollection: iDynamicsDocument[] = [];
   out: iDynamicsPostSignedContract;
@@ -66,6 +67,9 @@ export class SignContractComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let form_type = this.route.snapshot.data['formType'];
+    this.isModificationAgreement = form_type == "sign_mod_agreement";
+
     this.isLoading = true;
     this.stateSubscription = this.stateService.main.subscribe((m: Transmogrifier) => {
       this.trans = m;
@@ -105,16 +109,17 @@ export class SignContractComponent implements OnInit, OnDestroy {
   submit() {
     try {
       this.saving = true;
-      this.out = convertContractPackageToDynamics(this.userId, this.organizationId, this.documentCollection, this.signature);
+      this.out = convertContractPackageToDynamics(this.userId, this.organizationId, this.documentCollection, this.signature, this.isModificationAgreement);
       this.fileService.uploadSignedContract(this.out, this.taskId).subscribe(
         r => {
+          this.saving = false;
+          
           //for testing document combining, see if it works - setup backend to return the combined document instead of sending it forward to CRM
-          // let file = "data:application/pdf;base64," + r.document;
+          // let file = "data:application/pdf;base64," + r.signedContract.body;
           // let fileName = "Test combined doc";
           // let obj = { fileData: file, fileName: fileName };
           // this.stepperService.addStepperElement(obj, fileName, 'untouched', 'document');
 
-          this.saving = false;
           if (r.IsSuccess) {
             this.notificationQueueService.addNotification(`You have successfully signed the contract.`, 'success');
             this.stateService.refresh();

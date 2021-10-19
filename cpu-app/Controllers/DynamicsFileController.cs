@@ -144,7 +144,9 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 string signatureString = portalModel.Signature.vsd_authorizedsigningofficersignature;
                 var offset = signatureString.IndexOf(',') + 1;
                 var signatureImage = System.Convert.FromBase64String(signatureString.Substring(offset));
-                string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle);
+                //for mod agreement, the signature page should have it's "Section 25" header hidden
+                bool hideSection = portalModel.IsModificationAgreement;
+                string signedPage = stampSignaturePage(signaturePage, signatureImage, portalModel.Signature.vsd_signingofficersname, portalModel.Signature.vsd_signingofficertitle, hideSection);
 
 
                 for (int i = 0; i < portalModel.DocumentCollection.Length - 1; ++i)
@@ -167,6 +169,21 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     docMergeRequest.documents[signatureIndex] = new JAGDocument(signedPage, signatureIndex);
                 }
 
+                /* -- Local Document Merge - FOR TESTING ONLY */
+                // List<byte[]> byteArray = new List<byte[]>();
+
+                // foreach (var doc in docMergeRequest.documents)
+                // {
+                //     byteArray.Add(System.Convert.FromBase64String(doc.data));
+                // }
+
+                // byte[] combinedArray = concatContent(byteArray);
+
+                // string combinedDoc = System.Convert.ToBase64String(combinedArray);
+                /* -- Local Document Merge - FOR TESTING ONLY */
+
+
+                /* -- NTT Document Merge Service */
                 JsonSerializerOptions mergeOptions = new JsonSerializerOptions();
                 mergeOptions.IgnoreNullValues = true;
                 string mergeString = System.Text.Json.JsonSerializer.Serialize(docMergeRequest, mergeOptions);
@@ -178,12 +195,16 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 }
 
                 string combinedDoc = GetJArrayValue(mergeResult.result, "document");
-                //for testing document merge
-                // return StatusCode((int)mergeResult.statusCode, mergeResult.result.ToString());
+                /* -- NTT Document Merge Service */
+
 
                 data.SignedContract = new DynamicsDocumentPost();
                 data.SignedContract.body = combinedDoc;
                 data.SignedContract.filename = "Contract Package Signed by Service Provider.pdf";
+
+                //For testing document merge -local
+                // return Ok(data);
+
 
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.IgnoreNullValues = true;
@@ -275,23 +296,38 @@ namespace Gov.Cscp.Victims.Public.Controllers
             finally { }
         }
 
-        public static string stampSignaturePage(byte[] signaturePage, byte[] signature, String signingOfficerName, String signingOfficerTitle)
+        private static string stampSignaturePage(byte[] signaturePage, byte[] signature, String signingOfficerName, String signingOfficerTitle, bool hideSection)
         {
             using (var ms = new MemoryStream())
             {
                 PdfReader pdfr = new PdfReader(signaturePage);
                 PdfStamper pdfs = new PdfStamper(pdfr, ms);
-                Image image = iTextSharp.text.Image.GetInstance(signature);
                 Rectangle rect;
                 PdfContentByte content;
 
                 rect = pdfr.GetPageSize(1);
                 content = pdfs.GetOverContent(1);
 
+                Image image = iTextSharp.text.Image.GetInstance(signature);
                 image.SetAbsolutePosition(84.0F, 475.0F);
                 image.ScalePercent(29.0F, 25.0F);
 
                 content.AddImage(image);
+
+                //hide section 25
+                if (hideSection)
+                {
+                    //white box
+                    var hideBox = System.Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mP8/58BAzAOZUEA5OUT9xiCXfgAAAAASUVORK5CYII=");
+
+                    //blue - more easily visible for testing placement
+                    // var hideBox = System.Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mNkSPz/n4EIwDiqkL4KAaEYF8HYaFXLAAAAAElFTkSuQmCC");
+
+                    Image box = iTextSharp.text.Image.GetInstance(hideBox);
+                    box.SetAbsolutePosition(65.0F, 708.0F);
+                    box.ScalePercent(1300.0F, 150.0F);
+                    content.AddImage(box);
+                }
 
                 PdfLayer layer = new PdfLayer("info-layer", pdfs.Writer);
                 content.BeginLayer(layer);
@@ -325,6 +361,36 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 byte[] signedPage = ms.ToArray();
                 return System.Convert.ToBase64String(signedPage);
+            }
+        }
+
+        private static byte[] concatContent(List<byte[]> pdfByteContent)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var doc = new Document())
+                {
+                    using (var copy = new PdfSmartCopy(doc, ms))
+                    {
+                        doc.Open();
+
+                        //Loop through each byte array
+                        foreach (var p in pdfByteContent)
+                        {
+                            //Create a PdfReader bound to that byte array
+                            using (var reader = new PdfReader(p))
+                            {
+                                //Add the entire document instead of page-by-page
+                                copy.AddDocument(reader);
+                            }
+                        }
+
+                        doc.Close();
+                    }
+                }
+
+                //Return just before disposing
+                return ms.ToArray();
             }
         }
     }

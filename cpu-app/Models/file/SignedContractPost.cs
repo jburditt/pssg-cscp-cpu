@@ -11,6 +11,7 @@ namespace Gov.Cscp.Victims.Public.Models
         public string UserBCeID { get; set; }
         public DynamicsDocumentPost[] DocumentCollection { get; set; }
         public DynamicsSignaturePost Signature { get; set; }
+        public bool IsModificationAgreement { get; set; }
     }
 
     public class SignedContractPostToDynamics

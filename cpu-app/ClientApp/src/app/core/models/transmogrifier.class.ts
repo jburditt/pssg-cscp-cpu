@@ -122,7 +122,7 @@ export class Transmogrifier {
     if (discriminator === 'expense_report') {
       return t._vsd_schedulegid_value;
     }
-    if (discriminator === 'status_report' || discriminator === 'sign_contract') {
+    if (discriminator === 'status_report' || discriminator === 'sign_contract' || discriminator === 'sign_mod_agreement') {
       return t.activityid;
     }
     if (discriminator === 'program_application' || discriminator === 'cap_program_application') {
