@@ -31,6 +31,7 @@ export interface iDynamicsPostSignedContract { //maps to FilePost
   Userbceid: string;
   DocumentCollection?: iDynamicsDocumentPost[];
   Signature?: iDynamicsSignaturePost;
+  IsModificationAgreement?: boolean;
 }
 export interface iDynamicsSignaturePost {
   vsd_authorizedsigningofficersignature?: string;

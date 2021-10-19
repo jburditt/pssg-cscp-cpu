@@ -93,7 +93,13 @@ const routes: Routes = [
       },
       {
         path: 'sign_contract/:taskId',
-        component: SignContractComponent
+        component: SignContractComponent,
+        data: { formType: "sign_contract" }
+      },
+      {
+        path: 'sign_mod_agreement/:taskId',
+        component: SignContractComponent,
+        data: { formType: "sign_mod_agreement" }
       },
       {
         path: 'cover_letter/:taskId',
