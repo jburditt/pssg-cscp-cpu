@@ -58,7 +58,7 @@ namespace Gov.Cscp.Victims.Public.Services
             result.responseMessage = _httpResponse;
             result.result = Newtonsoft.Json.Linq.JObject.Parse(_responseContent);
 
-            // Console.WriteLine(result.result);
+            Console.WriteLine(result.result);
 
             return result;
         }
