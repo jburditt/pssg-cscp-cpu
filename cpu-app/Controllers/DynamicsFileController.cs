@@ -170,31 +170,31 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 }
 
                 /* -- Local Document Merge - FOR TESTING ONLY */
-                List<byte[]> byteArray = new List<byte[]>();
+                // List<byte[]> byteArray = new List<byte[]>();
 
-                foreach (var doc in docMergeRequest.documents)
-                {
-                    byteArray.Add(System.Convert.FromBase64String(doc.data));
-                }
+                // foreach (var doc in docMergeRequest.documents)
+                // {
+                //     byteArray.Add(System.Convert.FromBase64String(doc.data));
+                // }
 
-                byte[] combinedArray = concatContent(byteArray);
+                // byte[] combinedArray = concatContent(byteArray);
 
-                string combinedDoc = System.Convert.ToBase64String(combinedArray);
+                // string combinedDoc = System.Convert.ToBase64String(combinedArray);
                 /* -- Local Document Merge - FOR TESTING ONLY */
 
 
                 /* -- NTT Document Merge Service */
-                // JsonSerializerOptions mergeOptions = new JsonSerializerOptions();
-                // mergeOptions.IgnoreNullValues = true;
-                // string mergeString = System.Text.Json.JsonSerializer.Serialize(docMergeRequest, mergeOptions);
+                JsonSerializerOptions mergeOptions = new JsonSerializerOptions();
+                mergeOptions.IgnoreNullValues = true;
+                string mergeString = System.Text.Json.JsonSerializer.Serialize(docMergeRequest, mergeOptions);
 
-                // HttpClientResult mergeResult = await _documentMergeService.Post(mergeString);
-                // if (mergeResult.statusCode != HttpStatusCode.OK)
-                // {
-                //     return StatusCode((int)mergeResult.statusCode, mergeResult.result.ToString());
-                // }
+                HttpClientResult mergeResult = await _documentMergeService.Post(mergeString);
+                if (mergeResult.statusCode != HttpStatusCode.OK)
+                {
+                    return StatusCode((int)mergeResult.statusCode, mergeResult.result.ToString());
+                }
 
-                // string combinedDoc = GetJArrayValue(mergeResult.result, "document");
+                string combinedDoc = GetJArrayValue(mergeResult.result, "document");
                 /* -- NTT Document Merge Service */
 
 
