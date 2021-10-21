@@ -70,6 +70,10 @@ export class StateService {
       //userId = '6BBE5A08665147548B083B07C7963554';
       //orgId = 'F52E7303B961471A8B92188F4874B2FB';
 
+      //Victimservices16 - City of Coquitlam
+      // userId = '91963DE4684F47F4BB9470BE3A4F10D8';
+      // orgId = 'C48FD8C4E50749D095655B9C16CCDC8C';
+
       //Victimservices17 - City of Campbell River
       // userId = '41BD0A96CDF644A9B0FC85A2C700A4EB';
       // orgId = 'FCBAF5FEC8B14BF295BF385D553D0CA8';
