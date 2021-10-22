@@ -200,7 +200,9 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
                 data.SignedContract = new DynamicsDocumentPost();
                 data.SignedContract.body = combinedDoc;
-                data.SignedContract.filename = "Contract Package Signed by Service Provider.pdf";
+
+                string fileName = portalModel.IsModificationAgreement ? "Modification Package Signed by Service Provider.pdf" : "Contract Package Signed by Service Provider.pdf";
+                data.SignedContract.filename = fileName;
 
                 //For testing document merge -local
                 // return Ok(data);
