@@ -12,11 +12,11 @@ namespace Gov.Cscp.Victims.Public.Models
         public string vsd_programexpenseid { get; set; }
         public int vsd_cpu_programexpensetype { get; set; }
         public string vsd_cpu_otherexpense { get; set; }
-        public float vsd_totalcost { get; set; }
-        public float vsd_inputamount { get; set; }
-        public float vsd_cpu_salary { get; set; }
-        public float vsd_cpu_fundedfromvscp { get; set; }
-        public float vsd_cpu_benefits { get; set; }
+        public decimal vsd_totalcost { get; set; }
+        public decimal vsd_inputamount { get; set; }
+        public decimal vsd_cpu_salary { get; set; }
+        public decimal vsd_cpu_fundedfromvscp { get; set; }
+        public decimal vsd_cpu_benefits { get; set; }
         public int? statecode { get; set; }
 
         private string _vsd_EligibleExpenseItemIdfortunecookiebind;

@@ -11,8 +11,8 @@ namespace Gov.Cscp.Victims.Public.Models
         public string vsd_programrevenuesourceid { get; set; }
         public string vsd_cpu_otherrevenuesource { get; set; }
         public int vsd_cpu_revenuesourcetype { get; set; }
-        public float? vsd_cashcontribution { get; set; }
-        public float? vsd_inkindcontribution { get; set; }
+        public decimal? vsd_cashcontribution { get; set; }
+        public decimal? vsd_inkindcontribution { get; set; }
         public int? statecode { get; set; }
 
         private string _vsd_ProgramIdfortunecookiebind;
