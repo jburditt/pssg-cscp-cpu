@@ -1,5 +1,5 @@
 export const formTypeDict = {
-  '768faf46-e8f5-e911-b811-00505683fbf4': ['budget_proposal', 'Annual budget proposal'],
+  '768faf46-e8f5-e911-b811-00505683fbf4': ['budget_proposal', 'Annual budget proposal'],
   '9d0ef880-e8f5-e911-b811-00505683fbf4': ['expense_report', 'Quarterly expense report'],
   '47525432-e8f5-e911-b811-00505683fbf4': ['program_application', 'Complete program application'],
   'c84daf8d-e8f5-e911-b811-00505683fbf4': ['status_report', 'Statistics report'],
