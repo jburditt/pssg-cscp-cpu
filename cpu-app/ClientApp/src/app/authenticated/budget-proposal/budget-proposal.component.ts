@@ -137,7 +137,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
     }
     this.stepperService.setToFirstStepperElement();
   }
-  save(shouldExit: boolean = false) {
+  save(shouldExit: boolean = false, isSubmit: boolean = false) {
     return new Promise<void>((resolve, reject) => {
       try {
         let originalStepper = _.cloneDeep(this.currentStepperElement);
@@ -153,7 +153,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
         }
 
         this.saving = true;
-        this.out = convertBudgetProposalToDynamics(this.trans);
+        this.out = convertBudgetProposalToDynamics(this.trans, isSubmit);
         this.budgetProposalService.setBudgetProposal(this.out).subscribe(
           r => {
             if (r.IsSuccess) {
@@ -170,7 +170,7 @@ export class BudgetProposalComponent implements OnInit, OnDestroy {
               resolve();
             }
             else {
-              console.log(r);
+              // console.log(r);
               this.notificationQueueService.addNotification('The budget proposal could not be saved. If this problem is persisting please contact your ministry representative.', 'danger');
               this.saving = false;
               reject();

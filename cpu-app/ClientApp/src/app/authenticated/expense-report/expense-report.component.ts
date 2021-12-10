@@ -195,7 +195,7 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
       .map(l => l.annualBudget - (l.actualYearToDate + l.actual))
       .reduce((prev, curr) => prev + curr);
   }
-  save(shouldExit: boolean = false) {
+  save(shouldExit: boolean = false, isSubmit: boolean = false) {
     return new Promise<void>((resolve, reject) => {
       try {
         if (!this.formHelper.isFormValid(this.notificationQueueService)) {
@@ -203,7 +203,7 @@ export class ExpenseReportComponent implements OnInit, OnDestroy {
           return;
         }
         this.saving = true;
-        this.out = convertExpenseReportToDynamics(this.trans);
+        this.out = convertExpenseReportToDynamics(this.trans, isSubmit);
         this.expenseReportService.setExpenseReport(this.out).subscribe(
           r => {
             if (r.IsSuccess) {

@@ -47,6 +47,7 @@ export class ProgramApplicationComponent implements OnInit {
 
   discriminators: string[] = ['contact_information', 'administrative_information', 'commercial_general_liability_insurance', 'program', 'review_application', 'authorization'];
 
+  programError: boolean = false;
   saving: boolean = false;
   isCompleted: boolean = false;
 
@@ -151,6 +152,7 @@ export class ProgramApplicationComponent implements OnInit {
     });
 
     if (!this.trans.programApplications.length) {
+      this.programError = true;
       this.stepperService.addStepperElement(null, 'Program Application Does Not Include Programs', 'invalid');
       this.notificationQueueService.addNotification('A program application should always have a program attached. This is a problem with the data held by the ministry. Please contact your ministry representative and let them know that this has occured and that you cannot complete your program application.', 'danger', 99999999);
     }
@@ -197,7 +199,7 @@ export class ProgramApplicationComponent implements OnInit {
         if (originalStepper.object) {
           let obj_to_validate = new originalStepper.object.type(originalStepper.object.data);
           if (!obj_to_validate.hasRequiredFields()) {
-            console.log(obj_to_validate.getMissingFields());
+            // console.log(obj_to_validate.getMissingFields());
             this.notificationQueueService.addNotification('Please fill in all required fields', 'warning');
             return;
           }
@@ -265,7 +267,8 @@ export class ProgramApplicationComponent implements OnInit {
         return;
       }
       this.saving = true;
-      this.out = convertProgramApplicationToDynamics(this.trans);
+      let isSubmit = true;
+      this.out = convertProgramApplicationToDynamics(this.trans, isSubmit);
       this.programApplicationService.setProgramApplication(this.out).subscribe(
         r => {
           if (r.IsSuccess) {
@@ -327,7 +330,7 @@ export class ProgramApplicationComponent implements OnInit {
     if (originalStepper.object) {
       let obj_to_validate = new originalStepper.object.type(originalStepper.object.data);
       if (!obj_to_validate.hasRequiredFields()) {
-        console.log(obj_to_validate.getMissingFields());
+        // console.log(obj_to_validate.getMissingFields());
         this.notificationQueueService.addNotification('Please fill in all required fields', 'warning');
         return;
       }
@@ -354,7 +357,7 @@ export class ProgramApplicationComponent implements OnInit {
 
     if (originalStepper.discriminator === PAGES.REVIEW) {
       let index = this.currentReviewApplicationTab;
-      console.log(index);
+      // console.log(index);
       if (index < (this.reviewApplicationTabs.length - 1)) {
         ++this.currentReviewApplicationTab;
         window.scrollTo(0, 0);

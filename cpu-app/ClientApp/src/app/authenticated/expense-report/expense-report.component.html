@@ -300,7 +300,7 @@
     <div class="col-md-8">
       <span><button *ngIf="stepperIndex > 0" class="btn btn-primary mt-2 previous-button" (click)="setPreviousStepper()">Previous</button></span>
       <span><button *ngIf="stepperIndex < stepperElements.length - 1" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">Next</button></span>
-      <span><button *ngIf="stepperIndex == stepperElements.length - 1 && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.expenseReport.executiveReview || saving" (click)="save(true)">Submit</button></span>
+      <span><button *ngIf="stepperIndex == stepperElements.length - 1 && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.expenseReport.executiveReview || saving" (click)="save(true, true)">Submit</button></span>
     </div>
   </div>
 </div>

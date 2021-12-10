@@ -13,7 +13,7 @@ const expenseType = {
   program_delivery: 100000001,
   administrative: 100000002
 };
-export function convertBudgetProposalToDynamics(trans: TransmogrifierBudgetProposal): iDynamicsPostBudgetProposal {
+export function convertBudgetProposalToDynamics(trans: TransmogrifierBudgetProposal, isSubmit: boolean = false): iDynamicsPostBudgetProposal {
   // when we need the matching guid we can look it up from the text. this flips the dict's property and value. Which is fine because it is a string.
   const reverseDict = {};
   for (let property in trans.dict) {
@@ -121,9 +121,9 @@ export function convertBudgetProposalToDynamics(trans: TransmogrifierBudgetPropo
 
     p.ProgramCollection.push({
       vsd_programid: pb.programId,
-      vsd_signingofficersignature: trans.signature.signature ? trans.signature.signature : null,
-      vsd_signingofficerfullname: trans.signature.signer ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
-      vsd_signingofficertitle: trans.signature.signer ? trans.signature.signer.title : null
+      vsd_signingofficersignature: trans.signature.signature && isSubmit ? trans.signature.signature : null,
+      vsd_signingofficerfullname: trans.signature.signer  && isSubmit ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
+      vsd_signingofficertitle: trans.signature.signer  && isSubmit ? trans.signature.signer.title : null
     });
     
 

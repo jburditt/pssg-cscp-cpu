@@ -66,7 +66,7 @@ export class NewUserComponent implements OnInit {
     }
     catch (err) {
       console.log(err);
-      console.log("some error happened...");
+      // console.log("some error happened...");
     }
   }
   exit() {

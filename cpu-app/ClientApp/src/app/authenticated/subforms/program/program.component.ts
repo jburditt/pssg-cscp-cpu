@@ -167,7 +167,7 @@ export class ProgramComponent implements OnInit, OnDestroy {
     }
   }
   hasSubContractedStaffChange() {
-    console.log(this.programApplication.hasSubContractedStaff)
+    // console.log(this.programApplication.hasSubContractedStaff);
     if (!this.programApplication.hasSubContractedStaff) {
       for (let i = 0; i < this.programApplication.subContractedStaff.length; ++i) {
         let person: iPerson = this.trans.persons.filter(p => p.personId === this.programApplication.subContractedStaff[i].personId)[0];

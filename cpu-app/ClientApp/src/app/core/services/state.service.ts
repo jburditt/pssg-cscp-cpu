@@ -160,8 +160,8 @@ export class StateService {
           // console.log(this.userSettings.getValue());
 
           // collect the blob into a useful object
-          console.log("Dynamics blob");
-          console.log(JSON.parse(JSON.stringify(m)));
+          // console.log("Dynamics blob");
+          // console.log(JSON.parse(JSON.stringify(m)));
           const mainData = new Transmogrifier(m);
 
           let updatedSettings = new UserSettings(userInfo);
@@ -169,7 +169,7 @@ export class StateService {
 
           if (window.location.href.includes("localhost")) {
             // updatedSettings.userRole = Roles.ProgramStaff;
-            console.log("setting localhost role to ExecutiveContact");
+            // console.log("setting localhost role to ExecutiveContact");
             updatedSettings.userRole = Roles.ExecutiveContact;
           }
           this.userSettings.next(updatedSettings);

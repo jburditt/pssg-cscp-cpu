@@ -58,7 +58,7 @@ export class PersonnelComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     if (!_.isEqual(this.originalPersons, this.trans.persons)) {
-      console.log("setting persons back to original values")
+      // console.log("setting persons back to original values")
       this.trans.persons = this.originalPersons;
     }
     this.stepperService.reset();
@@ -88,7 +88,7 @@ export class PersonnelComponent implements OnInit, OnDestroy {
     let person = this.trans.persons.find(p => p.personId == this.currentStepperElement.object['personId']);
 
     if (!person) {
-      console.log("no one to save...");
+      // console.log("no one to save...");
       return;
     }
 
@@ -101,7 +101,7 @@ export class PersonnelComponent implements OnInit, OnDestroy {
         return;
       }
 
-      console.log(person);
+      // console.log(person);
       this.saving = true;
       let thisPerson = new Person(person);
       if (thisPerson.hasRequiredFields()) {
@@ -151,7 +151,7 @@ export class PersonnelComponent implements OnInit, OnDestroy {
         return;
       }
 
-      console.log(person);
+      // console.log(person);
       this.saving = true;
       let thisPerson = new Person(person);
       if (thisPerson.hasRequiredFields()) {

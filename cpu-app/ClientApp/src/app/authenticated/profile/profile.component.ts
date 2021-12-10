@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     if (!_.isEqual(this.originalContactInfo, this.trans.contactInformation)) {
-      console.log("setting trans contact info back to original");
+      // console.log("setting trans contact info back to original");
       this.trans.contactInformation = this.originalContactInfo;
     }
     this.stateSubscription.unsubscribe();
@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       let contactInfo = new ContactInformation(this.trans.contactInformation);
       if (contactInfo.hasRequiredFields()) {
         this.saving = true;
-        console.log(JSON.parse(JSON.stringify(this.trans)));
+        // console.log(JSON.parse(JSON.stringify(this.trans)));
         this.profileService.updateOrg(convertContactInformationToDynamics(this.trans))
           .subscribe(
             (res: any) => {
@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           );
       }
       else {
-        console.log(contactInfo.getMissingFields());
+        // console.log(contactInfo.getMissingFields());
         this.saving = false;
         this.notificationQueueService.addNotification('Please fill in required fields.', 'warning');
       }

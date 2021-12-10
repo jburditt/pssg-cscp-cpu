@@ -79,12 +79,12 @@ export class ProgramSurplusComponent implements OnInit {
             }
             this.saving = true;
             let data: iDynamicsPostSurplusPlan = convertProgramSurplusToDynamics(this.trans, SurplusTypes.Plan);
-            console.log("attempting submit");
-            console.log(data);
+            // console.log("attempting submit");
+            // console.log(data);
             this.programSurplusService.setProgramSurplus(data).subscribe(
                 r => {
                     if (r.IsSuccess) {
-                        console.log(r);
+                        // console.log(r);
 
                         this.notificationQueueService.addNotification(`You have successfully submitted the surplus plan.`, 'success');
                         this.saving = false;
@@ -119,12 +119,12 @@ export class ProgramSurplusComponent implements OnInit {
             }
             this.saving = true;
             let data: iDynamicsPostSurplusPlan = convertProgramSurplusToDynamics(this.trans, SurplusTypes.Plan, true);
-            console.log("attempting submit");
-            console.log(data);
+            // console.log("attempting submit");
+            // console.log(data);
             this.programSurplusService.setProgramSurplus(data).subscribe(
                 r => {
                     if (r.IsSuccess) {
-                        console.log(r);
+                        // console.log(r);
 
                         this.notificationQueueService.addNotification(`You have successfully submitted the surplus plan.`, 'success');
                         this.saving = false;

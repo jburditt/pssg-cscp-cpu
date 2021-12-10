@@ -6,7 +6,7 @@ import { TransmogrifierCAPApplication } from "../transmogrifier-cap-application.
 import { iCAPProgram } from "../cap-program.interface";
 import { boolOptionSet } from "../../constants/bool-optionset-values";
 
-export function convertCAPProgramToDynamics(trans: TransmogrifierCAPApplication): iDynamicsPostScheduleFCAP {
+export function convertCAPProgramToDynamics(trans: TransmogrifierCAPApplication, isSubmit: boolean = false): iDynamicsPostScheduleFCAP {
     const post: iDynamicsPostScheduleFCAP = {
         BusinessBCeID: trans.organizationId,
         UserBCeID: trans.userId,
@@ -14,9 +14,9 @@ export function convertCAPProgramToDynamics(trans: TransmogrifierCAPApplication)
             vsd_ContactLookup1fortunecookiebind: trans.applicantInformation.executiveContact ? trans.applicantInformation.executiveContact.personId : null,
             vsd_contractid: trans.contractId,
             vsd_name: trans.contractNumber,
-            vsd_authorizedsigningofficersignature: trans.signature.signature ? trans.signature.signature : null,
-            vsd_signingofficersname: trans.signature.signer ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
-            vsd_signingofficertitle: trans.signature.signer ? trans.signature.signer.title : null,
+            vsd_authorizedsigningofficersignature: trans.signature.signature && isSubmit ? trans.signature.signature : null,
+            vsd_signingofficersname: trans.signature.signer && isSubmit ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
+            vsd_signingofficertitle: trans.signature.signer && isSubmit ? trans.signature.signer.title : null,
             vsd_cpu_insuranceoptions: trans.applyingForInsurance ? 100000001 : 100000000,
             vsd_collaborationwithkeystakeholders: trans.collaborationWithKeyStakeholders ? 100000001 : 100000000,
             vsd_complaintandfeedbackprocessforparticipant: trans.complaintProcessForParticipant ? 100000001 : 100000000,

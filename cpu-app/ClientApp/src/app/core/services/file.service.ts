@@ -43,7 +43,7 @@ export class FileService {
     );
   }
   uploadAccountDocuments(file: iDynamicsPostFile, accountId: string): Observable<any> {
-    console.log(this);
+    // console.log(this);
     // may need to add the contract id into this postback
     return this.http.post<any>(`${this.apiUrl}/account/${accountId}`, file, { headers: this.headers }).pipe(
       retry(3),

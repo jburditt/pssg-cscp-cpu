@@ -31,8 +31,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.stateSubscription = this.stateService.main.subscribe((m: Transmogrifier) => {
       this.trans = m;
 
-      console.log("dashboard subscribed data");
-      console.log(this.trans);
+      // console.log("dashboard subscribed data");
+      // console.log(this.trans);
       if (m.contracts) {
         this.upcomingContracts = m.contracts.filter((c: iContract) => c.fiscalYearStart > this.currentYear);
         this.currentContracts = m.contracts.filter((c: iContract) => c.fiscalYearStart == this.currentYear);
