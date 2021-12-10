@@ -44,7 +44,7 @@ export class StatusReportComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(p => {
       const organizationId: string = this.stateService.main.getValue().organizationId;
       const userId: string = this.stateService.main.getValue().userId;
-      console.log(p['taskId']);
+      // console.log(p['taskId']);
 
       this.statusReportService.getStatusReportQuestions(organizationId, userId, p['taskId'])
         .subscribe(r => {
@@ -62,7 +62,7 @@ export class StatusReportComponent implements OnInit, OnDestroy {
               if (thisTask) title = thisTask.taskTitle;
             }
 
-            console.log(this.trans);
+            // console.log(this.trans);
             
             this.trans.title = title;
             this.constructDefaultstepperElements();

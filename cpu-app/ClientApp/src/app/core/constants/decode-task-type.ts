@@ -11,11 +11,11 @@ export function decodeTaskType(discriminator: string, getName = false): string {
     formType = form[getName ? 1 : 0];
   }
   else {
-    console.log('An error has occured. This type of task is not known:\n' + discriminator);
+    // console.log('An error has occured. This type of task is not known:\n' + discriminator);
     formType = "Unknown form";
   }
   if (!formType) {
-    console.log('An error has occured. This type of task is not known:\n' + discriminator);
+    // console.log('An error has occured. This type of task is not known:\n' + discriminator);
     return discriminator;
   } else {
     return formType;

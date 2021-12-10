@@ -74,11 +74,11 @@ export class UploadDocumentComponent implements OnInit, OnDestroy {
         this.isContractUpload = true;
         this.contractNumber = this.trans.contracts.find(c => c.contractId == this.contractId).contractNumber;
 
-        console.log("getContractDocuments");
+        // console.log("getContractDocuments");
         this.getContractDocuments();
       }
       else {
-        console.log("getAccountDocuments");
+        // console.log("getAccountDocuments");
         this.getAccountDocuments();
       }
     });
@@ -122,8 +122,8 @@ export class UploadDocumentComponent implements OnInit, OnDestroy {
     if (this.isContractUpload) {
       this.fileService.uploadContractDocuments(file, record_id).subscribe((d) => {
         if (d.IsSuccess) {
-          console.log("uploaded documents");
-          console.log(d);
+          // console.log("uploaded documents");
+          // console.log(d);
           this.saving = false;
           this.documentsToAdd = [];
           this.refresh();
@@ -138,8 +138,8 @@ export class UploadDocumentComponent implements OnInit, OnDestroy {
     else {
       this.fileService.uploadAccountDocuments(file, record_id).subscribe((d) => {
         if (d.IsSuccess) {
-          console.log("uploaded documents");
-          console.log(d);
+          // console.log("uploaded documents");
+          // console.log(d);
           this.saving = false;
           this.documentsToAdd = [];
           this.refresh();
@@ -206,7 +206,7 @@ export class UploadDocumentComponent implements OnInit, OnDestroy {
     this.fileService.downloadDocument(this.organizationId, this.userId, doc.activitymimeattachmentid).subscribe(
       (d: any) => {
         this.downloadingDocument = false;
-        console.log(d);
+        // console.log(d);
         if (!d.IsSuccess) {
           this.notificationQueueService.addNotification('There has been a data problem retrieving this file. Please let your ministry contact know that you have seen this error.', 'danger');
         }

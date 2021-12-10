@@ -74,12 +74,12 @@ export class CAPApplicationComponent implements OnInit {
                         this.notificationQueueService.addNotification('An attempt at getting this cap application form was unsuccessful. If the problem persists please notify your ministry contact.', 'danger');
                         this.router.navigate(['/authenticated/dashboard']);
                     } else {
-                        console.log("cap application dynamics info");
-                        console.log(f);
+                        // console.log("cap application dynamics info");
+                        // console.log(f);
 
                         this.trans = new TransmogrifierCAPApplication(f);
-                        console.log("cap application transmogrifier");
-                        console.log(this.trans);
+                        // console.log("cap application transmogrifier");
+                        // console.log(this.trans);
 
                         this.constructDefaultstepperElements(this.trans);
 
@@ -180,8 +180,8 @@ export class CAPApplicationComponent implements OnInit {
         return new Promise<void>((resolve, reject) => {
             try {
                 this.saving = true;
-                console.log("saving...");
-                console.log(_.cloneDeep(this.trans));
+                // console.log("saving...");
+                // console.log(_.cloneDeep(this.trans));
                 this.capService.setCAPApplication(convertCAPProgramToDynamics(this.trans)).subscribe(
                     r => {
                         if (r.IsSuccess) {
@@ -242,9 +242,10 @@ export class CAPApplicationComponent implements OnInit {
                 return;
             }
             this.saving = true;
-            console.log("submitting...");
-            console.log(_.cloneDeep(this.trans));
-            this.capService.setCAPApplication(convertCAPProgramToDynamics(this.trans)).subscribe(
+            let isSubmit = true;
+            // console.log("submitting...");
+            // console.log(_.cloneDeep(this.trans));
+            this.capService.setCAPApplication(convertCAPProgramToDynamics(this.trans, isSubmit)).subscribe(
                 r => {
                     if (r.IsSuccess) {
                         this.notificationQueueService.addNotification(`You have successfully submitted the cap application.`, 'success');
@@ -284,7 +285,7 @@ export class CAPApplicationComponent implements OnInit {
         if (originalStepper.object) {
             let obj_to_validate = new originalStepper.object.type(originalStepper.object.data);
             if (!obj_to_validate.hasRequiredFields()) {
-                console.log(obj_to_validate.getMissingFields());
+                // console.log(obj_to_validate.getMissingFields());
                 this.notificationQueueService.addNotification('Please fill in all required fields', 'warning');
                 return;
             }

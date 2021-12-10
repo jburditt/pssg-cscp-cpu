@@ -59,12 +59,12 @@ export class SurplusReportComponent implements OnInit {
                     } else {
                         this.data = f;
 
-                        console.log("program surplus dynamics info");
-                        console.log(f);
+                        // console.log("program surplus dynamics info");
+                        // console.log(f);
 
                         this.trans = new TransmogrifierProgramSurplus(f);
-                        console.log("Program surplus transmogrifier");
-                        console.log(this.trans);
+                        // console.log("Program surplus transmogrifier");
+                        // console.log(this.trans);
                         this.surplus_amount = this.trans.surplusAmount;
 
                         this.calculateTotals();
@@ -99,12 +99,12 @@ export class SurplusReportComponent implements OnInit {
             }
             this.saving = true;
             let data: iDynamicsPostSurplusPlan = convertProgramSurplusToDynamics(this.trans, SurplusTypes.Report);
-            console.log("attempting submit");
-            console.log(data);
+            // console.log("attempting submit");
+            // console.log(data);
             this.programSurplusService.setProgramSurplus(data).subscribe(
                 r => {
                     if (r.IsSuccess) {
-                        console.log(r);
+                        // console.log(r);
 
                         this.notificationQueueService.addNotification(`You have successfully submitted the surplus plan.`, 'success');
                         this.saving = false;
@@ -139,12 +139,12 @@ export class SurplusReportComponent implements OnInit {
             }
             this.saving = true;
             let data: iDynamicsPostSurplusPlan = convertProgramSurplusToDynamics(this.trans, SurplusTypes.Report, true);
-            console.log("attempting submit");
-            console.log(data);
+            // console.log("attempting submit");
+            // console.log(data);
             this.programSurplusService.setProgramSurplus(data).subscribe(
                 r => {
                     if (r.IsSuccess) {
-                        console.log(r);
+                        // console.log(r);
 
                         this.notificationQueueService.addNotification(`You have successfully submitted the surplus plan.`, 'success');
                         this.saving = false;

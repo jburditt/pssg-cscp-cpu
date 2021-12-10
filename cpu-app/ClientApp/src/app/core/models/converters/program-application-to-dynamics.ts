@@ -13,7 +13,7 @@ import { boolOptionSet } from "../../constants/bool-optionset-values";
 import { convertPersonToDynamics } from "./person-to-dynamics";
 import * as _ from "lodash";
 
-export function convertProgramApplicationToDynamics(trans: TransmogrifierProgramApplication): iDynamicsPostScheduleF {
+export function convertProgramApplicationToDynamics(trans: TransmogrifierProgramApplication, isSubmit: boolean = false): iDynamicsPostScheduleF {
   const post: iDynamicsPostScheduleF = {
     BusinessBCeID: trans.organizationId,
     UserBCeID: trans.userId,
@@ -29,9 +29,9 @@ export function convertProgramApplicationToDynamics(trans: TransmogrifierProgram
       vsd_cpu_humanresourcepolices: encodeHrPolicies(trans.administrativeInformation),
       vsd_cpu_specificunion: trans.administrativeInformation.staffUnion,
       vsd_name: trans.contractNumber,
-      vsd_authorizedsigningofficersignature: trans.signature.signature ? trans.signature.signature : null,
-      vsd_signingofficersname: trans.signature.signer ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
-      vsd_signingofficertitle: trans.signature.signer ? trans.signature.signer.title : null
+      vsd_authorizedsigningofficersignature: trans.signature.signature && isSubmit ? trans.signature.signature : null,
+      vsd_signingofficersname: trans.signature.signer && isSubmit ? nameAssemble(trans.signature.signer.firstName, trans.signature.signer.middleName, trans.signature.signer.lastName) : null,
+      vsd_signingofficertitle: trans.signature.signer && isSubmit ? trans.signature.signer.title : null
     }],
     Organization: {
       accountid: trans.accountId,

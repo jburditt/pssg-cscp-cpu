@@ -76,7 +76,7 @@
       <span><button *ngIf="stepperIndex > 0" class="btn btn-primary mt-2 previous-button" (click)="setPreviousStepper()">Previous</button></span>
       <span><button *ngIf="stepperIndex < stepperElements.length - 1 && !(current_program_budget && current_program_budget.currentTab == programBudgetTabs[0])" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">{{isCompleted?'':'Save and '}}Continue</button></span>
       <span><button *ngIf="current_program_budget && current_program_budget.currentTab == programBudgetTabs[0]" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">Continue</button></span>
-      <span><button *ngIf="stepperIndex == stepperElements.length -1 && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.signature.signatureDate || saving" (click)="save(true)">Submit</button></span>
+      <span><button *ngIf="stepperIndex == stepperElements.length -1 && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.signature.signatureDate || saving" (click)="save(true, true)">Submit</button></span>
     </div>
   </div>
 </div>

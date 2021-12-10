@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
     private notificationQueueService: NotificationQueueService,
     private stateService: StateService) {
 
-    console.log("login component");
+    // console.log("login component");
 
     this.userData.getCurrentUser().subscribe((userInfo: UserSettings) => {
       if (userInfo && userInfo.userId && userInfo.accountId) {

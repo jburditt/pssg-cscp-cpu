@@ -30,7 +30,7 @@ export function revenueSourceType(discriminator: number): string {
       break;
     }
     default: {
-      console.log('An error has occured. This type of revenue source is not known:\n' + discriminator);
+      // console.log('An error has occured. This type of revenue source is not known:\n' + discriminator);
       revenueSourceType = discriminator;
       break;
     }
@@ -61,7 +61,7 @@ export function revenueSourceValue(type: string): number {
       break;
     }
     default: {
-      console.log('An error has occured. This type of revenue source value is not known:\n' + type);
+      // console.log('An error has occured. This type of revenue source value is not known:\n' + type);
       value = null;
       break;
     }

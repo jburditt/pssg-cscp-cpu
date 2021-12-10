@@ -104,7 +104,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
       return;
     }
 
-    console.log("getting monthly stats");
+    // console.log("getting monthly stats");
     this.loadingStats = true;
 
 
@@ -116,8 +116,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this.notificationQueueService.addNotification('There was an issue loading Monthly Stats information. If this problem is persisting please contact your ministry representative.', 'danger');
       }
       else {
-        console.log("Monthly Stats:");
-        console.log(res);
+        // console.log("Monthly Stats:");
+        // console.log(res);
         this.completedStats = res;
         this.dataCollection = this.completedStats.DataCollection;
         for (let data of this.dataCollection) {
@@ -125,7 +125,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
           let program = this.completedStats.ProgramCollection.find(p => p.vsd_programid == data._vsd_program_value);
           data.program_name = program && program.vsd_name ? program.vsd_name : "";
         }
-        console.log(this.dataCollection);
+        // console.log(this.dataCollection);
       }
     });
   }
@@ -136,7 +136,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.fileService.downloadDocument(this.organizationId, this.userId, doc.activitymimeattachmentid).subscribe(
       (d: any) => {
         this.downloadingDocument = false;
-        console.log(d);
+        // console.log(d);
         if (!d.IsSuccess) {
           this.notificationQueueService.addNotification('There has been a data problem retrieving this file. Please let your ministry contact know that you have seen this error.', 'danger');
         }

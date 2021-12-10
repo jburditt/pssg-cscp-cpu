@@ -19,9 +19,9 @@
         <div style="max-height: 90%;">
           <app-icon-stepper></app-icon-stepper>
         </div>
-        <button class="btn btn-primary mt-2 mr-2" *ngIf="!isCompleted" [class.is-disabled]="saving || trans.signature.signatureDate" (click)="save(true, true)">Save and Exit</button>
-        <button class="btn btn-primary mt-2" *ngIf="!isCompleted" [class.is-disabled]="saving" (click)="save()">Save</button>
-        <button class="btn btn-primary mt-2" *ngIf="isCompleted" (click)="exit()">Exit</button>
+        <button class="btn btn-primary mt-2 mr-2" *ngIf="!isCompleted && !programError" [class.is-disabled]="saving || trans.signature.signatureDate || programError" (click)="save(true, true)">Save and Exit</button>
+        <button class="btn btn-primary mt-2" *ngIf="!isCompleted && !programError" [class.is-disabled]="saving || programError" (click)="save()">Save</button>
+        <button class="btn btn-primary mt-2" *ngIf="isCompleted || programError" (click)="exit()">Exit</button>
       </section>
     </div>
 
@@ -114,8 +114,8 @@
     </div>
     <div class="col-md-8">
       <span><button *ngIf="stepperIndex > 0" class="btn btn-primary mt-2 previous-button" (click)="setPreviousStepper()">Previous</button></span>
-      <span><button *ngIf="stepperIndex < stepperElements.length - 1 || (currentStepperElement.discriminator == discriminators[4] && currentReviewApplicationTab != (reviewApplicationTabs.length - 1))" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">{{isCompleted?'':'Save and '}}Continue</button></span>
-      <span><button *ngIf="stepperIndex == stepperElements.length -1  && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.signature.signatureDate || saving" (click)="submit()">Submit</button></span>
+      <span><button *ngIf="stepperIndex < stepperElements.length - 1 || (currentStepperElement.discriminator == discriminators[4] && currentReviewApplicationTab != (reviewApplicationTabs.length - 1))" [class.is-disabled]="saving || programError" class="btn btn-primary mt-2 next-button" (click)="setNextStepper()">{{isCompleted?'':'Save and '}}Continue</button></span>
+      <span><button *ngIf="stepperIndex == stepperElements.length -1  && !isCompleted" class="btn btn-primary mt-2 submit-button" [class.is-disabled]="!trans.signature.signatureDate || saving || programError" (click)="submit()">Submit</button></span>
     </div>
   </div>
 </div>

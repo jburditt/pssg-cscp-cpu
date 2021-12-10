@@ -4,7 +4,7 @@ import { iExpenseReport } from "../expense-report.interface";
 import { TransmogrifierExpenseReport } from "../transmogrifier-expense-report.class";
 
 //userId: string, organizationId: string, expenseReportId: string, e: iExpenseReport
-export function convertExpenseReportToDynamics(trans: TransmogrifierExpenseReport): iDynamicsPostScheduleG {
+export function convertExpenseReportToDynamics(trans: TransmogrifierExpenseReport, isSubmit: boolean = false): iDynamicsPostScheduleG {
   // schedule g's
   const g: iDynamicsScheduleG = {};
 
@@ -39,7 +39,7 @@ export function convertExpenseReportToDynamics(trans: TransmogrifierExpenseRepor
   if (trans.expenseReport.serviceHoursQuarterlyActual) g.vsd_actualhoursthisquarter = trans.expenseReport.serviceHoursQuarterlyActual;
   // if (trans.expenseReport.serviceHours) g.vsd_contractedservicehrsthisquarter = trans.expenseReport.serviceHours;
   // if (trans.expenseReport.onCallStandByHours) g.vsd_contractedservicehrsthisquarter = trans.expenseReport.onCallStandByHours;
-  if (trans.expenseReport.executiveReview) {
+  if (trans.expenseReport.executiveReview && isSubmit) {
     g.vsd_reportreviewed = trans.expenseReport.executiveReview;
   }
   else {
