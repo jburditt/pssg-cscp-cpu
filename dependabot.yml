@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # NuGet dependencies
+  - package-ecosystem: "nuget"
+    directory: "/cpu-interfaces"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "19:00"
+  - package-ecosystem: "nuget"
+    directory: "/cpu-app"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "19:00"
+  # npm dependencies - frontend
+  - package-ecosystem: "npm"
+    directory: "/cpu-app/ClientApp"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "19:00"
