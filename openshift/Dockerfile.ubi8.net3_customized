@@ -1,0 +1,77 @@
+FROM registry.access.redhat.com/ubi8/dotnet-31-runtime:3.1-53.20220727104936
+# This image provides a .NET Core 3.1 environment you can use to run your .NET
+# applications.
+
+ENV PATH=/opt/app-root/src/.local/bin:/opt/app-root/src/bin:/opt/app-root/node_modules/.bin:/opt/app-root/.dotnet/tools/:${PATH} \
+    STI_SCRIPTS_PATH=/usr/libexec/s2i
+
+LABEL io.k8s.description="Platform for building and running .NET Core 3.1 applications" \
+      io.openshift.tags="builder,.net,dotnet,dotnetcore,dotnet-31"
+
+# Labels consumed by Red Hat build service
+LABEL name="ubi8/dotnet-31" \
+      com.redhat.component="dotnet-31-container" \
+      version="3.1" \
+      release="53" \
+      architecture="x86_64"
+
+# Labels consumed by Eclipse JBoss OpenShift plugin
+LABEL com.redhat.dev-mode="DEV_MODE:false" \
+      com.redhat.deployments-dir="/opt/app-root/src"
+
+# Switch to root for package installs
+USER 0
+
+# Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH.
+# For local build got the the langauge specific scripts from here
+# https://github.com/redhat-developer/s2i-dotnetcore/tree/master/3.1/build/s2i/bin and 
+# and then put that at proper path on local system  
+COPY ./s2i/bin/ /usr/libexec/s2i
+
+# Python Support
+RUN INSTALL_PKGS="python38 python38-devel python38-setuptools python38-pip  \
+         npm nodejs-nodemon dotnet-sdk-3.1 rsync procps-ng findutils" && \
+    yum -y module enable python38:3.8 && \
+    yum -y module enable nodejs:14 && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
+    yum --disableplugin=subscription-manager && \
+    yum clean all -y && \
+# yum cache files may still exist (and quite large in size)
+    rm -rf /var/cache/yum/*
+
+# Directory with the sources is set as the working directory.
+RUN mkdir /opt/app-root/src
+WORKDIR /opt/app-root/src
+
+#RUN npm install -g handlebars@4.7.7
+#for Python 2 support
+#RUN npm config set python /usr/bin/python2.7
+#Python 3 Support
+RUN npm config set python /usr/bin/python3.8
+RUN npm i -g npm 
+# Not very good that we ommited the version. The underlying reason is the recommended 
+# lowest jump in version caused us grief 
+# This let us finish the build process
+
+RUN npm install -g node-gyp
+# Trigger first time actions.
+RUN dotnet help
+
+# Build the container tool.
+RUN /usr/libexec/s2i/container-tool build-tool
+
+# Since $HOME is set to /opt/app-root, the yum install may have created config
+# directories (such as ~/.pki/nssdb) there. These will be owned by root and can
+# cause actions that work on all of /opt/app-root to fail. So we need to fix
+# the permissions on those too.
+RUN chown -R 1001:0 /opt/app-root && fix-permissions /opt/app-root
+
+# Needed for the `dotnet watch` to detect changes in a container
+ENV  DOTNET_USE_POLLING_FILE_WATCHER=true
+
+# Run container by default as user with id 1001 (default)
+USER 1001
+
+# Set the default CMD to print the usage of the language image.
+CMD /usr/libexec/s2i/usage
