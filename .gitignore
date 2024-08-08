@@ -1,2 +1,4 @@
 
 cpu-app/cpu-app\.sln\.DotSettings
+*/bin/**
+*/obj/**

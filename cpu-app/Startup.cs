@@ -27,6 +27,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
+using Database;
 
 namespace Gov.Cscp.Victims.Public
 {
@@ -124,6 +125,11 @@ namespace Gov.Cscp.Victims.Public
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            // add dynamics database adapter
+            services.Configure<ADFSTokenProviderOptions>(Configuration.GetSection("Dynamics:ADFS"));
+            services.AddADFSTokenProvider();
+            services.AddDatabase(Configuration);
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>

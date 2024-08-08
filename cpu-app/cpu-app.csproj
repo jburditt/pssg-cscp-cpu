@@ -91,6 +91,10 @@
     <None Remove="ClientApp\src\app\models\justice\personal-information.model.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Contexts\ODataClient.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ODataClient.cs</LastGenOutput>
