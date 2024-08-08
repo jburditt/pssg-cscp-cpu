@@ -28,6 +28,8 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using Database;
+using ECER.Infrastructure.Common;
+using Microsoft.PowerPlatform.Dataverse.Client;
 
 namespace Gov.Cscp.Victims.Public
 {
@@ -127,9 +129,22 @@ namespace Gov.Cscp.Victims.Public
             });
 
             // add dynamics database adapter
-            services.Configure<ADFSTokenProviderOptions>(Configuration.GetSection("Dynamics:ADFS"));
-            services.AddADFSTokenProvider();
-            services.AddDatabase(Configuration);
+            //services.Configure<ADFSTokenProviderOptions>(Configuration.GetSection("Dynamics:ADFS"));
+            //services.AddADFSTokenProvider();
+            //services.AddDatabase(Configuration);
+            services.AddSingleton<IOrganizationServiceAsync>(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ServiceClient>>();
+                var connectionString = Configuration["DYNAMICS_CONNECTIONSTRING"];
+                var client = new ServiceClient(connectionString, logger);
+                if (!client.IsReady) throw new InvalidOperationException($"Failed to connect to Dataverse: {client.LastError}", client.LastException);
+                return client;
+            });
+            services.AddScoped(sp =>
+            {
+                var client = sp.GetRequiredService<IOrganizationServiceAsync>();
+                return new DatabaseContext(client);
+            });
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>
@@ -287,18 +302,18 @@ namespace Gov.Cscp.Victims.Public
                     .CreateLogger();
             }
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core, see https://go.microsoft.com/fwlink/?linkid=864501
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core, see https://go.microsoft.com/fwlink/?linkid=864501
+            //    spa.Options.SourcePath = "ClientApp";
 
-                // Only run the angular CLI Server in Development mode (not staging or test.)
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
-                }
-            });
+            //    // Only run the angular CLI Server in Development mode (not staging or test.)
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //        spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
+            //    }
+            //});
         }
     }
 }
