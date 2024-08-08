@@ -129,22 +129,7 @@ namespace Gov.Cscp.Victims.Public
             });
 
             // add dynamics database adapter
-            //services.Configure<ADFSTokenProviderOptions>(Configuration.GetSection("Dynamics:ADFS"));
-            //services.AddADFSTokenProvider();
-            //services.AddDatabase(Configuration);
-            services.AddSingleton<IOrganizationServiceAsync>(sp =>
-            {
-                var logger = sp.GetRequiredService<ILogger<ServiceClient>>();
-                var connectionString = Configuration["DYNAMICS_CONNECTIONSTRING"];
-                var client = new ServiceClient(connectionString, logger);
-                if (!client.IsReady) throw new InvalidOperationException($"Failed to connect to Dataverse: {client.LastError}", client.LastException);
-                return client;
-            });
-            services.AddScoped(sp =>
-            {
-                var client = sp.GetRequiredService<IOrganizationServiceAsync>();
-                return new DatabaseContext(client);
-            });
+            services.AddDatabase(Configuration);
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>
