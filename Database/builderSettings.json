@@ -92,7 +92,8 @@
   "emitFieldsClasses": true,
   "emitVirtualAttributes": true,
   "entityNamesFilter": [
-    "contact"
+    "contact",
+    "vsd_program"
   ],
   "entityTypesFolder": "Entities",
   "generateActions": true,

@@ -39,6 +39,17 @@ namespace Database.Model
 				return this.CreateQuery<Database.Model.Contact>();
 			}
 		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.VSd_Program"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.VSd_Program> VSd_ProgramSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.VSd_Program>();
+			}
+		}
 	}
 	
 	/// <summary>

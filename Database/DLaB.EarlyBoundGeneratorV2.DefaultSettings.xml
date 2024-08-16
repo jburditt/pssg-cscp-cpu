@@ -29,7 +29,8 @@ cpu_*</ActionPrefixesWhitelist>
     <CreateOneFilePerOptionSet>true</CreateOneFilePerOptionSet>
     <DeleteFilesFromOutputFolders>true</DeleteFilesFromOutputFolders>
     <EntitiesToSkip />
-    <EntitiesWhitelist>contact</EntitiesWhitelist>
+    <EntitiesWhitelist>contact|
+vsd_program</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
     <EntityClassNameOverrides />
     <EntityPrefixesToSkip />
