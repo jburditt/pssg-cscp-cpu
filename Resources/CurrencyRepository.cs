@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Database.Model;
-using Manager.Contract;
 
 namespace Resources;
 

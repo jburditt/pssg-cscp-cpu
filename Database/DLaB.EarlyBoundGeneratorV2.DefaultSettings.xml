@@ -20,7 +20,9 @@ cpu_*</ActionPrefixesWhitelist>
     <AttributeBlacklist />
     <BuilderSettingsJsonRelativePath>builderSettings.json</BuilderSettingsJsonRelativePath>
     <CamelCaseClassNames>true</CamelCaseClassNames>
-    <CamelCaseCustomWords />
+    <CamelCaseCustomWords>bcgov|
+vsd|
+vsu</CamelCaseCustomWords>
     <CamelCaseMemberNames>true</CamelCaseMemberNames>
     <CamelCaseNamesDictionaryRelativePath>DLaB.EarlyBoundGeneratorV2\DLaB.Dictionary.txt</CamelCaseNamesDictionaryRelativePath>
     <CleanupCrmSvcUtilLocalOptionSets>false</CleanupCrmSvcUtilLocalOptionSets>
@@ -32,6 +34,7 @@ cpu_*</ActionPrefixesWhitelist>
     <EntitiesWhitelist>contact|
 transactioncurrency|
 vsd_contract|
+vsd_invoice|
 vsd_program</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
     <EntityClassNameOverrides />
@@ -60,7 +63,7 @@ vsd_program</EntitiesWhitelist>
     <OptionSetLanguageCodeOverride
       xsi:nil="true" />
     <OptionSetNames />
-    <OutputRelativeDirectory>..\..\..\..\source\repos\pssg-cscp-cpu\Database</OutputRelativeDirectory>
+    <OutputRelativeDirectory>..\..\..\..\source\repos\pssg-cscp-cpu\Database\Model</OutputRelativeDirectory>
     <ProjectNameForEarlyBoundFiles>Database</ProjectNameForEarlyBoundFiles>
     <PropertyEnumMappings />
     <ReadSerializedMetadata>false</ReadSerializedMetadata>

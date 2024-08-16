@@ -7,8 +7,8 @@ public class ProgramRepository(DatabaseContext databaseContext, IMapper mapper) 
 {
     public ProgramResult Query(ProgramQuery programQuery)
     {
-        var query = databaseContext.VSd_ProgramSet;
-        if (programQuery.StateCode != null) query.Where(c => c.StateCode == mapper.Map<VSd_Program_StateCode>(programQuery.StateCode));
+        var query = databaseContext.Vsd_ProgramSet;
+        if (programQuery.StateCode != null) query.Where(c => c.StateCode == mapper.Map<Vsd_Program_StateCode>(programQuery.StateCode));
         
         var programs = mapper.Map<IEnumerable<Program>>(query.ToList());
         return new ProgramResult(programs);

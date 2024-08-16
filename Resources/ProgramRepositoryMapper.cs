@@ -7,8 +7,8 @@ public class ProgramRepositoryMapper : Profile
 {
     public ProgramRepositoryMapper()
     {
-        CreateMap<VSd_Program, Program>();
+        CreateMap<Vsd_Program, Program>();
 
-        CreateMap<StateCode, VSd_Program_StateCode>();
+        CreateMap<StateCode, Vsd_Program_StateCode>();
     }
 }
