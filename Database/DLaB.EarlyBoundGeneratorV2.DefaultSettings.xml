@@ -29,22 +29,11 @@ cpu_*</ActionPrefixesWhitelist>
     <CreateOneFilePerOptionSet>true</CreateOneFilePerOptionSet>
     <DeleteFilesFromOutputFolders>true</DeleteFilesFromOutputFolders>
     <EntitiesToSkip />
-    <EntitiesWhitelist>bcgov_field|
-bcgov_relationship|
-bcgov_template|
-bcgov_templatesession|
-contact|
-vsd_cpu_budgetproposalrenewal|
-vsd_cpu_contractrenewal|
-vsd_cpuinvoiceandpaymentprocessing|
-vsd_cpustatisticsmasterdata|
-vsd_cpustatisticsmasterdataanswer|
-vsd_templateorder</EntitiesWhitelist>
+    <EntitiesWhitelist>contact</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
     <EntityClassNameOverrides />
     <EntityPrefixesToSkip />
-    <EntityPrefixesWhitelist>bcgov_*|
-cpu_*</EntityPrefixesWhitelist>
+    <EntityPrefixesWhitelist />
     <GenerateActionAttributeNameConsts>true</GenerateActionAttributeNameConsts>
     <GenerateAllOptionSetLabelMetadata>false</GenerateAllOptionSetLabelMetadata>
     <GenerateAttributeNameConsts>true</GenerateAttributeNameConsts>
@@ -68,7 +57,7 @@ cpu_*</EntityPrefixesWhitelist>
     <OptionSetLanguageCodeOverride
       xsi:nil="true" />
     <OptionSetNames />
-    <OutputRelativeDirectory>..\..\..\..\source\repos\pssg-cscp-cpu\Database\Model\</OutputRelativeDirectory>
+    <OutputRelativeDirectory>..\..\..\..\source\repos\pssg-cscp-cpu\Database</OutputRelativeDirectory>
     <ProjectNameForEarlyBoundFiles>Database</ProjectNameForEarlyBoundFiles>
     <PropertyEnumMappings />
     <ReadSerializedMetadata>false</ReadSerializedMetadata>
@@ -132,6 +121,6 @@ VoiceMail</TokenCapitalizationOverrides>
   <ServiceContextName>DatabaseContext</ServiceContextName>
   <SuppressGeneratedCodeAttribute>true</SuppressGeneratedCodeAttribute>
   <SettingsVersion>2.2024.5.16</SettingsVersion>
-  <UpdateBuilderSettingsJson>false</UpdateBuilderSettingsJson>
+  <UpdateBuilderSettingsJson>true</UpdateBuilderSettingsJson>
   <Version>2.2024.5.16</Version>
 </Config>
