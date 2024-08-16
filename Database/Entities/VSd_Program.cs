@@ -370,6 +370,7 @@ namespace Database.Model
 			public const string VSd_Temp_ProvinceName = "vsd_temp_provincename";
 			public const string VSd_ToTalonCallStandbyHours = "vsd_totaloncallstandbyhours";
 			public const string VSd_TotalScheduledHours = "vsd_totalscheduledhours";
+			public const string VSd_VSd_Contract_VSd_Program = "vsd_vsd_contract_vsd_program";
 			public const string VSd_VSd_Program_Contact = "vsd_vsd_program_contact";
 		}
 		
@@ -3437,6 +3438,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntity<Database.Model.Contact>("vsd_contact_vsd_program_ContactLookup3", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_vsd_contract_vsd_program
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_contractid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_contract_vsd_program")]
+		public Database.Model.VSd_Contract VSd_VSd_Contract_VSd_Program
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.VSd_Contract>("vsd_vsd_contract_vsd_program", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.VSd_Contract>("vsd_vsd_contract_vsd_program", null, value);
 			}
 		}
 		

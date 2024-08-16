@@ -41,6 +41,17 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.VSd_Contract"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.VSd_Contract> VSd_ContractSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.VSd_Contract>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Database.Model.VSd_Program"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Database.Model.VSd_Program> VSd_ProgramSet

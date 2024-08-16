@@ -1036,6 +1036,9 @@ namespace Database.Model
 			public const string VSd_CloneContact = "vsd_clonecontact";
 			public const string VSd_CloneContactName = "vsd_clonecontactname";
 			public const string VSd_ConcatenatedGlobalSearchLine2 = "vsd_concatenatedglobalsearchline2";
+			public const string VSd_Contact_VSd_Contract_ContactLookup1 = "VSd_Contact_VSd_Contract_ContactLookup1";
+			public const string VSd_Contact_VSd_Contract_ContactLookup2 = "VSd_Contact_VSd_Contract_ContactLookup2";
+			public const string VSd_Contact_VSd_Contract_Customer = "VSd_Contact_VSd_Contract_Customer";
 			public const string VSd_Contact_VSd_Program = "vsd_contact_vsd_program";
 			public const string VSd_Contact_VSd_Program_ContactLookup = "VSd_Contact_VSd_Program_ContactLookup";
 			public const string VSd_Contact_VSd_Program_ContactLookup2 = "VSd_Contact_VSd_Program_ContactLookup2";
@@ -8781,6 +8784,60 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Contact>("contact_master_contact", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_contact_vsd_contract_ContactLookup1
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contact_vsd_contract_ContactLookup1")]
+		public System.Collections.Generic.IEnumerable<Database.Model.VSd_Contract> VSd_Contact_VSd_Contract_ContactLookup1
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_ContactLookup1", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_ContactLookup1", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_contact_vsd_contract_ContactLookup2
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contact_vsd_contract_ContactLookup2")]
+		public System.Collections.Generic.IEnumerable<Database.Model.VSd_Contract> VSd_Contact_VSd_Contract_ContactLookup2
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_ContactLookup2", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_ContactLookup2", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_contact_vsd_contract_Customer
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contact_vsd_contract_Customer")]
+		public System.Collections.Generic.IEnumerable<Database.Model.VSd_Contract> VSd_Contact_VSd_Contract_Customer
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_Customer", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.VSd_Contract>("vsd_contact_vsd_contract_Customer", null, value);
 			}
 		}
 		

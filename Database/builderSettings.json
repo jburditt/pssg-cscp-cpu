@@ -93,6 +93,7 @@
   "emitVirtualAttributes": true,
   "entityNamesFilter": [
     "contact",
+    "vsd_contract",
     "vsd_program"
   ],
   "entityTypesFolder": "Entities",
