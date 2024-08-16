@@ -91,7 +91,6 @@
     <None Remove="ClientApp\src\app\models\justice\personal-information.model.ts" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
   </ItemGroup>
   <ItemGroup>

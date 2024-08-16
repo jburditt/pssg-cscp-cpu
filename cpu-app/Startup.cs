@@ -28,8 +28,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using Database;
-using ECER.Infrastructure.Common;
-using Microsoft.PowerPlatform.Dataverse.Client;
 
 namespace Gov.Cscp.Victims.Public
 {
