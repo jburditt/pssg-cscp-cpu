@@ -1,4 +1,16 @@
-﻿namespace Manager.Contract;
+﻿using MediatR;
+
+namespace Manager.Contract;
+
+public record ProgramQuery : IRequest<ProgramResult>
+{
+	public StateCode StateCode { get; set; }
+	//public StatusCode StatusCode { get; set; }
+}
+
+public record ProgramResult(IEnumerable<Program> Programs);
+
+public record Program(StateCode StateCode, StatusCode StatusCode);
 
 public enum StateCode
 {

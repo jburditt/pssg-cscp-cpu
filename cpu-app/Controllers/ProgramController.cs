@@ -8,7 +8,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    public class ProgramController(CurrencyHandlers currencyHandler) : Controller
+    public class ProgramController(CurrencyHandlers currencyHandler, ProgramHandlers programHandlers) : Controller
     {
         [HttpGet("Approved")]
         public IActionResult GetApproved()
@@ -16,10 +16,14 @@ namespace Gov.Cscp.Victims.Public.Controllers
             // use CurrencyQuery to query "all the currencies that match this one currency code...don't ask me..."
             var currencyQuery = new CurrencyQuery();
             var currencyLookup = currencyHandler.Handle(currencyQuery);
+            
             var invoiceDate = GetInvoiceDate();
-            //var programs = _programManager.GetApprovedPrograms();
 
-            return new JsonResult(currencyLookup);
+            var programQuery = new ProgramQuery();
+            programQuery.StateCode = StateCode.Active;
+            var programs = programHandlers.Handle(programQuery);
+
+            return new JsonResult(programs);
         }
 
         private DateTime GetInvoiceDate()
