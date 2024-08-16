@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Manager\Manager.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Contexts\ODataClient.tt">

@@ -203,6 +203,7 @@ namespace Database.Model
 			public const string StatusCode = "statuscode";
 			public const string StatusCodename = "statuscodename";
 			public const string TimeZoneRuleVersionNumber = "timezoneruleversionnumber";
+			public const string TransactionCurrency_VSd_Program = "TransactionCurrency_vsd_program";
 			public const string TransactionCurrencyId = "transactioncurrencyid";
 			public const string TransactionCurrencyIdName = "transactioncurrencyidname";
 			public const string TraversedPath = "traversedpath";
@@ -3381,6 +3382,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Contact>("vsd_vsd_program_contact", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 TransactionCurrency_vsd_program
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("TransactionCurrency_vsd_program")]
+		public Database.Model.TransactionCurrency TransactionCurrency_VSd_Program
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.TransactionCurrency>("TransactionCurrency_vsd_program", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.TransactionCurrency>("TransactionCurrency_vsd_program", null, value);
 			}
 		}
 		

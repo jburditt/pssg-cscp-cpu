@@ -41,6 +41,17 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.TransactionCurrency"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.TransactionCurrency> TransactionCurrencySet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.TransactionCurrency>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Database.Model.VSd_Contract"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Database.Model.VSd_Contract> VSd_ContractSet

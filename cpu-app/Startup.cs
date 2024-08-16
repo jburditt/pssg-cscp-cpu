@@ -28,6 +28,8 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using Database;
+using Manager;
+using Resources;
 
 namespace Gov.Cscp.Victims.Public
 {
@@ -48,6 +50,8 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddTransient<TokenHandler>();
             services.AddTransient<KeycloakHandler>();
+            services.AddTransient<CurrencyHandlers>();
+            services.AddTransient<ICurrencyRepository, CurrencyRepository>();
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();
@@ -128,6 +132,8 @@ namespace Gov.Cscp.Victims.Public
 
             // add dynamics database adapter
             services.AddDatabase(Configuration);
+
+            services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, new[] { typeof(CurrencyMapper) });
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>

@@ -30,6 +30,7 @@ cpu_*</ActionPrefixesWhitelist>
     <DeleteFilesFromOutputFolders>true</DeleteFilesFromOutputFolders>
     <EntitiesToSkip />
     <EntitiesWhitelist>contact|
+transactioncurrency|
 vsd_contract|
 vsd_program</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
