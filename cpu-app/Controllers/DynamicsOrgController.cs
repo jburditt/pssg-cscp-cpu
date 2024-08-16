@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Serilog;
 using System;
 using System.Linq;
-using Database.Model;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -17,23 +16,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
     {
         private readonly IDynamicsResultService _dynamicsResultService;
         private readonly ILogger _logger;
-        private readonly DatabaseContext _databaseContext;
 
-        public DynamicsOrgController(IDynamicsResultService dynamicsResultService, DatabaseContext databaseContext)
+        public DynamicsOrgController(IDynamicsResultService dynamicsResultService)
         {
             this._dynamicsResultService = dynamicsResultService;
             _logger = Log.Logger;
-            _databaseContext = databaseContext;
-        }
-
-        [HttpGet("test")]
-        public async Task<IActionResult> Test()
-        {
-            var query = _databaseContext.VSd_ProgramSet.Where(x => x.StateCode == VSd_Program_StateCode.Active);
-
-            var results = query.ToList();
-
-            return Json(results);
         }
 
         [HttpPost]
