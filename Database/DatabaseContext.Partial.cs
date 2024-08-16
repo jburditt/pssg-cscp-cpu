@@ -1,4 +1,6 @@
-﻿public partial class DatabaseContext
+﻿namespace Database.Model;
+    
+public partial class DatabaseContext
 {
     private bool isInTransaction;
 

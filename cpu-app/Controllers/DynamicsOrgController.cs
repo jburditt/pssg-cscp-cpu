@@ -11,6 +11,7 @@ using Xrm.Tools.WebAPI.Results;
 using System.Dynamic;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk;
+using Database.Model;
 //using XrmToolkit.Linq;
 
 namespace Gov.Cscp.Victims.Public.Controllers
@@ -36,31 +37,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> Test()
         {
-
-            // Imports the 'Queryable<T>' extension method
-
-            // Select the "createdon" and "modifiedon" columns in addition to the "AccountName"
-            /*var query = from a in _databaseContext.Queryable<Account>(new ColumnSet("createdon", "modifiedon"))
-                        where a.AccountName == "Account 1"
-                        orderby a.AccountName ascending
-                        select new ProxyClasses.Account(a) { AccountName = a.AccountName };*/
-            var query = _databaseContext.DocumentSet.Where(x => x.bcgov_CaseIdName == "8898134e-1791-ed11-b83a-00505683fbf4");
+            var query = _databaseContext.VSd_ProgramSet.Where(x => x.StateCode == VSd_Program_StateCode.Active);
 
             var results = query.ToList();
 
-            //CRMGetListResult<ExpandoObject> test = null;
-
-            //try
-            //{
-            //    test = await _api.GetList("bcgov_documenturls");
-            //}
-            //catch (Exception e)
-            //{
-            //    _logger.Error(e, "Unexpected error while getting test data. Source = CPU");
-            //    return BadRequest();
-            //}
-
-            //return Json(test);
             return Json(results);
         }
 
