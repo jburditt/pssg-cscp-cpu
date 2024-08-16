@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 using Serilog;
 using System;
 using System.Linq;
-using Xrm.Tools.WebAPI;
-using Xrm.Tools.WebAPI.Results;
-using System.Dynamic;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk;
 using Database.Model;
-//using XrmToolkit.Linq;
 
 namespace Gov.Cscp.Victims.Public.Controllers
 {
@@ -23,14 +17,12 @@ namespace Gov.Cscp.Victims.Public.Controllers
     {
         private readonly IDynamicsResultService _dynamicsResultService;
         private readonly ILogger _logger;
-        //private readonly CRMWebAPI _api;
         private readonly DatabaseContext _databaseContext;
 
-        public DynamicsOrgController(IDynamicsResultService dynamicsResultService, /*CRMWebAPI api*/ DatabaseContext databaseContext)
+        public DynamicsOrgController(IDynamicsResultService dynamicsResultService, DatabaseContext databaseContext)
         {
             this._dynamicsResultService = dynamicsResultService;
             _logger = Log.Logger;
-            //_api = api;
             _databaseContext = databaseContext;
         }
 
