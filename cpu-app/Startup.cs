@@ -133,7 +133,8 @@ namespace Gov.Cscp.Victims.Public
             // add dynamics database adapter
             services.AddDatabase(Configuration);
 
-            services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, new[] { typeof(CurrencyMapper) });
+            var mapperTypes = new[] { typeof(CurrencyMapper), typeof(CurrencyRepositoryMapper) };
+            services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>

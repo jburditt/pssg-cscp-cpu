@@ -1,11 +1,16 @@
-﻿using Resources;
+﻿using AutoMapper;
+using Manager.Contract;
+using MediatR;
+using Resources;
 
 namespace Manager;
 
-public class CurrencyHandlers(ICurrencyRepository currentRepository) //: IRequestHandler<CurrencyResult>
+public class CurrencyHandlers(ICurrencyRepository currentRepository, IMapper mapper) : IRequestHandler<CurrencyQuery, Contract.CurrencyResult>
 {
-    public async Task<CurrencyResult> Handle(CancellationToken cancellationToken = default)
+    public async Task<Contract.CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
     {
-        return currentRepository.Query();
+        var currencies = currentRepository.Query();
+        var currencyResults = mapper.Map<IEnumerable<Contract.Currency>>(currencies.Currencies);
+        return new Contract.CurrencyResult(currencyResults);
     }
 }

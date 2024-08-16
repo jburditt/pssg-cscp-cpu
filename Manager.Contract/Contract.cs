@@ -12,7 +12,14 @@ public enum StatusCode
     Inactive = 1
 }
 
-public record Currency(StateCode StateCode, StatusCode StatusCode);
+public record CurrencyQuery : IRequest<CurrencyResult>
+{
+	public string IsoCurrencyCode { get; set; }
+}
+
+public record CurrencyResult(IEnumerable<Currency> Currencies);
+
+public record Currency(StateCode StateCode, StatusCode StatusCode, string IsoCurrencyCode);
 
 /*
  * 			public const string CreatedBy = "createdby";
