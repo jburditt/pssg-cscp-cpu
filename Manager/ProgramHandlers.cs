@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using Manager.Contract;
-using MediatR;
 using Resources;
 
 namespace Manager;
+
+
 
 public class ProgramHandlers(IProgramRepository programRepository, IMapper mapper) : 
     IRequestHandler<Contract.ProgramQuery, Contract.ProgramResult>,

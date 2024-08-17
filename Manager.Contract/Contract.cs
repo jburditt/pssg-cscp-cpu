@@ -1,6 +1,16 @@
-﻿using MediatR;
+﻿namespace Manager.Contract;
 
-namespace Manager.Contract;
+#region Fake MediatR
+
+// NOTE delete this region if you end up using MediatR
+public interface IRequestHandler<in TRequest, TResponse>
+{
+    Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+}
+
+public interface IRequest<TResponse> { }
+
+#endregion
 
 public enum StateCode
 {

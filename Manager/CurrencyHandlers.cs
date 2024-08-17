@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Manager.Contract;
-using MediatR;
 using Resources;
 
 namespace Manager;
