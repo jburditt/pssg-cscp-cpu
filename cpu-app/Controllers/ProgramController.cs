@@ -19,9 +19,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
             
             var invoiceDate = GetInvoiceDate();
 
-            var programQuery = new ProgramQuery();
-            programQuery.StateCode = StateCode.Active;
-            var programs = programHandlers.Handle(programQuery);
+            var emptyMessage = new ProgramResultEmptyMessage();
+            var programs = programHandlers.Handle(emptyMessage);
 
             return new JsonResult(programs);
         }

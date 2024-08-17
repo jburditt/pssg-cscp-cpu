@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Manager.Contract;
 
 namespace Resources;
 

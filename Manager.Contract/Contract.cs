@@ -2,16 +2,6 @@
 
 namespace Manager.Contract;
 
-public record ProgramQuery : IRequest<ProgramResult>
-{
-	public StateCode StateCode { get; set; }
-	//public StatusCode StatusCode { get; set; }
-}
-
-public record ProgramResult(IEnumerable<Program> Programs);
-
-public record Program(StateCode StateCode, StatusCode StatusCode);
-
 public enum StateCode
 {
     Active = 0,
@@ -23,6 +13,45 @@ public enum StatusCode
     Active = 0,
     Inactive = 1
 }
+
+public class ProgramResultEmptyMessage() : IRequest<ProgramResult>;
+
+#region Contact
+
+public record Contact();
+
+#endregion Contact
+
+#region Contract
+
+public record Contract();
+
+#endregion Contract
+
+#region Program
+
+public record ProgramQuery : IRequest<ProgramResult>
+{
+	public StateCode? StateCode { get; set; }
+	public StatusCode? StatusCode { get; set; }
+}
+
+public record ProgramResult(IEnumerable<Program> Programs);
+
+public record Program
+{
+	public Guid Id { get; set; }
+	public StateCode StateCode { get; set; }
+	public StatusCode StatusCode { get; set; }
+	public string Name { get; set; }
+	public Guid? ContractId { get; set; }
+	public Guid? OwnerId { get; set; }
+	public double Subtotal { get; set; }
+}
+
+#endregion Program
+
+#region Currency
 
 public record CurrencyQuery : IRequest<CurrencyResult>
 {
@@ -71,3 +100,5 @@ public record Currency(StateCode StateCode, StatusCode StatusCode, string IsoCur
 			public const string Id = "transactioncurrencyid";
 			public const string VersionNumber = "versionnumber";
 */
+
+#endregion Currency
