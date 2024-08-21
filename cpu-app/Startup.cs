@@ -54,6 +54,8 @@ namespace Gov.Cscp.Victims.Public
             services.AddTransient<ICurrencyRepository, CurrencyRepository>();
             services.AddTransient<ProgramHandlers>();
             services.AddTransient<IProgramRepository, ProgramRepository>();
+            services.AddTransient<InvoiceHandlers>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();

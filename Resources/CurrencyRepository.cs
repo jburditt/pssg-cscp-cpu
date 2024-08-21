@@ -10,6 +10,7 @@ public class CurrencyRepository(DatabaseContext databaseContext, IMapper mapper)
     {
         var dynamicsCurrencies = databaseContext.TransactionCurrencySet
             // TODO move this to Command
+            // TODO should be using enum outside of Contract
             .Where(c => c.StateCode == TransactionCurrency_StateCode.Active)
             // TODO move this to Command and use enum instead
             .Where(c => c.IsoCurrencyCode == "CAD")
