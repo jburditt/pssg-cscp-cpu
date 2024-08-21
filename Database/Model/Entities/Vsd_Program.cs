@@ -374,6 +374,7 @@ namespace Database.Model
 			public const string Vsd_Vsd_Contract_Vsd_Program = "vsd_vsd_contract_vsd_program";
 			public const string Vsd_Vsd_Program_Contact = "vsd_vsd_program_contact";
 			public const string Vsd_Vsd_Program_Vsd_Invoice = "Vsd_Vsd_Program_Vsd_Invoice";
+			public const string Vsd_Vsd_Program_Vsd_Payment = "Vsd_Vsd_Program_Vsd_Payment";
 		}
 		
 		[System.Diagnostics.DebuggerNonUserCode()]
@@ -3365,6 +3366,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Invoice>("vsd_vsd_program_vsd_invoice", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_vsd_program_vsd_payment
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_program_vsd_payment")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_Payment> Vsd_Vsd_Program_Vsd_Payment
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_program_vsd_payment", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_program_vsd_payment", null, value);
 			}
 		}
 		

@@ -74,6 +74,17 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.Vsd_Payment"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.Vsd_Payment> Vsd_PaymentSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.Vsd_Payment>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Database.Model.Vsd_Program"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Database.Model.Vsd_Program> Vsd_ProgramSet

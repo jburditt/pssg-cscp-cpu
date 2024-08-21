@@ -35,6 +35,7 @@ vsu</CamelCaseCustomWords>
 transactioncurrency|
 vsd_contract|
 vsd_invoice|
+vsd_payment|
 vsd_program</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
     <EntityClassNameOverrides />

@@ -391,6 +391,7 @@ namespace Database.Model
 			public const string Vsd_PayeeName = "vsd_payeename";
 			public const string Vsd_PayeeNumber = "vsd_payeenumber";
 			public const string Vsd_PayeeYomiName = "vsd_payeeyominame";
+			public const string Vsd_Payment_Vsd_Invoice = "vsd_payment_vsd_invoice";
 			public const string Vsd_PaymentAdviceComments = "vsd_paymentadvicecomments";
 			public const string Vsd_PaymentId = "vsd_paymentid";
 			public const string Vsd_PaymentIdName = "vsd_paymentidname";
@@ -446,6 +447,8 @@ namespace Database.Model
 			public const string Vsd_User3Name = "vsd_user3name";
 			public const string Vsd_User3YomiName = "vsd_user3yominame";
 			public const string Vsd_Vsd_Contract_Vsd_Invoice = "vsd_vsd_contract_vsd_invoice";
+			public const string Vsd_Vsd_Invoice_Vsd_Payment = "Vsd_Vsd_Invoice_Vsd_Payment";
+			public const string Vsd_Vsd_Payment_Vsd_Invoice = "vsd_vsd_payment_vsd_invoice";
 			public const string Vsd_Vsd_Program_Vsd_Invoice = "vsd_vsd_program_vsd_invoice";
 			public const string Vsd_Vsu_ClaimantBirthdate = "vsd_vsu_claimantbirthdate";
 			public const string Vsd_Vsu_ClaimantContactInfoChanged = "vsd_vsu_claimantcontactinfochanged";
@@ -3308,6 +3311,42 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// 1:N vsd_vsd_invoice_vsd_payment
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_invoice_vsd_payment")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_Payment> Vsd_Vsd_Invoice_Vsd_Payment
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_invoice_vsd_payment", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_invoice_vsd_payment", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:N vsd_vsd_payment_vsd_invoice
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_payment_vsd_invoice")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_Payment> Vsd_Vsd_Payment_Vsd_Invoice
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_payment_vsd_invoice", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_payment_vsd_invoice", null, value);
+			}
+		}
+		
+		/// <summary>
 		/// N:1 TransactionCurrency_vsd_invoice
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
@@ -3361,6 +3400,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntity<Database.Model.Contact>("vsd_contact_vsd_invoice_Payee", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_payment_vsd_invoice
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_paymentid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_payment_vsd_invoice")]
+		public Database.Model.Vsd_Payment Vsd_Payment_Vsd_Invoice
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Vsd_Payment>("vsd_payment_vsd_invoice", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Vsd_Payment>("vsd_payment_vsd_invoice", null, value);
 			}
 		}
 		

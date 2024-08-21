@@ -12,6 +12,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
     [Authorize]
     public class ProgramController(CurrencyHandlers currencyHandler, ProgramHandlers programHandlers, InvoiceHandlers invoiceHandler) : Controller
     {
+        // TODO add ErrorHandler ActionFilter that returns 500 status code and logs the exception
         [HttpGet("Approved")]
         public async Task<IActionResult> GetApproved()
         {
@@ -37,6 +38,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     continue;
                 }
 
+                //var scheduledPayment = GetScheduledPayment(program.Id)
             }
 
             return new JsonResult(programResult);

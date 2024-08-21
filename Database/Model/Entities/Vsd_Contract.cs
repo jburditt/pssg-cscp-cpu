@@ -317,6 +317,7 @@ namespace Database.Model
 			public const string Vsd_VerifySignatures = "vsd_verifysignatures";
 			public const string Vsd_VerifySignaturesName = "vsd_verifysignaturesname";
 			public const string Vsd_Vsd_Contract_Vsd_Invoice = "Vsd_Vsd_Contract_Vsd_Invoice";
+			public const string Vsd_Vsd_Contract_Vsd_Payment = "Vsd_Vsd_Contract_Vsd_Payment";
 			public const string Vsd_Vsd_Contract_Vsd_Program = "Vsd_Vsd_Contract_Vsd_Program";
 			public const string ReferencingVsd_Vsd_OldContract_Vsd_ClonedContract = "vsd_vsd_oldcontract_vsd_clonedcontract";
 			public const string Vsd_WorkerCompensationAct = "vsd_workercompensationact";
@@ -2921,6 +2922,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Invoice>("vsd_vsd_contract_vsd_invoice", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_vsd_contract_vsd_payment
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_contract_vsd_payment")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_Payment> Vsd_Vsd_Contract_Vsd_Payment
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_contract_vsd_payment", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_contract_vsd_payment", null, value);
 			}
 		}
 		
