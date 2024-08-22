@@ -4,5 +4,5 @@ namespace Resources;
 
 public interface IPaymentRepository
 {
-    PaymentResult Query(PaymentQuery invoiceQuery);
+    PaymentResult Query(PaymentQuery paymentQuery);
 }

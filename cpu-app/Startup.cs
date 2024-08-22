@@ -56,6 +56,8 @@ namespace Gov.Cscp.Victims.Public
             services.AddTransient<IProgramRepository, ProgramRepository>();
             services.AddTransient<InvoiceHandlers>();
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<PaymentHandlers>();
+            services.AddTransient<IPaymentRepository, PaymentRepository>();
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();
@@ -137,7 +139,7 @@ namespace Gov.Cscp.Victims.Public
             // add dynamics database adapter
             services.AddDatabase(Configuration);
 
-            var mapperTypes = new[] { typeof(CurrencyMapper), typeof(CurrencyRepositoryMapper) };
+            var mapperTypes = new[] { typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(GlobalMapper) };
             services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
 
             // allow for large files to be uploaded

@@ -27,6 +27,22 @@ public enum Origin
     Web = 100000000,
 }
 
+public enum MethodOfPayment
+{
+    Cheque = 100000001,
+    CreditCard = 100000003,
+    Eft = 100000000,
+    WireTransfer = 100000002,
+}
+
+public enum TaxExemption
+{
+    AllTax = 100000003,
+    GstOnly = 100000001,
+    NoTax = 100000002,
+    PstOnly = 100000000,
+}
+
 public record InvoiceQuery : IRequest<InvoiceResult>
 {
     public Guid? ProgramId { get; set; }
@@ -39,9 +55,19 @@ public record InvoiceResult(IEnumerable<Invoice> Invoices);
 public record Invoice
 {
     public Guid Id { get; set; }
+    public Origin Origin { get; set; }
     public StateCode StateCode { get; set; }
     public InvoiceStatusCode StatusCode { get; set; }
-    public string Name { get; set; }
     public Guid? ContractId { get; set; }
     public Guid? OwnerId { get; set; }
+    public Guid? PayeeId { get; set; }
+    public Guid? CurrencyId { get; set; }
+    public ProgramUnit ProgramUnit { get; set; }
+    public InvoiceType CvapInvoiceType { get; set; }
+    public TaxExemption TaxExemption { get; set; }
+    public DateTime CpuScheduledPaymentDate { get; set; }
+    public MethodOfPayment MethodOfPayment { get; set; }
+    public CpuInvoiceType CpuInvoiceType { get; set; }
+    public Guid? ProvinceStateId { get; set; }
+    public string PaymentAdviceComments { get; set; } = string.Empty;
 }

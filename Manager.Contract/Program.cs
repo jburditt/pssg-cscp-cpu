@@ -32,7 +32,7 @@ public record Program
     public string Name { get; set; }
     public Guid? ContractId { get; set; }
     public Guid? OwnerId { get; set; }
-    public double Subtotal { get; set; }
+    public decimal Subtotal { get; set; }
 }
 
 public class ProgramResultEmptyMessage() : IRequest<ProgramResult>;

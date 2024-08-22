@@ -14,22 +14,23 @@ public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) 
             join contract in databaseContext.Vsd_ContractSet on payment.Vsd_ContractId.Id equals contract.Vsd_ContractId
             select new { Payment = payment, Program = program, Contract = contract };
 
-        if (paymentQuery.ProgramId != null)
-        {
-            query = query.Where(c => c.Program.Id == paymentQuery.ProgramId);
-        }
+        //if (paymentQuery.ProgramId != null)
+        //{
+        //    query = query.Where(c => c.Program.Id == paymentQuery.ProgramId);
+        //}
 
-        if (paymentQuery.ContractId != null)
-        {
-            query = query.Where(c => c.Contract.Id == paymentQuery.ContractId);
-        }
+        //if (paymentQuery.ContractId != null)
+        //{
+        //    query = query.Where(c => c.Contract.Id == paymentQuery.ContractId);
+        //}
 
-        if (paymentQuery.ExcludeStatusCodes != null)
-        {
-            query = query.Where(x => x.Payment.StatusCode == null || paymentQuery.ExcludeStatusCodes.Contains((PaymentStatusCode)x.Payment.StatusCode));
-        }
+        //if (paymentQuery.ExcludeStatusCodes != null)
+        //{
+        //    query = query.Where(x => x.Payment.StatusCode == null || paymentQuery.ExcludeStatusCodes.Contains((PaymentStatusCode)x.Payment.StatusCode));
+        //}
 
-        var payments = mapper.Map<IEnumerable<Payment>>(query.ToList());
+        var queryResults = query.ToList().Select(x => x.Payment);
+        var payments = mapper.Map<IEnumerable<Payment>>(queryResults);
         return new PaymentResult(payments);
     }
 }

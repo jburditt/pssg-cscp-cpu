@@ -21,10 +21,10 @@ public record PaymentQuery : IRequest<PaymentResult>
     public List<PaymentStatusCode>? ExcludeStatusCodes { get; set; }
 }
 
-public record PaymentResult(IEnumerable<Payment> Invoices);
+public record PaymentResult(IEnumerable<Payment> Payments);
 
 public record Payment
 {
     public Guid Id { get; set; }
-    public double PaymentTotal { get; set; }
+    public decimal PaymentTotal { get; set; }
 }
