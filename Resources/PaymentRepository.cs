@@ -34,6 +34,10 @@ public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) 
         if (paymentQuery.ExcludeStatusCodes != null)
         {
             //    query = query.Where(x => x.Payment.StatusCode == null || paymentQuery.ExcludeStatusCodes.Contains((PaymentStatusCode)x.Payment.StatusCode));
+            foreach (var excludeStatusCode in paymentQuery.ExcludeStatusCodes)
+            {
+                query = query.Where(p => p.StatusCode != (Vsd_Payment_StatusCode)excludeStatusCode);
+            }
             //query = query.Where(p => p.StatusCode == null || !paymentQuery.ExcludeStatusCodes.Contains((PaymentStatusCode)p.StatusCode));
         }
 
