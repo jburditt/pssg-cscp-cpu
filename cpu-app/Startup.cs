@@ -50,6 +50,8 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddTransient<TokenHandler>();
             services.AddTransient<KeycloakHandler>();
+            services.AddTransient<ContractHandlers>();
+            services.AddTransient<IContractRepository, ContractRepository>();
             services.AddTransient<CurrencyHandlers>();
             services.AddTransient<ICurrencyRepository, CurrencyRepository>();
             services.AddTransient<ProgramHandlers>();

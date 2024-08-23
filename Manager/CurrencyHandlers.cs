@@ -4,12 +4,19 @@ using Resources;
 
 namespace Manager;
 
-public class CurrencyHandlers(ICurrencyRepository currencyRepository, IMapper mapper) : IRequestHandler<CurrencyQuery, CurrencyResult>
+public class CurrencyHandlers(ICurrencyRepository currencyRepository) : 
+    IRequestHandler<CurrencyQuery, CurrencyResult>,
+    IRequestHandler<FindCurrencyQuery, FindCurrencyResult>
 {
+    public async Task<FindCurrencyResult> Handle(FindCurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
+    {
+        var currencyResults = currencyRepository.FirstOrDefault(currencyQuery);
+        return await Task.FromResult(new FindCurrencyResult(currencyResults.Currency));
+    }
+
     public async Task<CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
     {
         var currencyResults = currencyRepository.Query();
-        //var currencyResults = mapper.Map<IEnumerable<Currency>>(currencies.Currencies);
-        return new CurrencyResult(currencyResults.Currencies);
+        return await Task.FromResult(new CurrencyResult(currencyResults.Currencies));
     }
 }

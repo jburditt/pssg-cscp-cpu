@@ -31,6 +31,7 @@ public record Program
     public ProgramStatusCode StatusCode { get; set; }
     public string Name { get; set; }
     public Guid? ContractId { get; set; }
+    public string ContractName { get; set; }
     public Guid? OwnerId { get; set; }
     public decimal Subtotal { get; set; }
 }

@@ -58,9 +58,11 @@ public record Invoice
     public Origin Origin { get; set; }
     public StateCode StateCode { get; set; }
     public InvoiceStatusCode StatusCode { get; set; }
+    public DateTime InvoiceDate { get; set; }
     public Guid? ContractId { get; set; }
     public Guid? OwnerId { get; set; }
     public Guid? PayeeId { get; set; }
+    public Guid? ProgramId { get; set; }
     public Guid? CurrencyId { get; set; }
     public ProgramUnit ProgramUnit { get; set; }
     public InvoiceType CvapInvoiceType { get; set; }

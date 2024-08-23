@@ -1,11 +1,29 @@
 ﻿using AutoMapper;
 using Database.Model;
-using Manager.Contract;
 
 namespace Resources;
 
 public class CurrencyRepository(DatabaseContext databaseContext, IMapper mapper) : ICurrencyRepository
 {
+    public FindCurrencyResult FirstOrDefault(FindCurrencyQuery currencyQuery)
+    {
+        var query = databaseContext.TransactionCurrencySet;
+
+        if (currencyQuery.StateCode != null)
+        {
+            query = query.Where(c => c.StateCode == (TransactionCurrency_StateCode)currencyQuery.StateCode);
+        }
+
+        if (currencyQuery.IsoCurrencyCode != null)
+        {
+            query = query.Where(p => p.IsoCurrencyCode == currencyQuery.IsoCurrencyCode);
+        }
+
+        var queryResults = query.FirstOrDefault();
+        var currency = mapper.Map<Currency>(queryResults);
+        return new FindCurrencyResult(currency);
+    }
+
     public CurrencyResult Query()
     {
         var dynamicsCurrencies = databaseContext.TransactionCurrencySet
