@@ -180,6 +180,7 @@ namespace Database.Model
 			public const string TransactionCurrencyIdName = "transactioncurrencyidname";
 			public const string UtcConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
+			public const string Vsd_Account_Vsd_Payment_Payee = "vsd_account_vsd_payment_Payee";
 			public const string Vsd_AccountNo = "vsd_accountno";
 			public const string Vsd_AddressLine1 = "vsd_addressline1";
 			public const string Vsd_AddressLine2 = "vsd_addressline2";
@@ -193,7 +194,7 @@ namespace Database.Model
 			public const string Vsd_ContractId = "vsd_contractid";
 			public const string Vsd_ContractIdName = "vsd_contractidname";
 			public const string Vsd_Country = "vsd_country";
-			public const string Vsd_CVAp_NoOfSessionsStoredValue = "vsd_cvap_noofsessionsstoredvalue";
+			public const string Vsd_Cvap_NoOfSessionsStoredValue = "vsd_cvap_noofsessionsstoredvalue";
 			public const string Vsd_EFtAdvice = "vsd_eftadvice";
 			public const string Vsd_EFtAdviceName = "vsd_eftadvicename";
 			public const string Vsd_EmailAddress1 = "vsd_emailaddress1";
@@ -1006,7 +1007,7 @@ namespace Database.Model
 		/// The purpose of this field is to store the value of the total count of sessions per an invoice that can used to roll-up the value to the entitlement for reporting purposes.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_noofsessionsstoredvalue")]
-		public System.Nullable<decimal> Vsd_CVAp_NoOfSessionsStoredValue
+		public System.Nullable<decimal> Vsd_Cvap_NoOfSessionsStoredValue
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1815,6 +1816,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntity<Database.Model.TransactionCurrency>("TransactionCurrency_vsd_payment", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_account_vsd_payment_Payee
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_payee")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_account_vsd_payment_Payee")]
+		public Database.Model.Account Vsd_Account_Vsd_Payment_Payee
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Account>("vsd_account_vsd_payment_Payee", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Account>("vsd_account_vsd_payment_Payee", null, value);
 			}
 		}
 		

@@ -12,6 +12,7 @@
     "camelCaseClassNames": true,
     "camelCaseCustomWords": [
       "bcgov",
+      "cvap",
       "vsd",
       "vsu"
     ],
@@ -97,10 +98,12 @@
   "emitFieldsClasses": true,
   "emitVirtualAttributes": true,
   "entityNamesFilter": [
+    "account",
     "contact",
     "transactioncurrency",
     "vsd_contract",
     "vsd_invoice",
+    "vsd_invoicelinedetail",
     "vsd_payment",
     "vsd_program"
   ],

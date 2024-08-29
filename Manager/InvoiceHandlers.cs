@@ -6,10 +6,14 @@ namespace Manager;
 
 public class InvoiceHandlers(IInvoiceRepository invoiceRepository, IMapper mapper) : IRequestHandler<InvoiceQuery, InvoiceResult>
 {
+    public async Task<Guid> Handle(Invoice invoice, CancellationToken cancellationToken = default)
+    {
+        return invoiceRepository.Insert(invoice);
+    }
+
     public async Task<InvoiceResult> Handle(InvoiceQuery invoiceQuery, CancellationToken cancellationToken = default)
     {
         var invoiceResults = invoiceRepository.Query(invoiceQuery);
-        //var invoiceResults = mapper.Map<IEnumerable<Invoice>>(invoices.Invoices);
         return new InvoiceResult(invoiceResults.Invoices);
     }
 }

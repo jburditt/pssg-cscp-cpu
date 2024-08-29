@@ -16,7 +16,23 @@ public class ContractRepository(DatabaseContext databaseContext, IMapper mapper)
         }
 
         var queryResults = query.FirstOrDefault();
+
         var contract = mapper.Map<Contract>(queryResults);
+
+        // if there is a customer, check if the customer is a reference to an account or contact, and load the corresponding method of payment from the referenced entity
+        if (queryResults.Vsd_Customer != null)
+        {
+            var customerEntityReferenceName = queryResults.Vsd_Customer.LogicalName;
+            if (customerEntityReferenceName == "account")
+            {
+                contract.MethodOfPayment = (MethodOfPayment)databaseContext.AccountSet.First(p => p.Id == queryResults.Vsd_Customer.Id).Vsd_MethodOfPayment;
+            }
+            else if (customerEntityReferenceName == "contact")
+            {
+                contract.MethodOfPayment = (MethodOfPayment)databaseContext.ContactSet.First(p => p.Id == queryResults.Vsd_Customer.Id).Vsd_MethodOfPayment;
+            }
+        }
+
         return new FindContractResult(contract);
     }
 

@@ -84,7 +84,7 @@ namespace Database.Model
 	/// An option set to serve as a status for authorization process of payments in CVAP.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	public enum Vsd_Invoice_Vsd_CVAp_AuthorizationStatus
+	public enum Vsd_Invoice_Vsd_Cvap_AuthorizationStatus
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -109,7 +109,7 @@ namespace Database.Model
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	public enum Vsd_Invoice_Vsd_CVAp_NumberOfLineItems
+	public enum Vsd_Invoice_Vsd_Cvap_NumberOfLineItems
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -154,7 +154,7 @@ namespace Database.Model
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	public enum Vsd_Invoice_Vsd_CVAp_PaymentType
+	public enum Vsd_Invoice_Vsd_Cvap_PaymentType
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -316,6 +316,8 @@ namespace Database.Model
 			public const string TraversedPath = "traversedpath";
 			public const string UtcConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
+			public const string Vsd_Account_Vsd_Invoice_Customer = "vsd_account_vsd_invoice_Customer";
+			public const string Vsd_Account_Vsd_Invoice_Payee = "vsd_account_vsd_invoice_Payee";
 			public const string Vsd_AuthorizationDate = "vsd_authorizationdate";
 			public const string Vsd_BankReconciled = "vsd_bankreconciled";
 			public const string Vsd_BankReconciledName = "vsd_bankreconciledname";
@@ -341,30 +343,30 @@ namespace Database.Model
 			public const string Vsd_Customer2 = "vsd_customer2";
 			public const string Vsd_Customer2Name = "vsd_customer2name";
 			public const string Vsd_Customer2YomiName = "vsd_customer2yominame";
-			public const string Vsd_CVAp_AuthorizationStatus = "vsd_cvap_authorizationstatus";
-			public const string Vsd_CVAp_AuthorizationStatusName = "vsd_cvap_authorizationstatusname";
-			public const string Vsd_CVaP_CounsellorEmailText = "vsd_cvap_counselloremailtext";
-			public const string Vsd_CVAp_CounsellorRate = "vsd_cvap_counsellorrate";
-			public const string Vsd_CVAp_CounsellorRate_Base = "vsd_cvap_counsellorrate_base";
-			public const string Vsd_CVAp_CounsellorRegistrationNumber = "vsd_cvap_counsellorregistrationnumber";
-			public const string Vsd_CVAp_EndOfServiceProvided = "vsd_cvap_endofserviceprovided";
-			public const string Vsd_CVAp_InvoiceType = "vsd_cvap_invoicetype";
-			public const string Vsd_CVAp_InvoiceTypeName = "vsd_cvap_invoicetypename";
-			public const string Vsd_CVAp_NameOfCounsellorText = "vsd_cvap_nameofcounsellortext";
-			public const string Vsd_CVAp_NoOfSessions = "vsd_cvap_noofsessions";
-			public const string Vsd_CVAp_NoOfSessions_Date = "vsd_cvap_noofsessions_date";
-			public const string Vsd_CVAp_NoOfSessions_State = "vsd_cvap_noofsessions_state";
-			public const string Vsd_CVAp_NoOfSessionsStoredValue = "vsd_cvap_noofsessionsstoredvalue";
-			public const string Vsd_CVAp_NumberOfLineItems = "vsd_cvap_numberoflineitems";
-			public const string Vsd_CVAp_NumberOfLineItemsName = "vsd_cvap_numberoflineitemsname";
-			public const string Vsd_CVAp_OnHoldComments = "vsd_cvap_onholdcomments";
-			public const string Vsd_CVAp_PaymentType = "vsd_cvap_paymenttype";
-			public const string Vsd_CVAp_PaymentTypeName = "vsd_cvap_paymenttypename";
-			public const string Vsd_CVAp_StartOfServiceProvided = "vsd_cvap_startofserviceprovided";
-			public const string Vsd_CVAp_SToBid = "vsd_cvap_stobid";
-			public const string Vsd_CVAp_SToBidName = "vsd_cvap_stobidname";
-			public const string Vsd_CVApQRStageCompleted = "vsd_cvapqrstagecompleted";
-			public const string Vsd_CVApValidationStageCompleted = "vsd_cvapvalidationstagecompleted";
+			public const string Vsd_Cvap_AuthorizationStatus = "vsd_cvap_authorizationstatus";
+			public const string Vsd_Cvap_AuthorizationStatusName = "vsd_cvap_authorizationstatusname";
+			public const string Vsd_Cvap_CounsellorEmailText = "vsd_cvap_counselloremailtext";
+			public const string Vsd_Cvap_CounsellorRate = "vsd_cvap_counsellorrate";
+			public const string Vsd_Cvap_CounsellorRate_Base = "vsd_cvap_counsellorrate_base";
+			public const string Vsd_Cvap_CounsellorRegistrationNumber = "vsd_cvap_counsellorregistrationnumber";
+			public const string Vsd_Cvap_EndOfServiceProvided = "vsd_cvap_endofserviceprovided";
+			public const string Vsd_Cvap_InvoiceType = "vsd_cvap_invoicetype";
+			public const string Vsd_Cvap_InvoiceTypeName = "vsd_cvap_invoicetypename";
+			public const string Vsd_Cvap_NameOfCounsellorText = "vsd_cvap_nameofcounsellortext";
+			public const string Vsd_Cvap_NoOfSessions = "vsd_cvap_noofsessions";
+			public const string Vsd_Cvap_NoOfSessions_Date = "vsd_cvap_noofsessions_date";
+			public const string Vsd_Cvap_NoOfSessions_State = "vsd_cvap_noofsessions_state";
+			public const string Vsd_Cvap_NoOfSessionsStoredValue = "vsd_cvap_noofsessionsstoredvalue";
+			public const string Vsd_Cvap_NumberOfLineItems = "vsd_cvap_numberoflineitems";
+			public const string Vsd_Cvap_NumberOfLineItemsName = "vsd_cvap_numberoflineitemsname";
+			public const string Vsd_Cvap_OnHoldComments = "vsd_cvap_onholdcomments";
+			public const string Vsd_Cvap_PaymentType = "vsd_cvap_paymenttype";
+			public const string Vsd_Cvap_PaymentTypeName = "vsd_cvap_paymenttypename";
+			public const string Vsd_Cvap_StartOfServiceProvided = "vsd_cvap_startofserviceprovided";
+			public const string Vsd_Cvap_SToBid = "vsd_cvap_stobid";
+			public const string Vsd_Cvap_SToBidName = "vsd_cvap_stobidname";
+			public const string Vsd_CvapQRStageCompleted = "vsd_cvapqrstagecompleted";
+			public const string Vsd_CvapValidationStageCompleted = "vsd_cvapvalidationstagecompleted";
 			public const string Vsd_Description = "vsd_description";
 			public const string Vsd_EmailAddress = "vsd_emailaddress";
 			public const string Vsd_EntitlementId = "vsd_entitlementid";
@@ -447,6 +449,7 @@ namespace Database.Model
 			public const string Vsd_User3Name = "vsd_user3name";
 			public const string Vsd_User3YomiName = "vsd_user3yominame";
 			public const string Vsd_Vsd_Contract_Vsd_Invoice = "vsd_vsd_contract_vsd_invoice";
+			public const string Vsd_Vsd_Invoice_Vsd_InvoiceLineDetail = "Vsd_Vsd_Invoice_Vsd_InvoiceLineDetail";
 			public const string Vsd_Vsd_Invoice_Vsd_Payment = "Vsd_Vsd_Invoice_Vsd_Payment";
 			public const string Vsd_Vsd_Payment_Vsd_Invoice = "vsd_vsd_payment_vsd_invoice";
 			public const string Vsd_Vsd_Program_Vsd_Invoice = "vsd_vsd_program_vsd_invoice";
@@ -1473,12 +1476,12 @@ namespace Database.Model
 		/// An option set to serve as a status for authorization process of payments in CVAP.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_authorizationstatus")]
-		public virtual Vsd_Invoice_Vsd_CVAp_AuthorizationStatus? Vsd_CVAp_AuthorizationStatus
+		public virtual Vsd_Invoice_Vsd_Cvap_AuthorizationStatus? Vsd_Cvap_AuthorizationStatus
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return ((Vsd_Invoice_Vsd_CVAp_AuthorizationStatus?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_authorizationstatus")));
+				return ((Vsd_Invoice_Vsd_Cvap_AuthorizationStatus?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_authorizationstatus")));
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
@@ -1488,7 +1491,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_authorizationstatusname")]
-		public string Vsd_CVAp_AuthorizationStatusName
+		public string Vsd_Cvap_AuthorizationStatusName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1508,7 +1511,7 @@ namespace Database.Model
 		/// The Submitter EmailAddress submitted through the online application.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counselloremailtext")]
-		public string Vsd_CVaP_CounsellorEmailText
+		public string Vsd_Cvap_CounsellorEmailText
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1523,7 +1526,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellorrate")]
-		public Microsoft.Xrm.Sdk.Money Vsd_CVAp_CounsellorRate
+		public Microsoft.Xrm.Sdk.Money Vsd_Cvap_CounsellorRate
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1541,7 +1544,7 @@ namespace Database.Model
 		/// Value of the Counsellor Rate in base currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellorrate_base")]
-		public Microsoft.Xrm.Sdk.Money Vsd_CVAp_CounsellorRate_Base
+		public Microsoft.Xrm.Sdk.Money Vsd_Cvap_CounsellorRate_Base
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1554,7 +1557,7 @@ namespace Database.Model
 		/// The counsellors unique identifier.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellorregistrationnumber")]
-		public string Vsd_CVAp_CounsellorRegistrationNumber
+		public string Vsd_Cvap_CounsellorRegistrationNumber
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1569,7 +1572,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_endofserviceprovided")]
-		public System.Nullable<System.DateTime> Vsd_CVAp_EndOfServiceProvided
+		public System.Nullable<System.DateTime> Vsd_Cvap_EndOfServiceProvided
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1584,7 +1587,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_invoicetype")]
-		public virtual Vsd_InvoiceTypes? Vsd_CVAp_InvoiceType
+		public virtual Vsd_InvoiceTypes? Vsd_Cvap_InvoiceType
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1599,7 +1602,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_invoicetypename")]
-		public string Vsd_CVAp_InvoiceTypeName
+		public string Vsd_Cvap_InvoiceTypeName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1619,7 +1622,7 @@ namespace Database.Model
 		/// The name of the counsellor submitted through the online application.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_nameofcounsellortext")]
-		public string Vsd_CVAp_NameOfCounsellorText
+		public string Vsd_Cvap_NameOfCounsellorText
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1637,7 +1640,7 @@ namespace Database.Model
 		/// Calculation of all line items counselling session duration.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_noofsessions")]
-		public System.Nullable<decimal> Vsd_CVAp_NoOfSessions
+		public System.Nullable<decimal> Vsd_Cvap_NoOfSessions
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1650,7 +1653,7 @@ namespace Database.Model
 		/// Last Updated time of rollup field No. of Sessions.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_noofsessions_date")]
-		public System.Nullable<System.DateTime> Vsd_CVAp_NoOfSessions_Date
+		public System.Nullable<System.DateTime> Vsd_Cvap_NoOfSessions_Date
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1663,7 +1666,7 @@ namespace Database.Model
 		/// State of rollup field No. of Sessions.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_noofsessions_state")]
-		public System.Nullable<int> Vsd_CVAp_NoOfSessions_State
+		public System.Nullable<int> Vsd_Cvap_NoOfSessions_State
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1676,7 +1679,7 @@ namespace Database.Model
 		/// The purpose of this field is to store the value of the total count of sessions per an invoice that can used to roll-up the value to the entitlement for reporting purposes.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_noofsessionsstoredvalue")]
-		public System.Nullable<decimal> Vsd_CVAp_NoOfSessionsStoredValue
+		public System.Nullable<decimal> Vsd_Cvap_NoOfSessionsStoredValue
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1691,12 +1694,12 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_numberoflineitems")]
-		public virtual Vsd_Invoice_Vsd_CVAp_NumberOfLineItems? Vsd_CVAp_NumberOfLineItems
+		public virtual Vsd_Invoice_Vsd_Cvap_NumberOfLineItems? Vsd_Cvap_NumberOfLineItems
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return ((Vsd_Invoice_Vsd_CVAp_NumberOfLineItems?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_numberoflineitems")));
+				return ((Vsd_Invoice_Vsd_Cvap_NumberOfLineItems?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_numberoflineitems")));
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
@@ -1706,7 +1709,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_numberoflineitemsname")]
-		public string Vsd_CVAp_NumberOfLineItemsName
+		public string Vsd_Cvap_NumberOfLineItemsName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1723,7 +1726,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_onholdcomments")]
-		public string Vsd_CVAp_OnHoldComments
+		public string Vsd_Cvap_OnHoldComments
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1738,12 +1741,12 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_paymenttype")]
-		public virtual Vsd_Invoice_Vsd_CVAp_PaymentType? Vsd_CVAp_PaymentType
+		public virtual Vsd_Invoice_Vsd_Cvap_PaymentType? Vsd_Cvap_PaymentType
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return ((Vsd_Invoice_Vsd_CVAp_PaymentType?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_paymenttype")));
+				return ((Vsd_Invoice_Vsd_Cvap_PaymentType?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_paymenttype")));
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
@@ -1753,7 +1756,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_paymenttypename")]
-		public string Vsd_CVAp_PaymentTypeName
+		public string Vsd_Cvap_PaymentTypeName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1770,7 +1773,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_startofserviceprovided")]
-		public System.Nullable<System.DateTime> Vsd_CVAp_StartOfServiceProvided
+		public System.Nullable<System.DateTime> Vsd_Cvap_StartOfServiceProvided
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1788,7 +1791,7 @@ namespace Database.Model
 		/// Unique identifier for CVAP STOB associated with Invoice.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_stobid")]
-		public Microsoft.Xrm.Sdk.EntityReference Vsd_CVAp_SToBid
+		public Microsoft.Xrm.Sdk.EntityReference Vsd_Cvap_SToBid
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1803,7 +1806,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_stobidname")]
-		public string Vsd_CVAp_SToBidName
+		public string Vsd_Cvap_SToBidName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1820,7 +1823,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvapqrstagecompleted")]
-		public System.Nullable<System.DateTime> Vsd_CVApQRStageCompleted
+		public System.Nullable<System.DateTime> Vsd_CvapQRStageCompleted
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -1835,7 +1838,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvapvalidationstagecompleted")]
-		public System.Nullable<System.DateTime> Vsd_CVApValidationStageCompleted
+		public System.Nullable<System.DateTime> Vsd_CvapValidationStageCompleted
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -3311,6 +3314,24 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// 1:N vsd_vsd_invoice_vsd_invoicelinedetail
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_invoice_vsd_invoicelinedetail")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_InvoiceLineDetail> Vsd_Vsd_Invoice_Vsd_InvoiceLineDetail
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_InvoiceLineDetail>("vsd_vsd_invoice_vsd_invoicelinedetail", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_InvoiceLineDetail>("vsd_vsd_invoice_vsd_invoicelinedetail", null, value);
+			}
+		}
+		
+		/// <summary>
 		/// 1:N vsd_vsd_invoice_vsd_payment
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_invoice_vsd_payment")]
@@ -3362,6 +3383,44 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntity<Database.Model.TransactionCurrency>("TransactionCurrency_vsd_invoice", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_account_vsd_invoice_Customer
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_customer2")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_account_vsd_invoice_Customer")]
+		public Database.Model.Account Vsd_Account_Vsd_Invoice_Customer
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Account>("vsd_account_vsd_invoice_Customer", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Account>("vsd_account_vsd_invoice_Customer", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_account_vsd_invoice_Payee
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_payee")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_account_vsd_invoice_Payee")]
+		public Database.Model.Account Vsd_Account_Vsd_Invoice_Payee
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Account>("vsd_account_vsd_invoice_Payee", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Account>("vsd_account_vsd_invoice_Payee", null, value);
 			}
 		}
 		

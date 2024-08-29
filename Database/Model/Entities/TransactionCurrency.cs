@@ -87,9 +87,11 @@ namespace Database.Model
 			public const string StateCodename = "statecodename";
 			public const string StatusCode = "statuscode";
 			public const string StatusCodename = "statuscodename";
+			public const string TransactionCurrency_Account = "TransactionCurrency_Account";
 			public const string TransactionCurrency_Contact = "TransactionCurrency_Contact";
 			public const string TransactionCurrency_Vsd_Contract = "TransactionCurrency_Vsd_Contract";
 			public const string TransactionCurrency_Vsd_Invoice = "TransactionCurrency_Vsd_Invoice";
+			public const string TransactionCurrency_Vsd_InvoiceLineDetail = "TransactionCurrency_Vsd_InvoiceLineDetail";
 			public const string TransactionCurrency_Vsd_Payment = "TransactionCurrency_Vsd_Payment";
 			public const string TransactionCurrency_Vsd_Program = "TransactionCurrency_Vsd_Program";
 			public const string TransactionCurrencyId = "transactioncurrencyid";
@@ -675,6 +677,24 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// 1:N transactioncurrency_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("transactioncurrency_account")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Account> TransactionCurrency_Account
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Account>("transactioncurrency_account", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Account>("transactioncurrency_account", null, value);
+			}
+		}
+		
+		/// <summary>
 		/// 1:N transactioncurrency_contact
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("transactioncurrency_contact")]
@@ -725,6 +745,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Invoice>("TransactionCurrency_vsd_invoice", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N TransactionCurrency_vsd_invoicelinedetail
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("TransactionCurrency_vsd_invoicelinedetail")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_InvoiceLineDetail> TransactionCurrency_Vsd_InvoiceLineDetail
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_InvoiceLineDetail>("TransactionCurrency_vsd_invoicelinedetail", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_InvoiceLineDetail>("TransactionCurrency_vsd_invoicelinedetail", null, value);
 			}
 		}
 		

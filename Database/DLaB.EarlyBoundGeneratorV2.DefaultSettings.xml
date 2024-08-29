@@ -21,6 +21,7 @@ cpu_*</ActionPrefixesWhitelist>
     <BuilderSettingsJsonRelativePath>builderSettings.json</BuilderSettingsJsonRelativePath>
     <CamelCaseClassNames>true</CamelCaseClassNames>
     <CamelCaseCustomWords>bcgov|
+cvap|
 vsd|
 vsu</CamelCaseCustomWords>
     <CamelCaseMemberNames>true</CamelCaseMemberNames>
@@ -31,10 +32,12 @@ vsu</CamelCaseCustomWords>
     <CreateOneFilePerOptionSet>true</CreateOneFilePerOptionSet>
     <DeleteFilesFromOutputFolders>true</DeleteFilesFromOutputFolders>
     <EntitiesToSkip />
-    <EntitiesWhitelist>contact|
+    <EntitiesWhitelist>account|
+contact|
 transactioncurrency|
 vsd_contract|
 vsd_invoice|
+vsd_invoicelinedetail|
 vsd_payment|
 vsd_program</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />

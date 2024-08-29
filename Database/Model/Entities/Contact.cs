@@ -589,7 +589,7 @@ namespace Database.Model
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	public enum Contact_Vsd_CVAp_CounsellingStatus
+	public enum Contact_Vsd_Cvap_CounsellingStatus
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -749,6 +749,7 @@ namespace Database.Model
 		/// </summary>
 		public partial class Fields
 		{
+			public const string Account_Primary_Contact = "Account_Primary_Contact";
 			public const string AccountId = "accountid";
 			public const string AccountIdName = "accountidname";
 			public const string AccountIdYomiName = "accountidyominame";
@@ -853,6 +854,7 @@ namespace Database.Model
 			public const string Callback = "callback";
 			public const string ChildrensNames = "childrensnames";
 			public const string Company = "company";
+			public const string Contact_Customer_Accounts = "contact_customer_accounts";
 			public const string ReferencingContact_Customer_Contacts = "contact_customer_contacts";
 			public const string ReferencingContact_Master_Contact = "contact_master_contact";
 			public const string ContactId = "contactid";
@@ -1023,6 +1025,7 @@ namespace Database.Model
 			public const string TraversedPath = "traversedpath";
 			public const string UtcConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
+			public const string Vsd_Account_Contact = "vsd_account_contact";
 			public const string Vsd_AccountNo = "vsd_accountno";
 			public const string Vsd_AccountNumber = "vsd_accountnumber";
 			public const string Vsd_Age = "vsd_age";
@@ -1034,6 +1037,7 @@ namespace Database.Model
 			public const string Vsd_BcEId = "vsd_bceid";
 			public const string Vsd_BirthdateComments = "vsd_birthdatecomments";
 			public const string Vsd_BirthdateThisYear = "vsd_birthdatethisyear";
+			public const string Vsd_BoardContact_Account = "Vsd_BoardContact_Account";
 			public const string Vsd_CloneContact = "vsd_clonecontact";
 			public const string Vsd_CloneContactName = "vsd_clonecontactname";
 			public const string Vsd_ConcatenatedGlobalSearchLine2 = "vsd_concatenatedglobalsearchline2";
@@ -1058,15 +1062,15 @@ namespace Database.Model
 			public const string Vsd_CSuCaseCount = "vsd_csucasecount";
 			public const string Vsd_CSuCaseCount_Date = "vsd_csucasecount_date";
 			public const string Vsd_CSuCaseCount_State = "vsd_csucasecount_state";
-			public const string Vsd_CVAp_CounsellingStatus = "vsd_cvap_counsellingstatus";
-			public const string Vsd_CVAp_CounsellingStatusName = "vsd_cvap_counsellingstatusname";
-			public const string Vsd_CVAp_CounsellorRegistrationDate = "vsd_cvap_counsellorregistrationdate";
-			public const string Vsd_CVAp_CounsellorRenewalDueDate = "vsd_cvap_counsellorrenewalduedate";
-			public const string Vsd_CVAp_Justin = "vsd_cvap_justin";
-			public const string Vsd_CVAp_JustinName = "vsd_cvap_justinname";
-			public const string Vsd_CVApCaseCount = "vsd_cvapcasecount";
-			public const string Vsd_CVApCaseCount_Date = "vsd_cvapcasecount_date";
-			public const string Vsd_CVApCaseCount_State = "vsd_cvapcasecount_state";
+			public const string Vsd_Cvap_CounsellingStatus = "vsd_cvap_counsellingstatus";
+			public const string Vsd_Cvap_CounsellingStatusName = "vsd_cvap_counsellingstatusname";
+			public const string Vsd_Cvap_CounsellorRegistrationDate = "vsd_cvap_counsellorregistrationdate";
+			public const string Vsd_Cvap_CounsellorRenewalDueDate = "vsd_cvap_counsellorrenewalduedate";
+			public const string Vsd_Cvap_Justin = "vsd_cvap_justin";
+			public const string Vsd_Cvap_JustinName = "vsd_cvap_justinname";
+			public const string Vsd_CvapCaseCount = "vsd_cvapcasecount";
+			public const string Vsd_CvapCaseCount_Date = "vsd_cvapcasecount_date";
+			public const string Vsd_CvapCaseCount_State = "vsd_cvapcasecount_state";
 			public const string Vsd_DateOfBirth = "vsd_dateofbirth";
 			public const string Vsd_DateOfDeath = "vsd_dateofdeath";
 			public const string Vsd_DateOfNameChange = "vsd_dateofnamechange";
@@ -1075,6 +1079,7 @@ namespace Database.Model
 			public const string Vsd_Elvis_Pin = "vsd_elvis_pin";
 			public const string Vsd_EmploymentStatus = "vsd_employmentstatus";
 			public const string Vsd_EmploymentStatusName = "vsd_employmentstatusname";
+			public const string Vsd_ExecutiveContact_Account = "Vsd_ExecutiveContact_Account";
 			public const string Vsd_HasPortalAccess = "vsd_hasportalaccess";
 			public const string Vsd_HasPortalAccessName = "vsd_hasportalaccessname";
 			public const string Vsd_HomePhoneExtension = "vsd_homephoneextension";
@@ -6244,12 +6249,12 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellingstatus")]
-		public virtual Contact_Vsd_CVAp_CounsellingStatus? Vsd_CVAp_CounsellingStatus
+		public virtual Contact_Vsd_Cvap_CounsellingStatus? Vsd_Cvap_CounsellingStatus
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
 			{
-				return ((Contact_Vsd_CVAp_CounsellingStatus?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_counsellingstatus")));
+				return ((Contact_Vsd_Cvap_CounsellingStatus?)(EntityOptionSetEnum.GetEnum(this, "vsd_cvap_counsellingstatus")));
 			}
 			[System.Diagnostics.DebuggerNonUserCode()]
 			set
@@ -6259,7 +6264,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellingstatusname")]
-		public string Vsd_CVAp_CounsellingStatusName
+		public string Vsd_Cvap_CounsellingStatusName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6276,7 +6281,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellorregistrationdate")]
-		public System.Nullable<System.DateTime> Vsd_CVAp_CounsellorRegistrationDate
+		public System.Nullable<System.DateTime> Vsd_Cvap_CounsellorRegistrationDate
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6291,7 +6296,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_counsellorrenewalduedate")]
-		public System.Nullable<System.DateTime> Vsd_CVAp_CounsellorRenewalDueDate
+		public System.Nullable<System.DateTime> Vsd_Cvap_CounsellorRenewalDueDate
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6306,7 +6311,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_justin")]
-		public virtual Vsd_YesNo? Vsd_CVAp_Justin
+		public virtual Vsd_YesNo? Vsd_Cvap_Justin
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6321,7 +6326,7 @@ namespace Database.Model
 		}
 		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvap_justinname")]
-		public string Vsd_CVAp_JustinName
+		public string Vsd_Cvap_JustinName
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6341,7 +6346,7 @@ namespace Database.Model
 		/// Roll-up field that calculates the total number of active CVAP cases for this contact
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvapcasecount")]
-		public System.Nullable<int> Vsd_CVApCaseCount
+		public System.Nullable<int> Vsd_CvapCaseCount
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6354,7 +6359,7 @@ namespace Database.Model
 		/// Last Updated time of rollup field Active CVAP Cases.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvapcasecount_date")]
-		public System.Nullable<System.DateTime> Vsd_CVApCaseCount_Date
+		public System.Nullable<System.DateTime> Vsd_CvapCaseCount_Date
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -6367,7 +6372,7 @@ namespace Database.Model
 		/// State of rollup field Active CVAP Cases.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_cvapcasecount_state")]
-		public System.Nullable<int> Vsd_CVApCaseCount_State
+		public System.Nullable<int> Vsd_CvapCaseCount_State
 		{
 			[System.Diagnostics.DebuggerNonUserCode()]
 			get
@@ -8756,6 +8761,24 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// 1:N account_primary_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("account_primary_contact")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Account> Account_Primary_Contact
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Account>("account_primary_contact", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Account>("account_primary_contact", null, value);
+			}
+		}
+		
+		/// <summary>
 		/// 1:N contact_customer_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contact_customer_contacts", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -8788,6 +8811,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Contact>("contact_master_contact", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_boardcontact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_boardcontact_account")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Account> Vsd_BoardContact_Account
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Account>("vsd_boardcontact_account", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Account>("vsd_boardcontact_account", null, value);
 			}
 		}
 		
@@ -8954,6 +8995,42 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// 1:N vsd_executivecontact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_executivecontact_account")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Account> Vsd_ExecutiveContact_Account
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Account>("vsd_executivecontact_account", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Account>("vsd_executivecontact_account", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:N vsd_account_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_account_contact")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Account> Vsd_Account_Contact
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Account>("vsd_account_contact", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Account>("vsd_account_contact", null, value);
+			}
+		}
+		
+		/// <summary>
 		/// N:N vsd_contact_vsd_program
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contact_vsd_program")]
@@ -8986,6 +9063,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Program>("vsd_vsd_program_contact", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 contact_customer_accounts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentcustomerid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contact_customer_accounts")]
+		public Database.Model.Account Contact_Customer_Accounts
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Account>("contact_customer_accounts", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Account>("contact_customer_accounts", null, value);
 			}
 		}
 		

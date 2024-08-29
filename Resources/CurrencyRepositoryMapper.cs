@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Manager.Contract;
+using Database.Model;
 
 namespace Resources;
 
@@ -7,6 +7,6 @@ public class CurrencyRepositoryMapper : Profile
 {
     public CurrencyRepositoryMapper()
     {
-        CreateMap<Database.Model.TransactionCurrency, Currency>();
+        CreateMap<TransactionCurrency, Currency>();
     }
 }

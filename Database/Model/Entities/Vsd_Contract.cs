@@ -187,6 +187,7 @@ namespace Database.Model
 			public const string TraversedPath = "traversedpath";
 			public const string UtcConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
+			public const string Vsd_Account_Vsd_Contract_Customer = "vsd_account_vsd_contract_Customer";
 			public const string Vsd_AgreementStartDate = "vsd_agreementstartdate";
 			public const string Vsd_AuthorizedSigningDate = "vsd_authorizedsigningdate";
 			public const string Vsd_AuthorizedSigningOfficerSignature = "vsd_authorizedsigningofficersignature";
@@ -2995,6 +2996,25 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntity<Database.Model.TransactionCurrency>("TransactionCurrency_vsd_contract", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 vsd_account_vsd_contract_Customer
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vsd_customer")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_account_vsd_contract_Customer")]
+		public Database.Model.Account Vsd_Account_Vsd_Contract_Customer
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntity<Database.Model.Account>("vsd_account_vsd_contract_Customer", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntity<Database.Model.Account>("vsd_account_vsd_contract_Customer", null, value);
 			}
 		}
 		

@@ -6,6 +6,14 @@ namespace Resources;
 
 public class InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) : IInvoiceRepository
 {
+    public Guid Insert(Invoice invoice)
+    {
+        var entity = mapper.Map<Vsd_Invoice>(invoice);
+        databaseContext.AddObject(entity);
+        databaseContext.SaveChanges();
+        return entity.Id;
+    }
+
     public InvoiceResult Query(InvoiceQuery invoiceQuery)
     {
         var query = databaseContext.Vsd_InvoiceSet;

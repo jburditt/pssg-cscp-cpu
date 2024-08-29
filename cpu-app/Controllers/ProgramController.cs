@@ -14,12 +14,14 @@ namespace Gov.Cscp.Victims.Public.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    public class ProgramController(CurrencyHandlers currencyHandler, ProgramHandlers programHandlers, InvoiceHandlers invoiceHandler, PaymentHandlers paymentHandler, ContractHandlers contractHandlers) : Controller
+    public class ProgramController(CurrencyHandlers currencyHandler, ProgramHandlers programHandlers, InvoiceHandlers invoiceHandler, InvoiceLineDetailHandlers invoiceLineDetailHander, PaymentHandlers paymentHandler, ContractHandlers contractHandlers) : Controller
     {
         // TODO add ErrorHandler ActionFilter that returns 500 status code and logs the exception
         [HttpGet("Approved")]
         public async Task<IActionResult> GetApproved()
         {
+            var provinceBc = new Guid("FDE4DBCA-989A-E811-8155-480FCFF4F6A1");
+
             // use CurrencyQuery to query "all the currencies that match this one currency code...don't ask me..."
             var currencyQuery = new FindCurrencyQuery();
             var currencyResult = await currencyHandler.Handle(currencyQuery);
@@ -49,7 +51,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 paymentQuery.ExcludeStatusCodes = new List<PaymentStatusCode> { PaymentStatusCode.Negative, PaymentStatusCode.Canceled };
                 var paymentResult = await paymentHandler.Handle(paymentQuery);
                 var paymentTotal = paymentResult.Payments.Sum(p => p.PaymentTotal);
-                var scheduledPaymentAmount = Convert.ToInt32(program.Subtotal - paymentTotal / (5 - quarter));
+                var scheduledPaymentAmount = program.Subtotal - paymentTotal / (5 - quarter);
                 if (scheduledPaymentAmount == 0)
                 {
                     throw new Exception("Line item is zero.");
@@ -71,15 +73,23 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoice.TaxExemption = TaxExemption.NoTax;
                 invoice.InvoiceDate = invoiceDate;
                 invoice.CpuScheduledPaymentDate = invoiceDate.AddDays(3);
-                /*
-                if(((EntityReference)invoiceEntity["vsd_payee"]).LogicalName.Equals("account", StringComparison.InvariantCultureIgnoreCase))
-                    invoiceEntity["vsd_methodofpayment"] = OrgService.Retrieve("account", ((EntityReference)invoiceEntity["vsd_payee"]).Id, new ColumnSet("vsd_methodofpayment"))["vsd_methodofpayment"];
-                else
-                    invoiceEntity["vsd_methodofpayment"] = OrgService.Retrieve("contact", ((EntityReference)invoiceEntity["vsd_payee"]).Id, new ColumnSet("vsd_methodofpayment"))["vsd_methodofpayment"];
-                */
+                invoice.MethodOfPayment = customerResults.Contract.MethodOfPayment;
                 invoice.CpuInvoiceType = CpuInvoiceType.ScheduledPayment;
-                invoice.ProvinceStateId = new Guid("FDE4DBCA-989A-E811-8155-480FCFF4F6A1"); // BC
+                invoice.ProvinceStateId = provinceBc;
                 invoice.PaymentAdviceComments = string.Format("{0}, {1}-{2}-{3}", program.ContractName, invoiceDate.AddDays(3).Day.ToString(), invoiceDate.AddDays(3).Month.ToString(), invoiceDate.AddDays(3).Year.ToString());
+                //await invoiceHandler.Handle(invoice);
+
+                var invoiceLineDetail = new InvoiceLineDetail();
+                invoiceLineDetail.InvoiceId = invoice.Id;
+                invoiceLineDetail.OwnerId = program.OwnerId;
+                invoiceLineDetail.InvoiceType = InvoiceType.OtherPayments;
+                invoiceLineDetail.ProgramUnit = ProgramUnit.Cpu;
+                invoiceLineDetail.Approved = YesNo.Yes;
+                invoiceLineDetail.AmountSimple = scheduledPaymentAmount;
+                invoiceLineDetail.ProvinceStateId = provinceBc;
+                invoiceLineDetail.TaxExemption = invoice.TaxExemption;
+                //var invoiceLineDetailId = await invoiceLineDetailHander.Handle(invoiceLineDetail);
+
                 invoices.Add(invoice);
             }
 

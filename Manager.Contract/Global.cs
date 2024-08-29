@@ -24,6 +24,20 @@ public enum StatusCode
     Inactive = 1
 }
 
+public enum YesNo
+{
+    No = 100000000,
+    Yes = 100000001
+}
+
+public enum MethodOfPayment
+{
+    Cheque = 100000001,
+    CreditCard = 100000003,
+    Eft = 100000000,
+    WireTransfer = 100000002,
+}
+
 public enum CpuInvoiceType
 {
     Deprecated = 100000002,

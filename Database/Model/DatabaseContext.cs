@@ -30,6 +30,17 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.Account"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.Account> AccountSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.Account>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Database.Model.Contact"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Database.Model.Contact> ContactSet
@@ -70,6 +81,17 @@ namespace Database.Model
 			get
 			{
 				return this.CreateQuery<Database.Model.Vsd_Invoice>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.Vsd_InvoiceLineDetail"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.Vsd_InvoiceLineDetail> Vsd_InvoiceLineDetailSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.Vsd_InvoiceLineDetail>();
 			}
 		}
 		

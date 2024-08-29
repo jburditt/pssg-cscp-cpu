@@ -50,16 +50,7 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddTransient<TokenHandler>();
             services.AddTransient<KeycloakHandler>();
-            services.AddTransient<ContractHandlers>();
-            services.AddTransient<IContractRepository, ContractRepository>();
-            services.AddTransient<CurrencyHandlers>();
-            services.AddTransient<ICurrencyRepository, CurrencyRepository>();
-            services.AddTransient<ProgramHandlers>();
-            services.AddTransient<IProgramRepository, ProgramRepository>();
-            services.AddTransient<InvoiceHandlers>();
-            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
-            services.AddTransient<PaymentHandlers>();
-            services.AddTransient<IPaymentRepository, PaymentRepository>();
+            services.AddHandlers();
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();
@@ -96,17 +87,17 @@ namespace Gov.Cscp.Victims.Public
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddNewtonsoftJson(
-                    opts =>
-                    {
-                        opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                        opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-                        opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+                opts =>
+                {
+                    opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                    opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+                    opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
 
-                        // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-                        opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
+                    opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
-                        //opts.PayloadSerializerOptions.WriteIndented = true;
-                    });
+                    //opts.PayloadSerializerOptions.WriteIndented = true;
+                });
 
             // setup siteminder authentication (core 2.0)
             services
@@ -141,7 +132,10 @@ namespace Gov.Cscp.Victims.Public
             // add dynamics database adapter
             services.AddDatabase(Configuration);
 
-            var mapperTypes = new[] { typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(GlobalMapper) };
+            var mapperTypes = new[] { 
+                typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(GlobalMapper), typeof(ContractRepositoryMapper),
+                typeof(InvoiceRepositoryMapper)
+            };
             services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
 
             // allow for large files to be uploaded

@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cpu-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "..\Database\Database.csproj", "{87E33771-D364-4F9C-B53C-8EE821999A29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager", "..\Manager\Manager.csproj", "{C91708E1-BE8C-4F72-BB1C-C2B061E5A528}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager", "..\Manager\Manager.csproj", "{C91708E1-BE8C-4F72-BB1C-C2B061E5A528}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "..\Resources\Resources.csproj", "{FBAC89C8-85D3-4E46-AE52-ACBF25F3E22D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "..\Resources\Resources.csproj", "{FBAC89C8-85D3-4E46-AE52-ACBF25F3E22D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager.Contract", "..\Manager.Contract\Manager.Contract.csproj", "{DD482D36-A76A-4721-8C66-082B20E34F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Contract", "..\Manager.Contract\Manager.Contract.csproj", "{DD482D36-A76A-4721-8C66-082B20E34F85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
