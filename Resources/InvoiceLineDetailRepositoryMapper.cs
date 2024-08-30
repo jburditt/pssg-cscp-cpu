@@ -15,9 +15,7 @@ public class InvoiceLineDetailRepositoryMapper : Profile
         CreateMap<InvoiceLineDetail, Vsd_InvoiceLineDetail>()
             .ForMember(dest => dest.Vsd_LineItemApproved, opts => opts.MapFrom(src => src.Approved))
             .ForMember(dest => dest.Vsd_InvoiceId, opts => opts.MapFrom(src => src.InvoiceId != null ? new EntityReference("vsd_invoice", src.InvoiceId.Value) : null))
-            .ForMember(dest => dest.Vsd_InvoiceType, opts => opts.MapFrom(src => src.InvoiceType))
             .ForMember(dest => dest.OwnerId, opts => opts.MapFrom(src => src.OwnerId != null ? new EntityReference("systemuser", src.OwnerId.Value) : null))
-            .ForMember(dest => dest.Vsd_ProgramUnit, opts => opts.MapFrom(src => src.ProgramUnit))
             .ForMember(dest => dest.Vsd_ProvinceStateId, opts => opts.MapFrom(src => new EntityReference("vsd_province", src.ProvinceStateId)));
     }
 }
