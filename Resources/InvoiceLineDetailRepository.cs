@@ -4,21 +4,25 @@ using Manager.Contract;
 
 namespace Resources
 {
-    public class InvoiceLineDetailRepository(DatabaseContext databaseContext, IMapper mapper) : IInvoiceLineDetailRepository
+    public class InvoiceLineDetailRepository : BaseRepository, IInvoiceLineDetailRepository
     {
+        private readonly IMapper _mapper;
+
+        public InvoiceLineDetailRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
+        {
+            _mapper = mapper;
+        }
+
         public Guid Insert(InvoiceLineDetail invoiceLineDetail)
         {
-            var entity = mapper.Map<Vsd_InvoiceLineDetail>(invoiceLineDetail);
-            databaseContext.AddObject(entity);
-            databaseContext.SaveChanges();
-            return entity.Id;
+            var entity = _mapper.Map<Vsd_InvoiceLineDetail>(invoiceLineDetail);
+            return base.Insert(entity);
         }
+
         public bool Delete(Guid id)
         {
-            var entity = databaseContext.Vsd_InvoiceLineDetailSet.Single(x => x.Id == id);
-            databaseContext.DeleteObject(entity);
-            databaseContext.SaveChanges();
-            return true;
+            var entity = _databaseContext.Vsd_InvoiceLineDetailSet.Single(x => x.Id == id);
+            return base.Delete(entity);
         }
     }
 }

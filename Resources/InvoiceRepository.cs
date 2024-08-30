@@ -4,22 +4,24 @@ using Manager.Contract;
 
 namespace Resources;
 
-public class InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) : IInvoiceRepository
+public class InvoiceRepository : BaseRepository, IInvoiceRepository
 {
+    private readonly IMapper _mapper;
+
+    public InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
+    {
+        _mapper = mapper;
+    }
+
     public Guid Insert(Invoice invoice)
     {
-        var entity = mapper.Map<Vsd_Invoice>(invoice);
-        databaseContext.AddObject(entity);
-        databaseContext.SaveChanges();
-        return entity.Id;
+        var entity = _mapper.Map<Vsd_Invoice>(invoice);
+        return base.Insert(entity);
     }
 
     public InvoiceResult Query(InvoiceQuery invoiceQuery)
     {
-        var query = databaseContext.Vsd_InvoiceSet;
-            //from invoice in databaseContext.Vsd_InvoiceSet
-            //join program in databaseContext.Vsd_ProgramSet on invoice.Vsd_ProgramId.Id equals program.Vsd_ProgramId
-            //select new { Invoice = invoice, Program = program };
+        var query = _databaseContext.Vsd_InvoiceSet;
 
         if (invoiceQuery.ProgramId != null)
         {
@@ -38,7 +40,7 @@ public class InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) 
         }
 
         var queryResults = query.ToList();
-        var invoices = mapper.Map<IEnumerable<Invoice>>(queryResults);
+        var invoices = _mapper.Map<IEnumerable<Invoice>>(queryResults);
         return new InvoiceResult(invoices);
     }
 }

@@ -5,7 +5,7 @@ public record FindContractQuery : IRequest<FindContractResult>
     public Guid? Id { get; set; }
 }
 
-public record FindContractResult(Contract Contract);
+public record FindContractResult(Contract? Contract);
 
 public record ContractQuery : IRequest<ContractResult>
 {

@@ -8,28 +8,28 @@ public class ContractRepository(DatabaseContext databaseContext, IMapper mapper)
 {
     public FindContractResult FirstOrDefault(FindContractQuery contractQuery)
     {
-        var query = databaseContext.Vsd_ContractSet;
+        var queryResults = databaseContext.Vsd_ContractSet
+            .WhereIf(contractQuery.Id != null, x => x.Id == contractQuery.Id)
+            .FirstOrDefault();
 
-        if (contractQuery.Id != null)
+        if (queryResults == null)
         {
-            query = query.Where(p => p.Id == contractQuery.Id);
+            return new FindContractResult(null);
         }
-
-        var queryResults = query.FirstOrDefault();
 
         var contract = mapper.Map<Contract>(queryResults);
 
         // if there is a customer, check if the customer is a reference to an account or contact, and load the corresponding method of payment from the referenced entity
-        if (queryResults.Vsd_Customer != null)
+        if (queryResults?.Vsd_Customer != null)
         {
             var customerEntityReferenceName = queryResults.Vsd_Customer.LogicalName;
             if (customerEntityReferenceName == "account")
             {
-                contract.MethodOfPayment = (MethodOfPayment)databaseContext.AccountSet.First(p => p.Id == queryResults.Vsd_Customer.Id).Vsd_MethodOfPayment;
+                contract.MethodOfPayment = (MethodOfPayment?)databaseContext.AccountSet.FirstOrDefault(p => p.Id == queryResults.Vsd_Customer.Id)?.Vsd_MethodOfPayment;
             }
             else if (customerEntityReferenceName == "contact")
             {
-                contract.MethodOfPayment = (MethodOfPayment)databaseContext.ContactSet.First(p => p.Id == queryResults.Vsd_Customer.Id).Vsd_MethodOfPayment;
+                contract.MethodOfPayment = (MethodOfPayment?)databaseContext.ContactSet.FirstOrDefault(p => p.Id == queryResults.Vsd_Customer.Id)?.Vsd_MethodOfPayment;
             }
         }
 
@@ -45,7 +45,7 @@ public class ContractRepository(DatabaseContext databaseContext, IMapper mapper)
             query = query.Where(p => p.Id == contractQuery.Id);
         }
 
-        var queryResults = query.FirstOrDefault();
+        var queryResults = query.ToList();
         var contract = mapper.Map<IEnumerable<Contract>>(queryResults);
         return new ContractResult(contract);
     }
