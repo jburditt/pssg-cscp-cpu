@@ -77,7 +77,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoice.CpuInvoiceType = CpuInvoiceType.ScheduledPayment;
                 invoice.ProvinceStateId = provinceBc;
                 invoice.PaymentAdviceComments = string.Format("{0}, {1}-{2}-{3}", program.ContractName, invoiceDate.AddDays(3).Day.ToString(), invoiceDate.AddDays(3).Month.ToString(), invoiceDate.AddDays(3).Year.ToString());
-                //await invoiceHandler.Handle(invoice);
+                await invoiceHandler.Handle(invoice);
 
                 var invoiceLineDetail = new InvoiceLineDetail();
                 invoiceLineDetail.InvoiceId = invoice.Id;
@@ -88,7 +88,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoiceLineDetail.AmountSimple = scheduledPaymentAmount;
                 invoiceLineDetail.ProvinceStateId = provinceBc;
                 invoiceLineDetail.TaxExemption = invoice.TaxExemption;
-                //var invoiceLineDetailId = await invoiceLineDetailHander.Handle(invoiceLineDetail);
+                var invoiceLineDetailId = await invoiceLineDetailHander.Handle(invoiceLineDetail);
 
                 invoices.Add(invoice);
             }

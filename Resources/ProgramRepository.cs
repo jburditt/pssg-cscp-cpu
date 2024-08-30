@@ -25,7 +25,6 @@ public class ProgramRepository(DatabaseContext databaseContext, IMapper mapper) 
         where c.Vsd_Type != Vsd_ContractType.TuaCommunityAccountabilityPrograms
         select new { Program = p, Contract = c };
 
-        var test = query.ToList();
         var dynamicsPrograms = query.ToList().Select(pc => pc.Program);
         var programs = mapper.Map<IEnumerable<Program>>(dynamicsPrograms);
         return new ProgramResult(programs);

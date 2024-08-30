@@ -134,7 +134,7 @@ namespace Gov.Cscp.Victims.Public
 
             var mapperTypes = new[] { 
                 typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(GlobalMapper), typeof(ContractRepositoryMapper),
-                typeof(InvoiceRepositoryMapper)
+                typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
             };
             services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
 

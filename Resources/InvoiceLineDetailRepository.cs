@@ -13,5 +13,12 @@ namespace Resources
             databaseContext.SaveChanges();
             return entity.Id;
         }
+        public bool Delete(Guid id)
+        {
+            var entity = databaseContext.Vsd_InvoiceLineDetailSet.Single(x => x.Id == id);
+            databaseContext.DeleteObject(entity);
+            databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

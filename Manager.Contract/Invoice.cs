@@ -49,7 +49,7 @@ public record Invoice
     public Guid Id { get; set; }
     public Origin Origin { get; set; }
     public StateCode StateCode { get; set; }
-    public InvoiceStatusCode StatusCode { get; set; }
+    public InvoiceStatusCode StatusCode { get; set; } = InvoiceStatusCode.Draft;
     public DateTime InvoiceDate { get; set; }
     public Guid? ContractId { get; set; }
     public Guid? OwnerId { get; set; }
