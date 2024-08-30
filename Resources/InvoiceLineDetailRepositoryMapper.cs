@@ -9,12 +9,6 @@ public class InvoiceLineDetailRepositoryMapper : Profile
 {
     public InvoiceLineDetailRepositoryMapper()
     {
-        // TODO move this to a global mapper
-        CreateMap<Money, decimal>().ConvertUsing(src => src.Value);
-        CreateMap<EntityReference, Guid>().ConvertUsing(src => src.Id);
-        CreateMap<EntityReference, Guid?>().ConvertUsing(src => src.Id);
-
-        // TODO add automapper "try Vsd_" prefix when direct name does not exist mapping
 
         CreateMap<Vsd_InvoiceLineDetail, InvoiceLineDetail>()
             .ForMember(dest => dest.Approved, opts => opts.MapFrom(src => src.Vsd_LineItemApproved))

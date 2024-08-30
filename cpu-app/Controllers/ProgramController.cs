@@ -22,14 +22,17 @@ namespace Gov.Cscp.Victims.Public.Controllers
         {
             var provinceBc = new Guid("FDE4DBCA-989A-E811-8155-480FCFF4F6A1");
 
-            // use CurrencyQuery to query "all the currencies that match this one currency code...don't ask me..."
+            // use CurrencyQuery to query "all the currencies that match this one currency code"
+            // ok so regrettably I should have thought about what I was porting before porting it, this could probably be optimized e.g. just use the currency code directly?
             var currencyQuery = new FindCurrencyQuery();
+            currencyQuery.StateCode = StateCode.Active;
+            currencyQuery.IsoCurrencyCode = IsoCurrencyCode.CAD.ToString();
             var currencyResult = await currencyHandler.Handle(currencyQuery);
             
             var (quarter, invoiceDate) = GetInvoiceDate();
 
-            var emptyMessage = new ProgramResultEmptyMessage();
-            var programResult = await programHandlers.Handle(emptyMessage);
+            var dummy = new GetApprovedCommand();
+            var programResult = await programHandlers.Handle(dummy);
 
             var invoices = new List<Invoice>();
             foreach (var program in programResult.Programs) 
@@ -96,14 +99,15 @@ namespace Gov.Cscp.Victims.Public.Controllers
             return new JsonResult(invoices);
         }
 
-        // TODO see if this is the right place for this method
+        // NOTE based from GetInvoiceData method https://jag.gov.bc.ca/jira/secure/attachment/142853/QuarterlyProgramPaymentLogic.cs
+        // what happens with dates Oct 16 to Dec 31, should it trigger quarter 1 and use next year's quarter?
         private Tuple<short, DateTime> GetInvoiceDate()
         {
             var firstQuarterDate = new DateTime(DateTime.Today.Year, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January
             var secondQuarterDate = new DateTime(DateTime.Today.Year, 4, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th April
             var thirdQuarterDate = new DateTime(DateTime.Today.Year, 7, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th July
             var fourthQuarterDate = new DateTime(DateTime.Today.Year, 10, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th October
-            //var fifthQuarterDate = new DateTime(DateTime.Today.Year + 1, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January next year
+            var fifthQuarterDate = new DateTime(DateTime.Today.Year + 1, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January next year
 
             if (DateTime.Today > firstQuarterDate && DateTime.Today <= secondQuarterDate)
             {
@@ -123,8 +127,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
             }
             else
             {
-                throw new Exception("Invalid quarter number");
-                //return new Tuple<short, DateTime>(1, fifthQuarterDate.AddDays(-3));
+                //throw new Exception("Invalid quarter number");
+                return new Tuple<short, DateTime>(1, fifthQuarterDate.AddDays(-3));
             }
         }
     }

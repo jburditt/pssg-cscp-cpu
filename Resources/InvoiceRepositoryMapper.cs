@@ -9,9 +9,6 @@ public class InvoiceRepositoryMapper : Profile
 {
     public InvoiceRepositoryMapper()
     {
-        // TODO move this to global mapper
-        RecognizeDestinationPrefixes("Vsd_");
-
         CreateMap<Vsd_Invoice, Invoice>()
             .ForMember(dest => dest.ContractId, opts => opts.MapFrom(src => src.Vsd_ContractId.Id))
             .ForMember(dest => dest.CpuInvoiceType, opts => opts.MapFrom(src => src.Vsd_Cpu_InvoiceType))
@@ -28,8 +25,6 @@ public class InvoiceRepositoryMapper : Profile
             .ForMember(dest => dest.ProgramUnit, opts => opts.MapFrom(src => src.Vsd_ProgramUnit))
             .ForMember(dest => dest.ProvinceStateId, opts => opts.MapFrom(src => src.Vsd_ProvinceStateId.Id))
             .ForMember(dest => dest.TaxExemption, opts => opts.MapFrom(src => src.Vsd_TaxExemption));
-
-        RecognizePrefixes("Vsd_");
 
         CreateMap<Invoice, Vsd_Invoice>()
             .ForMember(dest => dest.Vsd_ContractId, opts => opts.MapFrom(src => src.ContractId != null ? new EntityReference("vsd_contract", src.ContractId.Value) : null))

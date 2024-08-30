@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Xrm.Sdk;
 
 namespace Database;
 
@@ -6,7 +7,15 @@ public class GlobalMapper : Profile
 {
     public GlobalMapper()
     {
-        CreateMap<Microsoft.Xrm.Sdk.Money, decimal>()
-            .ConvertUsing(x => x.Value);
+        RecognizeDestinationPrefixes("Vsd_");
+
+        RecognizePrefixes("Vsd_");
+
+        CreateMap<Money, decimal>()
+            .ConvertUsing(src => src.Value);
+        CreateMap<EntityReference, Guid>()
+            .ConvertUsing(src => src.Id);
+        CreateMap<EntityReference, Guid?>()
+            .ConvertUsing(src => src.Id);
     }
 }

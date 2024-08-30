@@ -6,20 +6,16 @@ namespace Manager;
 
 public class ProgramHandlers(IProgramRepository programRepository, IMapper mapper) : 
     IRequestHandler<ProgramQuery, ProgramResult>,
-    IRequestHandler<ProgramResultEmptyMessage, ProgramResult>
+    IRequestHandler<GetApprovedCommand, ProgramResult>
 {
-    // TODO remove default cancellation token
     public async Task<ProgramResult> Handle(ProgramQuery programQuery, CancellationToken cancellationToken = default)
     {
-        //var resourcesProgramQuery = mapper.Map<Resources.ProgramQuery>(programQuery);
-        var resourcesProgramQuery = new ProgramQuery() { StateCode = (StateCode)(int)(programQuery.StateCode ?? 0) };
-        var programResults = programRepository.Query(resourcesProgramQuery);
+        var programResults = programRepository.Query(programQuery);
         var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);
         return await Task.FromResult(new ProgramResult(programs));
     }
 
-    // TODO replace empty with GetApprovedCommand
-    public async Task<ProgramResult> Handle(ProgramResultEmptyMessage dummy, CancellationToken cancellationToken = default)
+    public async Task<ProgramResult> Handle(GetApprovedCommand dummy, CancellationToken cancellationToken = default)
     {
         var programResults = programRepository.GetApproved();
         var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);

@@ -36,4 +36,4 @@ public record Program
     public decimal Subtotal { get; set; }
 }
 
-public class ProgramResultEmptyMessage() : IRequest<ProgramResult>;
+public class GetApprovedCommand() : IRequest<ProgramResult>;

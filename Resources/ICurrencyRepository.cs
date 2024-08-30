@@ -3,5 +3,5 @@
 public interface ICurrencyRepository
 {
     FindCurrencyResult FirstOrDefault(FindCurrencyQuery currencyQuery);
-    CurrencyResult Query();
+    CurrencyResult Query(CurrencyQuery currencyQuery);
 }

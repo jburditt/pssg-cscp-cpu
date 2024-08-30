@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Manager.Contract;
+﻿using Manager.Contract;
 using Resources;
 
 namespace Manager;
@@ -16,7 +15,7 @@ public class CurrencyHandlers(ICurrencyRepository currencyRepository) :
 
     public async Task<CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
     {
-        var currencyResults = currencyRepository.Query();
+        var currencyResults = currencyRepository.Query(currencyQuery);
         return await Task.FromResult(new CurrencyResult(currencyResults.Currencies));
     }
 }
