@@ -133,7 +133,7 @@ namespace Gov.Cscp.Victims.Public
             services.AddDatabase(Configuration);
 
             // NOTE global mapper should be first, since it has the prefix configurations
-            var mapperTypes = new[] { 
+            var mapperTypes = new[] {
                 typeof(GlobalMapper), typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(ContractRepositoryMapper),
                 typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
             };
@@ -295,18 +295,18 @@ namespace Gov.Cscp.Victims.Public
                     .CreateLogger();
             }
 
-            //app.UseSpa(spa =>
-            //{
-            //    // To learn more about options for serving an Angular SPA from ASP.NET Core, see https://go.microsoft.com/fwlink/?linkid=864501
-            //    spa.Options.SourcePath = "ClientApp";
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core, see https://go.microsoft.com/fwlink/?linkid=864501
+                spa.Options.SourcePath = "ClientApp";
 
-            //    // Only run the angular CLI Server in Development mode (not staging or test.)
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseAngularCliServer(npmScript: "start");
-            //        spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
-            //    }
-            //});
+                // Only run the angular CLI Server in Development mode (not staging or test.)
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
+                }
+            });
         }
     }
 }
