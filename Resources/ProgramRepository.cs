@@ -24,9 +24,8 @@ public class ProgramRepository(DatabaseContext databaseContext, IMapper mapper) 
             where p.StatusCode != Vsd_Program_StatusCode.Draft && p.StatusCode != Vsd_Program_StatusCode.ApplicationInfoSent && p.StatusCode != Vsd_Program_StatusCode.ApplicationInfoReceived
             where c.StatusCode == Vsd_Contract_StatusCode.DulyExecuted
             where c.Vsd_Type != Vsd_ContractType.TuaCommunityAccountabilityPrograms
-            select new { Program = p, Contract = c })
-                .ToList()
-                .Select(pc => pc.Program);
+            select p)
+                .ToList();
         var programs = mapper.Map<IEnumerable<Program>>(queryResults);
         return new ProgramResult(programs);
     }
