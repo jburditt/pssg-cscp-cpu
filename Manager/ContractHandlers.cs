@@ -8,13 +8,13 @@ public class ContractHandlers(IContractRepository ContractRepository, IMapper ma
     IRequestHandler<ContractQuery, ContractResult>,
     IRequestHandler<FindContractQuery, FindContractResult>
 {
-    public async Task<FindContractResult> Handle(FindContractQuery ContractQuery, CancellationToken cancellationToken = default)
+    public async Task<FindContractResult> Handle(FindContractQuery ContractQuery, CancellationToken cancellationToken)
     {
         var contractResults = ContractRepository.FirstOrDefault(ContractQuery);
         return await Task.FromResult(new FindContractResult(contractResults.Contract));
     }
 
-    public async Task<ContractResult> Handle(ContractQuery ContractQuery, CancellationToken cancellationToken = default)
+    public async Task<ContractResult> Handle(ContractQuery ContractQuery, CancellationToken cancellationToken)
     {
         var contractResults = ContractRepository.Query(ContractQuery);
         return await Task.FromResult(new ContractResult(contractResults.Contracts));

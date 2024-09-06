@@ -30,6 +30,7 @@ using Microsoft.Extensions.Hosting;
 using Database;
 using Manager;
 using Resources;
+using Gov.Cscp.Victims.Public.Background;
 
 namespace Gov.Cscp.Victims.Public
 {
@@ -138,6 +139,8 @@ namespace Gov.Cscp.Victims.Public
                 typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
             };
             services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
+
+            services.AddBackgroundTask();
 
             // allow for large files to be uploaded
             services.Configure<FormOptions>(options =>

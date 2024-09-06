@@ -8,12 +8,12 @@ public class InvoiceLineDetailHandlers(IInvoiceLineDetailRepository invoiceLineD
     IRequestHandler<InvoiceLineDetail, Guid>,
     IRequestHandler<Guid, bool>
 {
-    public async Task<Guid> Handle(InvoiceLineDetail invoiceLineDetail, CancellationToken cancellationToken = default)
+    public async Task<Guid> Handle(InvoiceLineDetail invoiceLineDetail, CancellationToken cancellationToken)
     {
         return invoiceLineDetailRepository.Insert(invoiceLineDetail);
     }
 
-    public async Task<bool> Handle(Guid id, CancellationToken cancellationToken = default)
+    public async Task<bool> Handle(Guid id, CancellationToken cancellationToken)
     {
         return invoiceLineDetailRepository.Delete(id);
     }

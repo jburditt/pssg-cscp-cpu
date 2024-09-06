@@ -8,14 +8,14 @@ public class ProgramHandlers(IProgramRepository programRepository, IMapper mappe
     IRequestHandler<ProgramQuery, ProgramResult>,
     IRequestHandler<GetApprovedCommand, ProgramResult>
 {
-    public async Task<ProgramResult> Handle(ProgramQuery programQuery, CancellationToken cancellationToken = default)
+    public async Task<ProgramResult> Handle(ProgramQuery programQuery, CancellationToken cancellationToken)
     {
         var programResults = programRepository.Query(programQuery);
         var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);
         return await Task.FromResult(new ProgramResult(programs));
     }
 
-    public async Task<ProgramResult> Handle(GetApprovedCommand dummy, CancellationToken cancellationToken = default)
+    public async Task<ProgramResult> Handle(GetApprovedCommand dummy, CancellationToken cancellationToken)
     {
         var programResults = programRepository.GetApproved();
         var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);

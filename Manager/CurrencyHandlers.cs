@@ -7,13 +7,13 @@ public class CurrencyHandlers(ICurrencyRepository currencyRepository) :
     IRequestHandler<CurrencyQuery, CurrencyResult>,
     IRequestHandler<FindCurrencyQuery, FindCurrencyResult>
 {
-    public async Task<FindCurrencyResult> Handle(FindCurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
+    public async Task<FindCurrencyResult> Handle(FindCurrencyQuery currencyQuery, CancellationToken cancellationToken)
     {
         var currencyResults = currencyRepository.FirstOrDefault(currencyQuery);
         return await Task.FromResult(new FindCurrencyResult(currencyResults.Currency));
     }
 
-    public async Task<CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken = default)
+    public async Task<CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken)
     {
         var currencyResults = currencyRepository.Query(currencyQuery);
         return await Task.FromResult(new CurrencyResult(currencyResults.Currencies));
