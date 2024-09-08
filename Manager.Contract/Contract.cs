@@ -17,5 +17,6 @@ public record ContractResult(IEnumerable<Contract> Contracts);
 public record Contract
 {
     public Guid Id { get; set; }
+    public StateCode StateCode { get; set; }
     public MethodOfPayment? MethodOfPayment { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using Manager;
+﻿using Database;
+using Manager;
 using Microsoft.Extensions.DependencyInjection;
 using Resources;
 
@@ -20,6 +21,17 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IInvoiceLineDetailRepository, InvoiceLineDetailRepository>();
         services.AddTransient<PaymentHandlers>();
         services.AddTransient<IPaymentRepository, PaymentRepository>();
+        return services;
+    }
+
+    public static IServiceCollection AddAutoMapper(this IServiceCollection services)
+    {
+        // NOTE global mapper should be first, since it has the prefix configurations
+        var mapperTypes = new[] {
+                typeof(GlobalMapper), typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(ContractRepositoryMapper),
+                typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
+            };
+        services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
         return services;
     }
 }

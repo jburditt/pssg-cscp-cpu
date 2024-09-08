@@ -133,12 +133,7 @@ namespace Gov.Cscp.Victims.Public
             // add dynamics database adapter
             services.AddDatabase(Configuration);
 
-            // NOTE global mapper should be first, since it has the prefix configurations
-            var mapperTypes = new[] {
-                typeof(GlobalMapper), typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(ContractRepositoryMapper),
-                typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
-            };
-            services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
+            services.AddAutoMapper();
 
             services.AddBackgroundTask();
 
