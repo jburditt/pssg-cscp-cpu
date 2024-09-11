@@ -10,6 +10,7 @@ public class ProgramRepositoryMapper : Profile
     public ProgramRepositoryMapper()
     {
         CreateMap<Vsd_Program, Program>()
+            .ForMember(dest => dest.ContractId, opts => opts.MapFrom(src => src.Vsd_ContractId.Id))
             .ForMember(dest => dest.ContractName, opts => opts.MapFrom(src => src.Vsd_ContractIdName))
             .ForMember(dest => dest.CpuSubtotal, opts => opts.MapFrom(src => src.Vsd_Cpu_SubtotalComponentValue))
             .ForMember(dest => dest.BudgetProposalSignatureDate, opts => opts.MapFrom(src => src.Vsd_BudgetProposalSignaturedAte));
