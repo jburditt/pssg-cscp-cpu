@@ -17,6 +17,25 @@ public abstract class BaseRepository
         return entity.Id;
     }
 
+    public virtual Guid Upsert<T>(T entity) where T : Entity
+    {
+        var existingEntity = _databaseContext
+            .CreateQuery<T>()
+            .FirstOrDefault(x => x.Id == entity.Id);
+        if (existingEntity != null)
+        {
+            _databaseContext.Detach(existingEntity);
+            _databaseContext.Attach(entity);
+            _databaseContext.UpdateObject(entity);
+        }
+        else
+        {
+            _databaseContext.AddObject(entity);
+        }
+        _databaseContext.SaveChanges();
+        return entity.Id;
+    }
+
     public virtual bool Delete<T>(T entity) where T : Entity
     {
         _databaseContext.DeleteObject(entity);

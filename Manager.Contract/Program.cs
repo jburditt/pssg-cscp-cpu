@@ -18,6 +18,7 @@ public enum ProgramStatusCode
 
 public record ProgramQuery : IRequest<ProgramResult>
 {
+    public Guid? Id { get; set; }
     public StateCode? StateCode { get; set; }
     public ProgramStatusCode? StatusCode { get; set; }
 }
@@ -33,7 +34,9 @@ public record Program
     public Guid? ContractId { get; set; }
     public string ContractName { get; set; }
     public Guid? OwnerId { get; set; }
-    public decimal Subtotal { get; set; }
+    public decimal CpuSubtotal { get; set; }
+    public string ProvinceState { get; set; }
+    public DateTime? BudgetProposalSignatureDate { get; set; }
 }
 
 public class GetApprovedCommand() : IRequest<ProgramResult>;

@@ -69,7 +69,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 paymentQuery.ExcludeStatusCodes = new List<PaymentStatusCode> { PaymentStatusCode.Negative, PaymentStatusCode.Canceled };
                 var paymentResult = await paymentHandler.Handle(paymentQuery, token);
                 var paymentTotal = paymentResult.Payments.Sum(p => p.PaymentTotal);
-                var scheduledPaymentAmount = program.Subtotal - paymentTotal / (5 - quarter);
+                var scheduledPaymentAmount = program.CpuSubtotal - paymentTotal / (5 - quarter);
                 if (scheduledPaymentAmount == 0)
                 {
                     throw new Exception("Line item is zero.");
