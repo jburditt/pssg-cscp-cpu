@@ -35,7 +35,7 @@ public class AutoMapperValidation(IMapper mapper)
     [Fact]
     public void Program_Mapping()
     {
-        var obj = FakeProgramData.Programs[0];
+        var obj = FakeData.Programs[0];
         var entity = mapper.Map<Vsd_Program>(obj);
 
         Assert.Equal((int)obj.StateCode, (int)entity.StateCode);

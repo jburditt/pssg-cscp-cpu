@@ -1,4 +1,4 @@
-﻿public static class FakeData
+﻿public static partial class FakeData
 {
     public static List<Contract> Contracts = new List<Contract>
     {

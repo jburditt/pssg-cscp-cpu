@@ -5,7 +5,7 @@ public class ProgramRepositoryTests(IProgramRepository programRepository)
     public void Upsert()
     {
         // Arrange
-        var program = FakeProgramData.Programs[0];
+        var program = FakeData.Programs[0];
 
         // Act
         var id = programRepository.Upsert(program);
@@ -20,7 +20,7 @@ public class ProgramRepositoryTests(IProgramRepository programRepository)
     {
         // Arrange
         var programQuery = new ProgramQuery();
-        programQuery.Id = FakeProgramData.Programs[0].Id;
+        programQuery.Id = FakeData.Programs[0].Id;
 
         // Act
         var result = programRepository.Query(programQuery);
@@ -33,7 +33,7 @@ public class ProgramRepositoryTests(IProgramRepository programRepository)
     public void Delete()
     {
         // Arrange
-        var program = FakeProgramData.Programs[0];
+        var program = FakeData.Programs[0];
 
         // Act
         var result = programRepository.Delete(program.Id);
