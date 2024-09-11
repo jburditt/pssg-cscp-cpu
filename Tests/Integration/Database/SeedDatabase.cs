@@ -14,7 +14,7 @@
             } catch { /* glup */ }
         }
 
-        foreach (var program in FakeData.Programs)
+        foreach (var program in FakeProgramData.Programs)
         {
             try
             {
@@ -39,7 +39,7 @@
             catch { /* glup */ }
         }
 
-        foreach (var program in FakeData.Programs)
+        foreach (var program in FakeProgramData.Programs)
         {
             try
             {

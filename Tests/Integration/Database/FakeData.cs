@@ -11,22 +11,21 @@
             ContractType = ContractType.TuaVictimServicesVawp,
             ProgramId = new Guid("05dcfc76-77d1-471f-9b7a-a79332186fac"),
         },
-        new Contract
-    public static List<Manager.Contract.Program> Programs = new List<Manager.Contract.Program>
-        {
-        // GetApprovedProgram Programs must not have StatusCode.Draft, ApplicationInfoSent, or ApplicationInfoReceived
-        // Type cannot be TuaCommunityAccountabilityPrograms
-        new Manager.Contract.Program
-        {
-            Id = new Guid("05dcfc76-77d1-471f-9b7a-a79332186fac"),
-            StateCode = StateCode.Active,
-            StatusCode = ProgramStatusCode.Completed,
-            ContractId = Contracts[0].Id,
-            ContractName = "123456-23",
-            OwnerId = OwnerIds[0],
-            BudgetProposalSignatureDate = new DateTime(2021, 12, 1, 10, 34, 19),
-            ProvinceState = "British Columbia",
-        },
+        //new Contract
+        //{
+        //    Id = new Guid("a06832aa-bee1-eb11-b82a-00505683fbf4"),
+        //    StateCode = StateCode.Active,
+        //    StatusCode = ContractStatusCode.Draft,
+        //    MethodOfPayment = MethodOfPayment.Cheque
+        //},
+        //new Contract
+        //{
+        //    Id = new Guid("9f874f12-e81b-ec11-b82d-00505683fbf4"),
+        //    StateCode = StateCode.Active,
+        //    StatusCode = ContractStatusCode.DulyExecuted,
+        //    MethodOfPayment = MethodOfPayment.Cheque
+        //}
+    };
 
     public static List<InvoiceLineDetail> InvoiceLineDetails = new List<InvoiceLineDetail>
     {
