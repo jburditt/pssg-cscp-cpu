@@ -17,8 +17,6 @@ public class ProgramRepository : BaseRepository, IProgramRepository
     {
         var entity = _mapper.Map<Vsd_Program>(program);
         entity.Id = base.Upsert(entity);
-        _databaseContext.AddObject(entity);
-        _databaseContext.SaveChanges();
         return entity.Id;
     }
 

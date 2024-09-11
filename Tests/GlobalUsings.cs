@@ -5,4 +5,5 @@ global using Gov.Cscp.Victims.Public.ViewModels;
 global using Manager.Contract;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Newtonsoft.Json;
 global using Resources;

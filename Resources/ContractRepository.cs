@@ -17,6 +17,7 @@ public class ContractRepository : BaseRepository, IContractRepository
     {
         var entity = _mapper.Map<Vsd_Contract>(contract);
         return base.Insert(entity);
+    }
 
     public Guid Upsert(Contract contract)
     {

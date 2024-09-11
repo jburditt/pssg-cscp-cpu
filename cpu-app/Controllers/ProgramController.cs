@@ -29,12 +29,13 @@ namespace Gov.Cscp.Victims.Public.Controllers
         [HttpGet("Approved")]
         public async Task<IActionResult> GetApproved()
         {
-            await taskQueue.QueueBackgroundWorkItemAsync(GetApprovedWorkItem);
-            return new OkResult();
-        }
+            var token = _cancellationToken;
+            //await taskQueue.QueueBackgroundWorkItemAsync(GetApprovedWorkItem);
+            //return new OkResult();
+            //}
 
-        private async ValueTask GetApprovedWorkItem(CancellationToken token)
-        {
+            //private async ValueTask GetApprovedWorkItem(CancellationToken token)
+            //{
             var provinceBc = new Guid("FDE4DBCA-989A-E811-8155-480FCFF4F6A1");
 
             // use CurrencyQuery to query "all the currencies that match this one currency code"
@@ -49,7 +50,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             var dummy = new GetApprovedCommand();
             var programResult = await programHandlers.Handle(dummy, token);
 
-            var invoices = new List<Invoice>();
+            var invoices = new List<Tuple<Invoice, InvoiceLineDetail>>();
             foreach (var program in programResult.Programs) 
             {
                 var invoiceQuery = new InvoiceQuery();
@@ -98,6 +99,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 await invoiceHandler.Handle(invoice);
 
                 var invoiceLineDetail = new InvoiceLineDetail();
+                invoiceLineDetail.Id = Guid.NewGuid();
                 invoiceLineDetail.InvoiceId = invoice.Id;
                 invoiceLineDetail.OwnerId = program.OwnerId;
                 invoiceLineDetail.InvoiceType = InvoiceType.OtherPayments;
@@ -108,8 +110,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoiceLineDetail.TaxExemption = invoice.TaxExemption;
                 var invoiceLineDetailId = await invoiceLineDetailHander.Handle(invoiceLineDetail);
 
-                invoices.Add(invoice);
+                var tuple = new Tuple<Invoice, InvoiceLineDetail>(invoice, invoiceLineDetail);
+                invoices.Add(tuple);
             }
+
+            return new JsonResult(invoices);
         }
 
         // NOTE based from GetInvoiceData method https://jag.gov.bc.ca/jira/secure/attachment/142853/QuarterlyProgramPaymentLogic.cs

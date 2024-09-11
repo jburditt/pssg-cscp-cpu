@@ -1,32 +1,30 @@
-﻿using Newtonsoft.Json;
-
-public class ContractRepositoryTests(IContractRepository contractRepository)
+﻿public class ContractRepositoryTests(IContractRepository repository)
 {
-    //[Fact]
-    //public void Insert()
-    //{
-    //    // Arrange
-    //    var contract = FakeData.Contracts[0];
+    [Fact]
+    public void Insert()
+    {
+        // Arrange
+        var contract = FakeData.Contracts[0];
 
-    //    // Act
-    //    var id = contractRepository.Insert(contract);
+        // Act
+        var id = repository.Insert(contract);
 
-    //    // Assert
-    //    Assert.True(id != Guid.Empty);
-    //}
+        // Assert
+        Assert.True(id != Guid.Empty);
+    }
 
-    //[Fact]
-    //public void Upsert()
-    //{
-    //    // Arrange
-    //    var contract = FakeData.Contracts[0];
+    [Fact]
+    public void Upsert()
+    {
+        // Arrange
+        var contract = FakeData.Contracts[0];
 
-    //    // Act
-    //    var id = contractRepository.Upsert(contract);
+        // Act
+        var id = repository.Upsert(contract);
 
-    //    // Assert
-    //    Assert.True(id != Guid.Empty);
-    //}
+        // Assert
+        Assert.True(id != Guid.Empty);
+    }
 
     [Fact]
     public void Query()
@@ -35,7 +33,7 @@ public class ContractRepositoryTests(IContractRepository contractRepository)
         var command = new ContractQuery();
 
         // Act
-        var result = contractRepository.Query(command);
+        var result = repository.Query(command);
 
         var test = JsonConvert.SerializeObject(result);
         // Assert

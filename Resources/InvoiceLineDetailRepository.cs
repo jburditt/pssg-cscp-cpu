@@ -19,6 +19,15 @@ namespace Resources
             return base.Insert(entity);
         }
 
+        // TODO not completed and should return InvoiceLineDetailResult not IEnumerable
+        public IEnumerable<InvoiceLineDetail> Query(InvoiceLineDetailQuery query)
+        {
+            var queryResults = _databaseContext.Vsd_InvoiceLineDetailSet
+                .WhereIf(query.Id != null, x => x.Id == query.Id.Value)
+                .ToList();
+            return _mapper.Map<IEnumerable<InvoiceLineDetail>>(queryResults);
+        }
+
         public bool Delete(Guid id)
         {
             var entity = _databaseContext.Vsd_InvoiceLineDetailSet.Single(x => x.Id == id);
