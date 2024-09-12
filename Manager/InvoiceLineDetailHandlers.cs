@@ -10,11 +10,11 @@ public class InvoiceLineDetailHandlers(IInvoiceLineDetailRepository invoiceLineD
 {
     public async Task<Guid> Handle(InvoiceLineDetail invoiceLineDetail, CancellationToken cancellationToken)
     {
-        return invoiceLineDetailRepository.Insert(invoiceLineDetail);
+        return await Task.FromResult(invoiceLineDetailRepository.Insert(invoiceLineDetail));
     }
 
     public async Task<bool> Handle(Guid id, CancellationToken cancellationToken)
     {
-        return invoiceLineDetailRepository.Delete(id);
+        return await Task.FromResult(invoiceLineDetailRepository.Delete(id));
     }
 }

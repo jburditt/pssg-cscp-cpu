@@ -42,4 +42,18 @@ public abstract class BaseRepository
         _databaseContext.SaveChanges();
         return true;
     }
+
+    public virtual bool TryDelete<T>(T entity) where T : Entity
+    {
+        try
+        {
+            _databaseContext.DeleteObject(entity);
+            _databaseContext.SaveChanges();
+            return true;
+        }
+        catch 
+        { 
+            return false; 
+        }
+    }
 }

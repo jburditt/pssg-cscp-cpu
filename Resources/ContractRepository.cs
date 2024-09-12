@@ -57,18 +57,14 @@ public class ContractRepository : BaseRepository, IContractRepository
 
     public ContractResult Query(ContractQuery contractQuery)
     {
-        var query = _databaseContext.Vsd_ContractSet;
-
-        if (contractQuery.Id != null)
-        {
-            query = query.Where(p => p.Id == contractQuery.Id);
-        }
-
-        var queryResults = query.ToList();
+        var queryResults = _databaseContext.Vsd_ContractSet
+            .WhereIf(contractQuery.Id != null, p => p.Id == contractQuery.Id)
+            .ToList();
         var contract = _mapper.Map<IEnumerable<Contract>>(queryResults);
         return new ContractResult(contract);
     }
 
+    // Safe Delete, will not throw exception if entity does not exist, but comes at cost of performance
     public bool Delete(Guid id)
     {
         var entity = _databaseContext.Vsd_ContractSet.FirstOrDefault(x => x.Vsd_ContractId == id);

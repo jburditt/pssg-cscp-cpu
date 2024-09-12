@@ -30,7 +30,11 @@ namespace Resources
 
         public bool Delete(Guid id)
         {
-            var entity = _databaseContext.Vsd_InvoiceLineDetailSet.Single(x => x.Id == id);
+            var entity = _databaseContext.Vsd_InvoiceLineDetailSet.FirstOrDefault(x => x.Id == id);
+            if (entity == null)
+            {
+                return false;
+            }
             return base.Delete(entity);
         }
     }
