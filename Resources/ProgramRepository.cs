@@ -30,6 +30,7 @@ public class ProgramRepository : BaseRepository, IProgramRepository
         return new ProgramResult(programs);
     }
 
+    // safe delete, use try delete for faster deletes
     public bool Delete(Guid id)
     {
         var entity = _databaseContext.Vsd_ProgramSet.FirstOrDefault(x => x.Vsd_ProgramId == id);

@@ -50,7 +50,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             var dummy = new GetApprovedCommand();
             var programResult = await programHandlers.Handle(dummy, token);
 
-            var invoices = new List<Tuple<Invoice, InvoiceLineDetail>>();
+            var invoices = new List<(Invoice invoice, InvoiceLineDetail invoiceLineDetail)>();
             foreach (var program in programResult.Programs) 
             {
                 var invoiceQuery = new InvoiceQuery();
@@ -110,8 +110,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoiceLineDetail.TaxExemption = invoice.TaxExemption;
                 var invoiceLineDetailId = await invoiceLineDetailHander.Handle(invoiceLineDetail);
 
-                var tuple = new Tuple<Invoice, InvoiceLineDetail>(invoice, invoiceLineDetail);
-                invoices.Add(tuple);
+                invoices.Add((invoice, invoiceLineDetail));
             }
 
             return new JsonResult(invoices);

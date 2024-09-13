@@ -1,7 +1,9 @@
 public class InvoiceRepositoryTests(IInvoiceRepository repository)
 {
+    // WARNING!!! these are not reliable tests, they will fail, these were shortcuts I used for building a POC, these tests will need to be adjusted in order to be idempotent
+
     // NOTE verify your changes with https://cscp-vs.dev.jag.gov.bc.ca/api/data/v9.0/vsd_invoicelinedetails?$filter=vsd_invoicelinedetailid eq '00000000-e81b-ec11-b82d-00505683fbf4'
-    
+
     //[Fact]
     //public void Insert()
     //{

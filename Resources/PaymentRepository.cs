@@ -15,6 +15,7 @@ public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) 
         if (paymentQuery.ExcludeStatusCodes != null)
         {
             // TODO this could be a one liner, Linq Contains and BinarySearch do not translate from IQueryable to Dynamics SQL and I wasn't smart enough to figure out 'ExcludesIf'
+            // TODO try the DataverseExtensions WhereNotIn
             foreach (var excludeStatusCode in paymentQuery.ExcludeStatusCodes)
             {
                 query = query.Where(p => p.StatusCode != (Vsd_Payment_StatusCode)excludeStatusCode);
