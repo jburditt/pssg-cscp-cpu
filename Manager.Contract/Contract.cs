@@ -36,6 +36,9 @@ public record FindContractResult(Contract? Contract);
 public record ContractQuery : IRequest<ContractResult>
 {
     public Guid? Id { get; set; }
+    public StateCode? StateCode { get; set; }
+    public ContractStatusCode? StatusCode { get; set; }
+    public bool? CpuCloneFlag { get; set; }
 }
 
 public record ContractResult(IEnumerable<Contract> Contracts);
@@ -45,8 +48,11 @@ public record Contract
     public Guid Id { get; set; }
     public StateCode? StateCode { get; set; }
     public ContractStatusCode? StatusCode { get; set; }
+
     public MethodOfPayment? MethodOfPayment { get; set; }
     public ContractType? ContractType { get; set; }
+
     // References
     public Guid? ProgramId { get; set; }
+    public Guid? ClonedContractId { get; set; }
 }

@@ -58,10 +58,19 @@ public class ContractRepository : BaseRepository, IContractRepository
     public ContractResult Query(ContractQuery contractQuery)
     {
         var queryResults = _databaseContext.Vsd_ContractSet
-            .WhereIf(contractQuery.Id != null, p => p.Id == contractQuery.Id)
+            .WhereIf(contractQuery.Id != null, x => x.Id == contractQuery.Id)
+            .WhereIf(contractQuery.StateCode != null, x => x.StateCode == (Vsd_Contract_StateCode?)contractQuery.StateCode)
+            .WhereIf(contractQuery.StatusCode != null, x => x.StatusCode == (Vsd_Contract_StatusCode?)contractQuery.StatusCode)
+            .WhereIf(contractQuery.CpuCloneFlag != null, x => x.Vsd_CpuCloneFlag == contractQuery.CpuCloneFlag)
             .ToList();
         var contract = _mapper.Map<IEnumerable<Contract>>(queryResults);
         return new ContractResult(contract);
+    }
+
+    public bool IsCloned(Guid id)
+    {
+        var entity = _databaseContext.Vsd_ContractSet.FirstOrDefault(x => x.Vsd_ClonedContractId.Id == id);
+        return entity != null;
     }
 
     // Safe Delete, will not throw exception if entity does not exist, but comes at cost of performance

@@ -40,4 +40,30 @@
         // Assert
         Assert.True(result.Contracts.Count() > 0);
     }
+
+    [Fact]
+    public void Clone()
+    {
+        // Arrange
+        var command = new ContractQuery();
+        command.StateCode = StateCode.Active;
+        command.StatusCode = ContractStatusCode.DulyExecuted;
+        command.CpuCloneFlag = true;
+
+        // Act
+        var result = repository.Query(command);
+
+        foreach (var contract in result.Contracts)
+        {
+            if (!repository.IsCloned(contract.Id))
+            {
+                //OrganizationRequest req = new OrganizationRequest("vsd_CloneContract");
+                //req["Target"] = contractEntity.ToEntityReference();
+                //var resp = OrgService.Execute(req);
+            }
+        }
+
+        // Assert
+        Assert.True(result.Contracts.Count() > 0);
+    }
 }
