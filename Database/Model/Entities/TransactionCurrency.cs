@@ -94,6 +94,7 @@ namespace Database.Model
 			public const string TransactionCurrency_Vsd_InvoiceLineDetail = "TransactionCurrency_Vsd_InvoiceLineDetail";
 			public const string TransactionCurrency_Vsd_Payment = "TransactionCurrency_Vsd_Payment";
 			public const string TransactionCurrency_Vsd_Program = "TransactionCurrency_Vsd_Program";
+			public const string TransactionCurrency_Vsd_ScheduleG = "TransactionCurrency_Vsd_ScheduleG";
 			public const string TransactionCurrencyId = "transactioncurrencyid";
 			public const string Id = "transactioncurrencyid";
 			public const string VersionNumber = "versionnumber";
@@ -799,6 +800,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Program>("TransactionCurrency_vsd_program", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N TransactionCurrency_vsd_scheduleg
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("TransactionCurrency_vsd_scheduleg")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_ScheduleG> TransactionCurrency_Vsd_ScheduleG
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_ScheduleG>("TransactionCurrency_vsd_scheduleg", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_ScheduleG>("TransactionCurrency_vsd_scheduleg", null, value);
 			}
 		}
 		

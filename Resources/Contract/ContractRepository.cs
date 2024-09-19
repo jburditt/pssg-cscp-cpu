@@ -59,6 +59,10 @@ public class ContractRepository : BaseRepository, IContractRepository
             .WhereIf(contractQuery.Id != null, x => x.Id == contractQuery.Id)
             .WhereIf(contractQuery.StateCode != null, x => x.StateCode == (Vsd_Contract_StateCode?)contractQuery.StateCode)
             .WhereIf(contractQuery.StatusCode != null, x => x.StatusCode == (Vsd_Contract_StatusCode?)contractQuery.StatusCode)
+            .WhereIf(contractQuery.NotNullCustomer != null, x => x.Vsd_Customer != null)
+            .WhereIf(contractQuery.NotNullFiscalStartDate != null, x => x.Vsd_FiscalStartDate != null)
+            .WhereIf(contractQuery.NotNullFiscalEndDate != null, x => x.Vsd_FiscalEndDate != null)
+            .WhereIf(contractQuery.NotEqualType != null, x => x.Vsd_Type != (Vsd_ContractType?)contractQuery.NotEqualType)
             .WhereIf(contractQuery.CpuCloneFlag != null, x => x.Vsd_CpuCloneFlag == contractQuery.CpuCloneFlag)
             .ToList();
         var contract = _mapper.Map<IEnumerable<Contract>>(queryResults);

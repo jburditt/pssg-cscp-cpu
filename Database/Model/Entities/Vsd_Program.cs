@@ -376,6 +376,7 @@ namespace Database.Model
 			public const string Vsd_Vsd_Program_Contact = "vsd_vsd_program_contact";
 			public const string Vsd_Vsd_Program_Vsd_Invoice = "Vsd_Vsd_Program_Vsd_Invoice";
 			public const string Vsd_Vsd_Program_Vsd_Payment = "Vsd_Vsd_Program_Vsd_Payment";
+			public const string Vsd_Vsd_Program_Vsd_ScheduleG_Program = "Vsd_Vsd_Program_Vsd_ScheduleG_Program";
 		}
 		
 		[System.Diagnostics.DebuggerNonUserCode()]
@@ -3385,6 +3386,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Payment>("vsd_vsd_program_vsd_payment", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_vsd_program_vsd_scheduleg_Program
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_program_vsd_scheduleg_Program")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_ScheduleG> Vsd_Vsd_Program_Vsd_ScheduleG_Program
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_ScheduleG>("vsd_vsd_program_vsd_scheduleg_Program", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_ScheduleG>("vsd_vsd_program_vsd_scheduleg_Program", null, value);
 			}
 		}
 		

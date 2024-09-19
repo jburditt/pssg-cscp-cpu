@@ -21,6 +21,9 @@ public record ProgramQuery : IRequest<ProgramResult>
     public Guid? Id { get; set; }
     public StateCode? StateCode { get; set; }
     public ProgramStatusCode? StatusCode { get; set; }
+
+    // References
+    public Guid? ContractId { get; set; }
 }
 
 public record ProgramResult(IEnumerable<Program> Programs);

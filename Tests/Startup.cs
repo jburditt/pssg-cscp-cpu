@@ -22,6 +22,7 @@
         services.AddTransient<IPaymentRepository, PaymentRepository>();
         services.AddTransient<IProgramRepository, ProgramRepository>();
         services.AddTransient<ICurrencyRepository, CurrencyRepository>();
+        services.AddTransient<IScheduleGRepository, ScheduleGRepository>();
 
         // add dynamics database adapter
         services.AddDatabase(configuration);

@@ -116,6 +116,17 @@ namespace Database.Model
 				return this.CreateQuery<Database.Model.Vsd_Program>();
 			}
 		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.Vsd_ScheduleG"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.Vsd_ScheduleG> Vsd_ScheduleGSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.Vsd_ScheduleG>();
+			}
+		}
 	}
 	
 	/// <summary>

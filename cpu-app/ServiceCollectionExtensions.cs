@@ -28,9 +28,9 @@ public static class ServiceCollectionExtensions
     {
         // NOTE global mapper should be first, since it has the prefix configurations
         var mapperTypes = new[] {
-                typeof(GlobalMapper), typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(ContractRepositoryMapper),
-                typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper)
-            };
+            typeof(GlobalMapper), typeof(CurrencyRepositoryMapper), typeof(PaymentRepositoryMapper), typeof(ProgramRepositoryMapper), typeof(ContractRepositoryMapper),
+            typeof(InvoiceRepositoryMapper), typeof(InvoiceLineDetailRepositoryMapper), typeof(ScheduleGRepositoryMapper)
+        };
         services.AddAutoMapper(cfg => cfg.ShouldUseConstructor = constructor => constructor.IsPublic, mapperTypes);
         return services;
     }

@@ -39,7 +39,8 @@ vsd_contract|
 vsd_invoice|
 vsd_invoicelinedetail|
 vsd_payment|
-vsd_program</EntitiesWhitelist>
+vsd_program|
+vsd_scheduleg</EntitiesWhitelist>
     <EntityAttributeSpecifiedNames />
     <EntityClassNameOverrides />
     <EntityPrefixesToSkip />
@@ -130,7 +131,7 @@ VoiceMail</TokenCapitalizationOverrides>
   <Namespace>Database.Model</Namespace>
   <ServiceContextName>DatabaseContext</ServiceContextName>
   <SuppressGeneratedCodeAttribute>true</SuppressGeneratedCodeAttribute>
-  <SettingsVersion>2.2024.5.16</SettingsVersion>
+  <SettingsVersion>2.2024.9.11</SettingsVersion>
   <UpdateBuilderSettingsJson>true</UpdateBuilderSettingsJson>
   <Version>2.2024.9.11</Version>
 </Config>

@@ -39,10 +39,15 @@ public record ContractQuery : IRequest<ContractResult>
     public StateCode? StateCode { get; set; }
     public ContractStatusCode? StatusCode { get; set; }
     public bool? CpuCloneFlag { get; set; }
+    public bool? NotNullCustomer { get; set; }
+    public bool? NotNullFiscalStartDate { get; set; }
+    public bool? NotNullFiscalEndDate { get; set; }
+    public ContractType? NotEqualType { get; set; }
 }
 
 public record ContractResult(IEnumerable<Contract> Contracts);
 
+// TODO could put Id, StateCode, and even StatusCode in an interface
 public record Contract
 {
     public Guid Id { get; set; }

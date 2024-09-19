@@ -1051,6 +1051,7 @@ namespace Database.Model
 			public const string Vsd_Contact_Vsd_Program_ContactLookup = "Vsd_Contact_Vsd_Program_ContactLookup";
 			public const string Vsd_Contact_Vsd_Program_ContactLookup2 = "Vsd_Contact_Vsd_Program_ContactLookup2";
 			public const string Vsd_Contact_Vsd_Program_ContactLookup3 = "Vsd_Contact_Vsd_Program_ContactLookup3";
+			public const string Vsd_Contact_Vsd_ScheduleG_Contact = "Vsd_Contact_Vsd_ScheduleG_Contact";
 			public const string Vsd_ContactRole = "vsd_contactrole";
 			public const string Vsd_ContactRoleName = "vsd_contactrolename";
 			public const string Vsd_CounsellingStatusReason = "vsd_counsellingstatusreason";
@@ -8991,6 +8992,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Vsd_Program>("vsd_contact_vsd_program_ContactLookup3", null, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_contact_vsd_scheduleg_Contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contact_vsd_scheduleg_Contact")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Vsd_ScheduleG> Vsd_Contact_Vsd_ScheduleG_Contact
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Vsd_ScheduleG>("vsd_contact_vsd_scheduleg_Contact", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Vsd_ScheduleG>("vsd_contact_vsd_scheduleg_Contact", null, value);
 			}
 		}
 		

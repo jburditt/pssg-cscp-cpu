@@ -105,7 +105,8 @@
     "vsd_invoice",
     "vsd_invoicelinedetail",
     "vsd_payment",
-    "vsd_program"
+    "vsd_program",
+    "vsd_scheduleg"
   ],
   "entityTypesFolder": "Entities",
   "generateActions": true,
