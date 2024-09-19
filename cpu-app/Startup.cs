@@ -28,8 +28,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using Database;
-using Manager;
-using Resources;
 using Gov.Cscp.Victims.Public.Background;
 
 namespace Gov.Cscp.Victims.Public

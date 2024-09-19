@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using Database.Model;
-using Manager.Contract;
-
-namespace Resources;
+﻿namespace Resources;
 
 public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) : IPaymentRepository
 {
@@ -11,6 +7,7 @@ public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) 
         var query = databaseContext.Vsd_PaymentSet
             .WhereIf(paymentQuery.ProgramId != null, p => p.Vsd_ProgramId.Id == paymentQuery.ProgramId)
             .WhereIf(paymentQuery.ContractId != null, p => p.Vsd_ContractId.Id == paymentQuery.ContractId);
+            //.ExcludesIf(paymentQuery.ExcludeStatusCodes != null, p => p.StatusCode, paymentQuery.ExcludeStatusCodes);
 
         if (paymentQuery.ExcludeStatusCodes != null)
         {

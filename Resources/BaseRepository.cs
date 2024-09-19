@@ -1,5 +1,4 @@
-using Database.Model;
-using Microsoft.Xrm.Sdk;
+namespace Resources;
 
 public abstract class BaseRepository
 {

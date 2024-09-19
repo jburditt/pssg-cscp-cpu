@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Manager.Contract;
-
-namespace Resources;
+﻿namespace Resources;
 
 public class PaymentRepositoryMapper : Profile
 {

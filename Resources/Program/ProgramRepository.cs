@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using Database.Model;
-using Manager.Contract;
-
-namespace Resources;
+﻿namespace Resources;
 
 public class ProgramRepository : BaseRepository, IProgramRepository
 {

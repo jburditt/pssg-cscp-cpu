@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Database;
-using Resources;
 
 public class AutoMapperValidation(IMapper mapper)
 {

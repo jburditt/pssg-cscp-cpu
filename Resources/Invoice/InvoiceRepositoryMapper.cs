@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using Database.Model;
-using Manager.Contract;
-using Microsoft.Xrm.Sdk;
-
-namespace Resources;
+﻿namespace Resources;
 
 public class InvoiceRepositoryMapper : Profile
 {

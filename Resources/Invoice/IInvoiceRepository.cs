@@ -1,6 +1,4 @@
-﻿using Manager.Contract;
-
-namespace Resources;
+﻿namespace Resources;
 
 public interface IInvoiceRepository
 {
