@@ -14,7 +14,7 @@ public class ScheduleGRepositoryMapper : Profile
 
         CreateMap<ScheduleG, Vsd_ScheduleG>()
             .ForMember(dest => dest.Vsd_Cpu_ReportingPeriod, opts => opts.MapFrom(src => src.Quarter))
-            .ForMember(dest => dest.Vsd_ServiceProvider, opts => opts.MapFrom(src => src.ServiceProviderId != null ? new EntityReference("vsd_customer", src.ServiceProviderId.Value) : null))
+            .ForMember(dest => dest.Vsd_ServiceProvider, opts => opts.MapFrom(src => src.ServiceProviderId != null ? new EntityReference(Account.EntityLogicalName, src.ServiceProviderId.Value) : null))
             .ForMember(dest => dest.Vsd_Program, opts => opts.MapFrom(src => src.ProgramId != null ? new EntityReference(Vsd_Program.EntityLogicalName, src.ProgramId.Value) : null))
             .ForMember(dest => dest.Vsd_Contract, opts => opts.MapFrom(src => src.ContractId != null ? new EntityReference(Vsd_Contract.EntityLogicalName, src.ContractId.Value) : null));
     }
