@@ -111,7 +111,7 @@
   "generateActions": true,
   "generateGlobalOptionSets": false,
   "messageNamesFilter": [
-    "analyze*",
+    "vsd_clonecontract*",
     "bcgov_*",
     "cpu_*"
   ],

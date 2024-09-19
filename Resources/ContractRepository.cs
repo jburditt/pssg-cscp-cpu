@@ -13,6 +13,8 @@ public class ContractRepository : BaseRepository, IContractRepository
         _mapper = mapper;
     }
 
+    #region CRUD
+
     public Guid Insert(Contract contract)
     {
         var entity = _mapper.Map<Vsd_Contract>(contract);
@@ -67,12 +69,6 @@ public class ContractRepository : BaseRepository, IContractRepository
         return new ContractResult(contract);
     }
 
-    public bool IsCloned(Guid id)
-    {
-        var entity = _databaseContext.Vsd_ContractSet.FirstOrDefault(x => x.Vsd_ClonedContractId.Id == id);
-        return entity != null;
-    }
-
     // Safe Delete, will not throw exception if entity does not exist, but comes at cost of performance
     public bool Delete(Guid id)
     {
@@ -82,5 +78,29 @@ public class ContractRepository : BaseRepository, IContractRepository
             return false;
         }
         return base.Delete(entity);
+    }
+
+    #endregion CRUD
+
+    public bool IsCloned(Guid id)
+    {
+        var entity = _databaseContext.Vsd_ContractSet.FirstOrDefault(x => x.Vsd_ClonedContractId.Id == id);
+        return entity != null;
+    }
+
+    public Guid? Clone(Contract contract)
+    {
+        var entity = _mapper.Map<Vsd_Contract>(contract);
+        var request = new Vsd_CloneContractRequest();
+        request.Target = entity.ToEntityReference();
+        var response = (Vsd_CloneContractResponse)_databaseContext.Execute(request);
+        if (response.IsSuccess)
+        {
+            return new Guid(response.Result);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

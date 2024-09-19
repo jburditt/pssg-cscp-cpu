@@ -13,4 +13,5 @@ public interface IContractRepository
 
     // Custom queries
     bool IsCloned(Guid id);
+    Guid? Clone(Contract contract);
 }

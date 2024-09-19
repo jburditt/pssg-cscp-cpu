@@ -42,6 +42,19 @@
     }
 
     [Fact]
+    public void Delete()
+    {
+        // Arrange
+        var id = new Guid("");
+
+        // Act
+        var result = repository.Delete(id);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
     public void Clone()
     {
         // Arrange
@@ -52,18 +65,16 @@
 
         // Act
         var result = repository.Query(command);
-
+        Guid? id = null;
         foreach (var contract in result.Contracts)
         {
             if (!repository.IsCloned(contract.Id))
             {
-                //OrganizationRequest req = new OrganizationRequest("vsd_CloneContract");
-                //req["Target"] = contractEntity.ToEntityReference();
-                //var resp = OrgService.Execute(req);
+                id = repository.Clone(contract);
             }
         }
 
         // Assert
-        Assert.True(result.Contracts.Count() > 0);
+        Assert.NotNull(id);
     }
 }
