@@ -36,7 +36,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
 
             //private async ValueTask GetApprovedWorkItem(CancellationToken token)
             //{
-            var provinceBc = new Guid("FDE4DBCA-989A-E811-8155-480FCFF4F6A1");
+            var provinceBc = Constant.ProvinceBc;
 
             // use CurrencyQuery to query "all the currencies that match this one currency code"
             // ok so regrettably I should have thought about what I was porting before porting it, this could probably be optimized e.g. just use the currency code directly?
@@ -113,7 +113,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 invoices.Add((invoice, invoiceLineDetail));
             }
 
-            return new JsonResult(invoices);
+            return Json(invoices);
         }
 
         // NOTE based from GetInvoiceData method https://jag.gov.bc.ca/jira/secure/attachment/142853/QuarterlyProgramPaymentLogic.cs

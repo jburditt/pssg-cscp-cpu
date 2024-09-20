@@ -23,10 +23,13 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<InvoiceLineDetailHandlers>();
         services.AddTransient<IInvoiceLineDetailRepository, InvoiceLineDetailRepository>();
+
         services.AddTransient<PaymentHandlers>();
         services.AddTransient<IPaymentRepository, PaymentRepository>();
 
+        services.AddTransient<ScheduleGHandlers>();
         services.AddTransient<IScheduleGRepository, ScheduleGRepository>();
+
         services.AddTransient<ITaskRepository, TaskRepository>();
 
         return services;
