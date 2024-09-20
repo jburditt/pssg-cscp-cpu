@@ -17,7 +17,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
     [Authorize]
     public class ScheduleGController(
         IBackgroundTaskQueue taskQueue, IHostApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory,
-        ProgramHandlers programHandlers, ContractHandlers contractHandlers, ScheduleGHandlers scheduleGHandlers
+        ProgramHandlers programHandlers, ContractHandlers contractHandlers, ScheduleGHandlers scheduleGHandlers, TaskHandlers taskHandlers
     ) : Controller
     {
         private readonly CancellationToken _cancellationToken = applicationLifetime.ApplicationStopping;
@@ -55,27 +55,27 @@ namespace Gov.Cscp.Victims.Public.Controllers
                     var scheduleGCount = (await scheduleGHandlers.Handle(scheduleGQuery, _cancellationToken))?.ScheduleGs.Count();
                     _logger.LogInformation("Found {0} schedule g's", scheduleGCount);
 
-                    //if (scheduleGCount == 0)
-                    //{
-                    //    _logger.LogInformation(string.Format("Creating a new Schedule G for reporting period {0} and program '{1}'..", quarter, program.Id));
-                    //    var scheduleG = new ScheduleG();
-                    //    scheduleG.ServiceProviderId = contract.CustomerId;
-                    //    scheduleG.ProgramId = program.Id;
-                    //    scheduleG.ContractId = contract.Id;
-                    //    scheduleG.Quarter = quarterPeriod;
-                    //    scheduleG.Id = scheduleGRepository.Insert(scheduleG);
+                    if (scheduleGCount == 0)
+                    {
+                        _logger.LogInformation(string.Format("Creating a new Schedule G for reporting period {0} and program '{1}'..", quarter, program.Id));
+                        var scheduleG = new ScheduleG();
+                        scheduleG.ServiceProviderId = contract.CustomerId;
+                        scheduleG.ProgramId = program.Id;
+                        scheduleG.ContractId = contract.Id;
+                        scheduleG.Quarter = quarterPeriod;
+                        scheduleG.Id = await scheduleGHandlers.Handle(scheduleG, _cancellationToken);
 
-                    //    _logger.LogInformation(string.Format("Creating a new Task to Schedule G '{0}'..", scheduleG.Id));
-                    //    var task = new Manager.Contract.Task();
-                    //    task.Subject = string.Format("Schedule G - {0} - {1} Q{2}", program.Name, DateTime.Today.Year, quarter);
-                    //    task.TaskTypeId = Constant.QuarterlyScheduleG;
-                    //    task.ScheduledEnd = DateTime.Today.AddMonths(1);
-                    //    task.RegardingObjectId = contract.Id;
-                    //    task.ProgramId = program.Id;
-                    //    task.ScheduleGId = scheduleG.Id;
-                    //    task.Id = taskRepository.Insert(task);
-                    //    _logger.LogInformation(string.Format("New task created with id '{0}'..", task.Id));
-                    //}
+                        _logger.LogInformation(string.Format("Creating a new Task to Schedule G '{0}'..", scheduleG.Id));
+                        var task = new Manager.Contract.Task();
+                        task.Subject = string.Format("Schedule G - {0} - {1} Q{2}", program.Name, DateTime.Today.Year, quarter);
+                        task.TaskTypeId = Constant.QuarterlyScheduleG;
+                        task.ScheduledEnd = DateTime.Today.AddMonths(1);
+                        task.RegardingObjectId = contract.Id;
+                        task.ProgramId = program.Id;
+                        task.ScheduleGId = scheduleG.Id;
+                        task.Id = await taskHandlers.Handle(task, _cancellationToken);
+                        _logger.LogInformation(string.Format("New task created with id '{0}'..", task.Id));
+                    }
                 }
             }
 

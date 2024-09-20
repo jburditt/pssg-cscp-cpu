@@ -30,6 +30,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ScheduleGHandlers>();
         services.AddTransient<IScheduleGRepository, ScheduleGRepository>();
 
+        services.AddTransient<TaskHandlers>();
         services.AddTransient<ITaskRepository, TaskRepository>();
 
         return services;
