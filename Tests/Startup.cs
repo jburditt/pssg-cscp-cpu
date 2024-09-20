@@ -16,15 +16,6 @@
 
         services.AddHandlers();
 
-        services.AddTransient<IInvoiceLineDetailRepository, InvoiceLineDetailRepository>();
-        services.AddTransient<IContractRepository, ContractRepository>();
-        services.AddTransient<IInvoiceRepository, InvoiceRepository>();
-        services.AddTransient<IPaymentRepository, PaymentRepository>();
-        services.AddTransient<IProgramRepository, ProgramRepository>();
-        services.AddTransient<ICurrencyRepository, CurrencyRepository>();
-        services.AddTransient<IScheduleGRepository, ScheduleGRepository>();
-        services.AddTransient<ITaskRepository, TaskRepository>();
-
         // add dynamics database adapter
         services.AddDatabase(configuration);
         services.AddTransient<SeedDatabase>();

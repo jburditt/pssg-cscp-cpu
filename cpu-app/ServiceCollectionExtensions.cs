@@ -11,16 +11,24 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<ContractHandlers>();
         services.AddTransient<IContractRepository, ContractRepository>();
+
         services.AddTransient<CurrencyHandlers>();
         services.AddTransient<ICurrencyRepository, CurrencyRepository>();
+
         services.AddTransient<ProgramHandlers>();
         services.AddTransient<IProgramRepository, ProgramRepository>();
+
         services.AddTransient<InvoiceHandlers>();
         services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+
         services.AddTransient<InvoiceLineDetailHandlers>();
         services.AddTransient<IInvoiceLineDetailRepository, InvoiceLineDetailRepository>();
         services.AddTransient<PaymentHandlers>();
         services.AddTransient<IPaymentRepository, PaymentRepository>();
+
+        services.AddTransient<IScheduleGRepository, ScheduleGRepository>();
+        services.AddTransient<ITaskRepository, TaskRepository>();
+
         return services;
     }
 
