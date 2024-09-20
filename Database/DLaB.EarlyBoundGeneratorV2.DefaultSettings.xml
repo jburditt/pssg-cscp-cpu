@@ -34,6 +34,7 @@ vsu</CamelCaseCustomWords>
     <EntitiesToSkip />
     <EntitiesWhitelist>account|
 contact|
+task|
 transactioncurrency|
 vsd_contract|
 vsd_invoice|

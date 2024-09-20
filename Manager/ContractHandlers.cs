@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using Manager.Contract;
-using Resources;
-
-namespace Manager;
+﻿namespace Manager;
 
 public class ContractHandlers(IContractRepository ContractRepository, IMapper mapper) : 
     IRequestHandler<ContractQuery, ContractResult>,

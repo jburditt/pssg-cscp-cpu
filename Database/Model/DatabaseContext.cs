@@ -52,6 +52,17 @@ namespace Database.Model
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Database.Model.Task"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Database.Model.Task> TaskSet
+		{
+			get
+			{
+				return this.CreateQuery<Database.Model.Task>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Database.Model.TransactionCurrency"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Database.Model.TransactionCurrency> TransactionCurrencySet

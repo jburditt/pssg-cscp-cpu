@@ -449,6 +449,7 @@ namespace Database.Model
 			public const string Vsd_User3Name = "vsd_user3name";
 			public const string Vsd_User3YomiName = "vsd_user3yominame";
 			public const string Vsd_Vsd_Contract_Vsd_Invoice = "vsd_vsd_contract_vsd_invoice";
+			public const string Vsd_Vsd_Invoice_Task_Invoice = "Vsd_Vsd_Invoice_Task_Invoice";
 			public const string Vsd_Vsd_Invoice_Vsd_InvoiceLineDetail = "Vsd_Vsd_Invoice_Vsd_InvoiceLineDetail";
 			public const string Vsd_Vsd_Invoice_Vsd_Payment = "Vsd_Vsd_Invoice_Vsd_Payment";
 			public const string Vsd_Vsd_Payment_Vsd_Invoice = "vsd_vsd_payment_vsd_invoice";
@@ -3310,6 +3311,24 @@ namespace Database.Model
 			set
 			{
 				this.SetAttributeValue("vsd_wiretransferlocation", value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_vsd_invoice_task_Invoice
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_vsd_invoice_task_Invoice")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Task> Vsd_Vsd_Invoice_Task_Invoice
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Task>("vsd_vsd_invoice_task_Invoice", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Task>("vsd_vsd_invoice_task_Invoice", null, value);
 			}
 		}
 		

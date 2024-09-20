@@ -215,6 +215,7 @@ namespace Database.Model
 			public const string Vsd_ContactLookup2 = "vsd_contactlookup2";
 			public const string Vsd_ContactLookup2Name = "vsd_contactlookup2name";
 			public const string Vsd_ContactLookup2YomiName = "vsd_contactlookup2yominame";
+			public const string Vsd_Contract_Tasks = "Vsd_Contract_Tasks";
 			public const string Vsd_ContractAgreementDate = "vsd_contractagreementdate";
 			public const string Vsd_ContractId = "vsd_contractid";
 			public const string Id = "vsd_contractid";
@@ -2906,6 +2907,24 @@ namespace Database.Model
 				{
 					return default(string);
 				}
+			}
+		}
+		
+		/// <summary>
+		/// 1:N vsd_contract_Tasks
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("vsd_contract_Tasks")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Task> Vsd_Contract_Tasks
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Task>("vsd_contract_Tasks", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Task>("vsd_contract_Tasks", null, value);
 			}
 		}
 		

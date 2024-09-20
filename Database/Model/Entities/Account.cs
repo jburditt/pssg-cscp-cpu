@@ -679,6 +679,7 @@ namespace Database.Model
 			public const string ReferencingAccount_Master_Account = "account_master_account";
 			public const string ReferencingAccount_Parent_Account = "account_parent_account";
 			public const string Account_Primary_Contact = "account_primary_contact";
+			public const string Account_Tasks = "Account_Tasks";
 			public const string AccountCategoryCode = "accountcategorycode";
 			public const string AccountCategoryCodename = "accountcategorycodename";
 			public const string AccountClassificationCode = "accountclassificationcode";
@@ -5818,6 +5819,24 @@ namespace Database.Model
 			set
 			{
 				this.SetRelatedEntities<Database.Model.Account>("account_parent_account", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+			}
+		}
+		
+		/// <summary>
+		/// 1:N Account_Tasks
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("Account_Tasks")]
+		public System.Collections.Generic.IEnumerable<Database.Model.Task> Account_Tasks
+		{
+			[System.Diagnostics.DebuggerNonUserCode()]
+			get
+			{
+				return this.GetRelatedEntities<Database.Model.Task>("Account_Tasks", null);
+			}
+			[System.Diagnostics.DebuggerNonUserCode()]
+			set
+			{
+				this.SetRelatedEntities<Database.Model.Task>("Account_Tasks", null, value);
 			}
 		}
 		

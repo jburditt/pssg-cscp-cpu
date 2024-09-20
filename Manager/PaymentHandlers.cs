@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using Manager.Contract;
-using Resources;
-
-namespace Manager;
+﻿namespace Manager;
 
 public class PaymentHandlers(IPaymentRepository paymentRepository, IMapper mapper) : IRequestHandler<PaymentQuery, PaymentResult>
 {

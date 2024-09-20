@@ -100,6 +100,7 @@
   "entityNamesFilter": [
     "account",
     "contact",
+    "task",
     "transactioncurrency",
     "vsd_contract",
     "vsd_invoice",

@@ -1,6 +1,4 @@
-﻿using Database.Model;
-
-namespace Resources;
+﻿namespace Resources;
 
 public class ScheduleGRepositoryMapper : Profile
 {

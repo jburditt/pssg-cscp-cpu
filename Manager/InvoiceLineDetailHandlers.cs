@@ -1,7 +1,3 @@
-using AutoMapper;
-using Manager.Contract;
-using Resources;
-
 namespace Manager;
 
 public class InvoiceLineDetailHandlers(IInvoiceLineDetailRepository invoiceLineDetailRepository) : 

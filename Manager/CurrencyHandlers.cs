@@ -1,7 +1,4 @@
-﻿using Manager.Contract;
-using Resources;
-
-namespace Manager;
+﻿namespace Manager;
 
 public class CurrencyHandlers(ICurrencyRepository currencyRepository) : 
     IRequestHandler<CurrencyQuery, CurrencyResult>,
