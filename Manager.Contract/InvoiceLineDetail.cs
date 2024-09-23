@@ -1,6 +1,5 @@
 ﻿namespace Manager.Contract;
 
-
 public record InvoiceLineDetailQuery : IRequest<InvoiceLineDetailResult>
 {
     public Guid? Id { get; set; }

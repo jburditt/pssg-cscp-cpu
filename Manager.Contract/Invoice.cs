@@ -1,6 +1,5 @@
 ﻿namespace Manager.Contract;
 
-
 /// <summary>
 /// Reason for the status of the Invoice
 /// </summary>

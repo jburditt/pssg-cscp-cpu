@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Xrm.Sdk;
-
-namespace Database;
+﻿namespace Database;
 
 public class GlobalMapper : Profile
 {
