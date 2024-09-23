@@ -29,7 +29,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
             foreach (var contract in result.Contracts)
             {
                 // if not cloned
-                if (!await contractHandlers.Handle(contract.Id, _cancellationToken))
+                var isClonedCommand = new IsClonedCommand(contract.Id);
+                if (!await contractHandlers.Handle(isClonedCommand, _cancellationToken))
                 {
                     // clone the contract
                     var command = new CloneCommand(contract);

@@ -16,6 +16,8 @@
 
         services.AddHandlers();
 
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<HandlerAssemblyMarker>());
+
         // add dynamics database adapter
         services.AddDatabase(configuration);
         services.AddTransient<SeedDatabase>();

@@ -80,8 +80,8 @@ public class BaseHandlers<TRepository, TDto>(TRepository repository)
     }
 }
 
-public record InsertCommand<TDto>(TDto dto) : PayloadCommand<TDto>(dto) { }
-public record UpsertCommand<TDto>(TDto dto) : PayloadCommand<TDto>(dto) { }
-public record TryDeleteCommand<TDto>(TDto dto) : PayloadCommand<TDto>(dto) { }
+public record InsertCommand<TDto>(TDto dto) : PayloadCommand<TDto, Guid>(dto) { }
+public record UpsertCommand<TDto>(TDto dto) : PayloadCommand<TDto, Guid>(dto) { }
+public record TryDeleteCommand<TDto>(TDto dto) : PayloadCommand<TDto, bool>(dto) { }
 public record TryDeleteCommand(Guid Id) : IdCommand(Id) { }
 public record DeleteCommand(Guid Id) : IdCommand(Id) { }

@@ -62,4 +62,6 @@ public record Contract : IDto
     public Guid? ClonedContractId { get; set; }
 }
 
+public record IsClonedCommand(Guid Id) : IRequest<bool>;
+
 public record CloneCommand(Contract Contract) : IRequest<Guid?>;
