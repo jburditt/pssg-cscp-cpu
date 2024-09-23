@@ -1,19 +1,8 @@
 ﻿namespace Resources;
 
-public class InvoiceRepository : BaseRepository, IInvoiceRepository
+public class InvoiceRepository : BaseRepository<Vsd_Invoice, Invoice>, IInvoiceRepository
 {
-    private readonly IMapper _mapper;
-
-    public InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
-    {
-        _mapper = mapper;
-    }
-
-    public Guid Insert(Invoice invoice)
-    {
-        var entity = _mapper.Map<Vsd_Invoice>(invoice);
-        return base.Insert(entity);
-    }
+    public InvoiceRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext, mapper) { }
 
     public InvoiceResult Query(InvoiceQuery invoiceQuery)
     {

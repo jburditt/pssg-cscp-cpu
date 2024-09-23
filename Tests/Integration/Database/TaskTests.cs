@@ -7,7 +7,7 @@
         var id = new Guid("");
 
         // Act
-        var result = repository.Delete(id);
+        var result = repository.TryDelete(id);
         
         // Assert
         Assert.True(result);

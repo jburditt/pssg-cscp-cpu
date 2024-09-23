@@ -1,11 +1,14 @@
 ﻿namespace Manager;
 
-public class ContractHandlers(IContractRepository ContractRepository, IMapper mapper) : 
+public class ContractHandlers : 
+    FindQueryBaseHandlers<IContractRepository, Contract.Contract, FindContractQuery, FindContractResult, ContractQuery, ContractResult>,
     IRequestHandler<ContractQuery, ContractResult>,
     IRequestHandler<FindContractQuery, FindContractResult>,
     IRequestHandler<Guid, bool>,
-    IRequestHandler<Contract.Contract, Guid?>
+    IRequestHandler<CloneCommand, Guid?>
 {
+    public ContractHandlers(IContractRepository repository) : base(repository) { }
+
     // FirstOrDefault
     public async Task<FindContractResult> Handle(FindContractQuery ContractQuery, CancellationToken cancellationToken)
     {
@@ -23,14 +26,14 @@ public class ContractHandlers(IContractRepository ContractRepository, IMapper ma
     // IsCloned
     public async Task<bool> Handle(Guid id, CancellationToken cancellationToken)
     {
-        var result = ContractRepository.IsCloned(id);
+        var result = _repository.IsCloned(id);
         return await Task.FromResult(result);
     }
 
     // Clone
-    public async Task<Guid?> Handle(Contract.Contract contract, CancellationToken cancellationToken)
+    public async Task<Guid?> Handle(CloneCommand cloneCommand, CancellationToken cancellationToken)
     {
-        var result = ContractRepository.Clone(contract);
+        var result = _repository.Clone(cloneCommand.Contract);
         return await Task.FromResult(result);
     }
 }

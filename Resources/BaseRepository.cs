@@ -41,87 +41,46 @@ public abstract class BaseRepository<TEntity, TDto>
         return entity.Id;
     }
 
-    public virtual bool Delete(Guid id)
+    public virtual bool TryDelete(Guid id)
     {
         var dto = Activator.CreateInstance<TDto>();
         dto.Id = id;
-        return Delete(dto);
+        return TryDelete(dto);
     }
 
-    public virtual bool Delete(TDto dto)
+    public virtual bool TryDelete(TDto dto)
+    {
+        try
     {
         var entity = Map(dto);
         _databaseContext.Attach(entity);
         _databaseContext.DeleteObject(entity);
-        Save();
+            _databaseContext.SaveChanges();
         return true;
     }
-
-    private TEntity Map(TDto dto)
+        catch
     {
-        return _mapper.Map<TEntity>(dto);
+            return false;
+    }
     }
 
-    private void Save()
-    {
-        _databaseContext.SaveChanges();
-    }
-}
-
-[Obsolete("Use BaseRepository<TEntity, TDto> instead")]
-public abstract class BaseRepository
+    // safe delete, use TryDelete for faster deletes
+    public virtual bool Delete(Guid id)
 {
-    protected readonly DatabaseContext _databaseContext;
-
-    public BaseRepository(DatabaseContext databaseContext)
+        var entity = _databaseContext
+            .CreateQuery<TEntity>()
+            .FirstOrDefault(x => x.Id == id);
+        if (entity == null)
     {
-        _databaseContext = databaseContext;
+            return false;
     }
-
-    public virtual Guid Insert<T>(T entity) where T : Entity
-    {
-        _databaseContext.AddObject(entity);
-        _databaseContext.SaveChanges();
-        return entity.Id;
-    }
-
-    public virtual Guid Upsert<T>(T entity) where T : Entity
-    {
-        var existingEntity = _databaseContext
-            .CreateQuery<T>()
-            .FirstOrDefault(x => x.Id == entity.Id);
-        if (existingEntity != null)
-        {
-            _databaseContext.Detach(existingEntity);
-            _databaseContext.Attach(entity);
-            _databaseContext.UpdateObject(entity);
-        }
-        else
-        {
-            _databaseContext.AddObject(entity);
-        }
-        _databaseContext.SaveChanges();
-        return entity.Id;
-    }
-
-    public virtual bool Delete<T>(T entity) where T : Entity
-    {
         _databaseContext.DeleteObject(entity);
         _databaseContext.SaveChanges();
         return true;
     }
 
-    public virtual bool TryDelete<T>(T entity) where T : Entity
-    {
-        try
-        {
-            _databaseContext.DeleteObject(entity);
-            _databaseContext.SaveChanges();
-            return true;
-        }
-        catch 
+    private TEntity Map(TDto dto)
         { 
-            return false; 
-        }
+        return _mapper.Map<TEntity>(dto);
     }
 }

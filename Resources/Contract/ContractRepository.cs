@@ -1,27 +1,8 @@
 ﻿namespace Resources;
 
-public class ContractRepository : BaseRepository, IContractRepository
+public class ContractRepository : BaseRepository<Vsd_Contract, Contract>, IContractRepository
 {
-    private readonly IMapper _mapper;
-
-    public ContractRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
-    {
-        _mapper = mapper;
-    }
-
-    #region CRUD
-
-    public Guid Insert(Contract contract)
-    {
-        var entity = _mapper.Map<Vsd_Contract>(contract);
-        return base.Insert(entity);
-    }
-
-    public Guid Upsert(Contract contract)
-    {
-        var entity = _mapper.Map<Vsd_Contract>(contract);
-        return base.Upsert(entity);
-    }
+    public ContractRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext, mapper) { }
 
     public FindContractResult FirstOrDefault(FindContractQuery contractQuery)
     {
@@ -68,19 +49,6 @@ public class ContractRepository : BaseRepository, IContractRepository
         var contract = _mapper.Map<IEnumerable<Contract>>(queryResults);
         return new ContractResult(contract);
     }
-
-    // Safe Delete, will not throw exception if entity does not exist, but comes at cost of performance
-    public bool Delete(Guid id)
-    {
-        var entity = _databaseContext.Vsd_ContractSet.FirstOrDefault(x => x.Vsd_ContractId == id);
-        if (entity == null)
-        {
-            return false;
-        }
-        return base.Delete(entity);
-    }
-
-    #endregion CRUD
 
     public bool IsCloned(Guid id)
     {

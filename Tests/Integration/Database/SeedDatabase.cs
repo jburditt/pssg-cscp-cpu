@@ -33,7 +33,7 @@
         {
             try
             {
-                isDeleted = contractRepository.Delete(contract.Id);
+                isDeleted = contractRepository.TryDelete(contract.Id);
                 Console.WriteLine($"Deleted contract with id {contract.Id} {isDeleted}");
             }
             catch { /* glup */ }

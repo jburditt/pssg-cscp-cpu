@@ -1,19 +1,8 @@
 ﻿namespace Resources;
 
-public class InvoiceLineDetailRepository : BaseRepository, IInvoiceLineDetailRepository
+public class InvoiceLineDetailRepository : BaseRepository<Vsd_InvoiceLineDetail, InvoiceLineDetail>, IInvoiceLineDetailRepository
 {
-    private readonly IMapper _mapper;
-
-    public InvoiceLineDetailRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
-    {
-        _mapper = mapper;
-    }
-
-    public Guid Insert(InvoiceLineDetail invoiceLineDetail)
-    {
-        var entity = _mapper.Map<Vsd_InvoiceLineDetail>(invoiceLineDetail);
-        return base.Insert(entity);
-    }
+    public InvoiceLineDetailRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext, mapper) { }
 
     // TODO not completed and should return InvoiceLineDetailResult not IEnumerable
     public IEnumerable<InvoiceLineDetail> Query(InvoiceLineDetailQuery query)
@@ -22,15 +11,5 @@ public class InvoiceLineDetailRepository : BaseRepository, IInvoiceLineDetailRep
             .WhereIf(query.Id != null, x => x.Id == query.Id.Value)
             .ToList();
         return _mapper.Map<IEnumerable<InvoiceLineDetail>>(queryResults);
-    }
-
-    public bool Delete(Guid id)
-    {
-        var entity = _databaseContext.Vsd_InvoiceLineDetailSet.FirstOrDefault(x => x.Id == id);
-        if (entity == null)
-        {
-            return false;
-        }
-        return base.Delete(entity);
     }
 }

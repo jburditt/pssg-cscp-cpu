@@ -1,20 +1,8 @@
 ﻿namespace Resources;
 
-public class ProgramRepository : BaseRepository, IProgramRepository
+public class ProgramRepository : BaseRepository<Vsd_Program, Program>, IProgramRepository
 {
-    private readonly IMapper _mapper;
-
-    public ProgramRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext)
-    {
-        this._mapper = mapper;
-    }
-
-    public Guid Upsert(Program program)
-    {
-        var entity = _mapper.Map<Vsd_Program>(program);
-        entity.Id = base.Upsert(entity);
-        return entity.Id;
-    }
+    public ProgramRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext, mapper) { }
 
     public ProgramResult Query(ProgramQuery programQuery)
     {
@@ -24,17 +12,6 @@ public class ProgramRepository : BaseRepository, IProgramRepository
             .ToList();
         var programs = _mapper.Map<IEnumerable<Program>>(queryResults);
         return new ProgramResult(programs);
-    }
-
-    // safe delete, use try delete for faster deletes
-    public bool Delete(Guid id)
-    {
-        var entity = _databaseContext.Vsd_ProgramSet.FirstOrDefault(x => x.Vsd_ProgramId == id);
-        if (entity == null)
-        {
-            return false;
-        }
-        return base.Delete(entity);
     }
 
     public ProgramResult GetApproved()

@@ -28,7 +28,7 @@ public record ProgramQuery : IRequest<ProgramResult>
 
 public record ProgramResult(IEnumerable<Program> Programs);
 
-public record Program
+public record Program : IDto
 {
     public Guid Id { get; set; }
     public StateCode StateCode { get; set; }

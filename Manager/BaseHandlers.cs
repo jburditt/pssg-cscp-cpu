@@ -1,13 +1,45 @@
 ﻿namespace Manager;
 
+// Query, Find, and Base Handler
+public class FindQueryBaseHandlers<TRepository, TDto, TFindQuery, TFindResult, TQuery, TResult> : BaseHandlers<TRepository, TDto>
+    where TRepository : IFindRepository<TFindQuery, TFindResult>, IQueryRepository<TQuery, TResult>, IBaseRepository<TDto>
+    where TDto : IDto
+{
+    protected readonly TRepository _repository;
+
+    public FindQueryBaseHandlers(TRepository repository) : base(repository)
+    {
+        _repository = repository;
+    }
+
+    public async Task<TFindResult> Handle(TFindQuery query, CancellationToken cancellationToken)
+    {
+        var results = _repository.FirstOrDefault(query);
+        return await Task.FromResult(results);
+    }
+
+    public async Task<TResult> Handle(TQuery query, CancellationToken cancellationToken)
+    {
+        var results = _repository.Query(query);
+        return await Task.FromResult(results);
+    }
+}
+
 // Query and Base Handler
-public class QueryBaseHandlers<TRepository, TDto, TQuery, TResult>(TRepository repository) : BaseHandlers<TRepository, TDto>(repository)
+public class QueryBaseHandlers<TRepository, TDto, TQuery, TResult> : BaseHandlers<TRepository, TDto>
     where TRepository : IQueryRepository<TQuery, TResult>, IBaseRepository<TDto>
     where TDto : IDto
 {
+    protected readonly TRepository _repository;
+
+    public QueryBaseHandlers(TRepository repository) : base(repository) 
+    {
+        _repository = repository;
+    }
+
     public async Task<TResult> Handle(TQuery query, CancellationToken cancellationToken)
     {
-        var results = repository.Query(query);
+        var results = _repository.Query(query);
         return await Task.FromResult(results);
     }
 }

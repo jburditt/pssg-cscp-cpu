@@ -44,12 +44,12 @@ public record InvoiceQuery : IRequest<InvoiceResult>
 
 public record InvoiceResult(IEnumerable<Invoice> Invoices);
 
-public record Invoice
+public record Invoice : IDto
 {
     public Guid Id { get; set; }
-    public Origin Origin { get; set; }
     public StateCode StateCode { get; set; }
     public InvoiceStatusCode StatusCode { get; set; } = InvoiceStatusCode.Draft;
+    public Origin Origin { get; set; }
     public DateTime InvoiceDate { get; set; }
     public Guid? ContractId { get; set; }
     public Guid? OwnerId { get; set; }

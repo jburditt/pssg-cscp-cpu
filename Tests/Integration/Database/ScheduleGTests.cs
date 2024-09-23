@@ -27,7 +27,7 @@ public class ScheduleGTests(IContractRepository contractRepository, IProgramRepo
         var id = new Guid("");
 
         // Act
-        var result = scheduleGRepository.Delete(id);
+        var result = scheduleGRepository.TryDelete(id);
 
         // Assert
         Assert.True(result);

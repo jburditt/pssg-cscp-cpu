@@ -9,9 +9,10 @@ public record InvoiceLineDetailQuery : IRequest<InvoiceLineDetailResult>
 
 public record InvoiceLineDetailResult(IEnumerable<InvoiceLineDetail> InvoiceLineDetails);
 
-public record InvoiceLineDetail
+public record InvoiceLineDetail : IDto
 {
     public Guid Id { get; set; }
+    public StateCode StateCode { get; set; }
     public Guid? InvoiceId { get; set; }
     public Guid? OwnerId { get; set; }
     public InvoiceType InvoiceType { get; set; }
