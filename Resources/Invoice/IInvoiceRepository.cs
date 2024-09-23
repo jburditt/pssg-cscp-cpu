@@ -1,7 +1,6 @@
 ﻿namespace Resources;
 
-public interface IInvoiceRepository
+public interface IInvoiceRepository : IQueryRepository<InvoiceQuery, InvoiceResult>, IBaseRepository<Invoice>
 {
-    Guid Insert(Invoice invoice);
-    InvoiceResult Query(InvoiceQuery invoiceQuery);
+
 }

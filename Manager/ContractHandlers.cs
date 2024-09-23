@@ -9,20 +9,6 @@ public class ContractHandlers :
 {
     public ContractHandlers(IContractRepository repository) : base(repository) { }
 
-    // FirstOrDefault
-    public async Task<FindContractResult> Handle(FindContractQuery ContractQuery, CancellationToken cancellationToken)
-    {
-        var contractResults = ContractRepository.FirstOrDefault(ContractQuery);
-        return await Task.FromResult(new FindContractResult(contractResults.Contract));
-    }
-
-    // Query
-    public async Task<ContractResult> Handle(ContractQuery ContractQuery, CancellationToken cancellationToken)
-    {
-        var contractResults = ContractRepository.Query(ContractQuery);
-        return await Task.FromResult(new ContractResult(contractResults.Contracts));
-    }
-
     // IsCloned
     public async Task<bool> Handle(Guid id, CancellationToken cancellationToken)
     {

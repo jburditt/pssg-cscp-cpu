@@ -1,20 +1,20 @@
 ﻿namespace Manager;
 
-public class ProgramHandlers(IProgramRepository programRepository, IMapper mapper) : 
+public class ProgramHandlers : QueryBaseHandlers<IProgramRepository, Program, ProgramQuery, ProgramResult>,
     IRequestHandler<ProgramQuery, ProgramResult>,
     IRequestHandler<GetApprovedCommand, ProgramResult>
 {
-    public async Task<ProgramResult> Handle(ProgramQuery programQuery, CancellationToken cancellationToken)
+    private readonly IMapper _mapper;
+
+    public ProgramHandlers(IProgramRepository repository, IMapper mapper) : base(repository) 
     {
-        var programResults = programRepository.Query(programQuery);
-        var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);
-        return await Task.FromResult(new ProgramResult(programs));
+        _mapper = mapper;
     }
 
     public async Task<ProgramResult> Handle(GetApprovedCommand dummy, CancellationToken cancellationToken)
     {
-        var programResults = programRepository.GetApproved();
-        var programs = mapper.Map<IEnumerable<Program>>(programResults.Programs);
+        var programResults = _repository.GetApproved();
+        var programs = _mapper.Map<IEnumerable<Program>>(programResults.Programs);
         return await Task.FromResult(new ProgramResult(programs));
     }
 }

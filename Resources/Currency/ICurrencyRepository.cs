@@ -1,7 +1,6 @@
 ﻿namespace Resources;
 
-public interface ICurrencyRepository
+public interface ICurrencyRepository : IFindRepository<FindCurrencyQuery, FindCurrencyResult>, IQueryRepository<CurrencyQuery, CurrencyResult>, IBaseRepository<Currency>
 {
-    FindCurrencyResult FirstOrDefault(FindCurrencyQuery currencyQuery);
-    CurrencyResult Query(CurrencyQuery currencyQuery);
+
 }

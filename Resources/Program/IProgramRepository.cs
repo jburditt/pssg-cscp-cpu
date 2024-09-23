@@ -1,9 +1,6 @@
 ﻿namespace Resources;
 
-public interface IProgramRepository
+public interface IProgramRepository : IBaseRepository<Program>, IQueryRepository<ProgramQuery, ProgramResult>
 {
-    Guid Upsert(Program program);
-    ProgramResult Query(ProgramQuery programQuery);
-    bool Delete(Guid id);
     ProgramResult GetApproved();
 }

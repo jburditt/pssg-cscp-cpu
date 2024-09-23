@@ -22,4 +22,10 @@ public record CurrencyQuery : IRequest<CurrencyResult>
 
 public record CurrencyResult(IEnumerable<Currency> Currencies);
 
-public record Currency(Guid Id, StateCode StateCode, StatusCode StatusCode, string IsoCurrencyCode);
+public record Currency : IDto
+{
+    public Guid Id { get; set; }
+    public StateCode StateCode { get; set; }
+    public StatusCode StatusCode { get; set; }
+    public required string IsoCurrencyCode { get; set; }
+}

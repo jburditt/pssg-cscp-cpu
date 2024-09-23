@@ -1,18 +1,8 @@
 ﻿namespace Manager;
 
-public class CurrencyHandlers(ICurrencyRepository currencyRepository) : 
+public class CurrencyHandlers(ICurrencyRepository repository) : FindQueryBaseHandlers<ICurrencyRepository, Currency, FindCurrencyQuery, FindCurrencyResult, CurrencyQuery, CurrencyResult>(repository),
     IRequestHandler<CurrencyQuery, CurrencyResult>,
     IRequestHandler<FindCurrencyQuery, FindCurrencyResult>
 {
-    public async Task<FindCurrencyResult> Handle(FindCurrencyQuery currencyQuery, CancellationToken cancellationToken)
-    {
-        var currencyResults = currencyRepository.FirstOrDefault(currencyQuery);
-        return await Task.FromResult(new FindCurrencyResult(currencyResults.Currency));
-    }
 
-    public async Task<CurrencyResult> Handle(CurrencyQuery currencyQuery, CancellationToken cancellationToken)
-    {
-        var currencyResults = currencyRepository.Query(currencyQuery);
-        return await Task.FromResult(new CurrencyResult(currencyResults.Currencies));
-    }
 }
