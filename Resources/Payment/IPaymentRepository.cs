@@ -1,6 +1,6 @@
 ﻿namespace Resources;
 
-public interface IPaymentRepository
+public interface IPaymentRepository : IQueryRepository<PaymentQuery, PaymentResult>, IBaseRepository<Payment>
 {
-    PaymentResult Query(PaymentQuery paymentQuery);
+
 }

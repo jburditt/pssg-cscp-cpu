@@ -15,19 +15,6 @@ public class InvoiceLineDetailRepositoryTests(IInvoiceLineDetailRepository repos
         Assert.True(id != Guid.Empty);
     }
 
-    [Fact]
-    public void Query()
-    {
-        // Arrange
-        var command = new InvoiceLineDetailQuery();
-        command.Id = FakeData.InvoiceLineDetails[0].Id;
-
-        // Act
-        var result = repository.Query(command);
-
-        // Assert
-        Assert.True(result.Count() > 0);
-    }
 
     [Fact]
     public void Delete()

@@ -23,8 +23,9 @@ public record PaymentQuery : IRequest<PaymentResult>
 
 public record PaymentResult(IEnumerable<Payment> Payments);
 
-public record Payment
+public record Payment : IDto
 {
     public Guid Id { get; set; }
+    public StateCode StateCode { get; set; }
     public decimal PaymentTotal { get; set; }
 }

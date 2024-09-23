@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             var contractResult = await contractHandlers.Handle(contractQuery, _cancellationToken);
             _logger.LogInformation("Found {0} contracts", contractResult.Contracts.Count());
 
+            var scheduleGTasks = new List<(ScheduleG, Manager.Contract.Task)>();
             foreach (var contract in contractResult.Contracts)
             {
                 var programQuery = new ProgramQuery();
@@ -63,7 +65,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
                         scheduleG.ProgramId = program.Id;
                         scheduleG.ContractId = contract.Id;
                         scheduleG.Quarter = quarterPeriod;
-                        scheduleG.Id = await scheduleGHandlers.Handle(scheduleG, _cancellationToken);
+                        var insertScheduleGCommand = new InsertCommand<ScheduleG>(scheduleG);
+                        scheduleG.Id = await scheduleGHandlers.Handle(insertScheduleGCommand, _cancellationToken);
 
                         _logger.LogInformation(string.Format("Creating a new Task to Schedule G '{0}'..", scheduleG.Id));
                         var task = new Manager.Contract.Task();
@@ -73,13 +76,16 @@ namespace Gov.Cscp.Victims.Public.Controllers
                         task.RegardingObjectId = contract.Id;
                         task.ProgramId = program.Id;
                         task.ScheduleGId = scheduleG.Id;
-                        task.Id = await taskHandlers.Handle(task, _cancellationToken);
+                        var insertTaskCommand = new InsertCommand<Manager.Contract.Task>(task);
+                        task.Id = await taskHandlers.Handle(insertTaskCommand, _cancellationToken);
                         _logger.LogInformation(string.Format("New task created with id '{0}'..", task.Id));
+
+                        scheduleGTasks.Add((scheduleG, task));
                     }
                 }
             }
 
-            return Json(quarter);
+            return Json(scheduleGTasks);
         }
     }
 }

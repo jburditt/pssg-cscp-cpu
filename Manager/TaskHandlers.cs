@@ -2,7 +2,7 @@
 
 public class TaskHandlers(ITaskRepository repository) :
     BaseHandlers<ITaskRepository, Contract.Task>(repository),
-    IRequestHandler<Contract.Task, Guid>
+    IRequestHandler<InsertCommand<Contract.Task>, Guid>
 {
 
 }

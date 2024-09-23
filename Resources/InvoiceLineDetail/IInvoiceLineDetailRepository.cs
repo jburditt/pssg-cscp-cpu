@@ -1,8 +1,6 @@
 ﻿namespace Resources;
 
-public interface IInvoiceLineDetailRepository
+public interface IInvoiceLineDetailRepository : IBaseRepository<InvoiceLineDetail>
 {
-    Guid Insert(InvoiceLineDetail invoiceLineDetail);
-    IEnumerable<InvoiceLineDetail> Query(InvoiceLineDetailQuery query);
-    bool Delete(Guid id);
+
 }

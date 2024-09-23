@@ -1,10 +1,12 @@
 ﻿namespace Resources;
 
-public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) : IPaymentRepository
+public class PaymentRepository : BaseRepository<Vsd_Payment, Payment>, IPaymentRepository
 {
+    public PaymentRepository(DatabaseContext databaseContext, IMapper mapper) : base(databaseContext, mapper) { }
+
     public PaymentResult Query(PaymentQuery paymentQuery)
     {
-        var query = databaseContext.Vsd_PaymentSet
+        var query = _databaseContext.Vsd_PaymentSet
             .WhereIf(paymentQuery.ProgramId != null, p => p.Vsd_ProgramId.Id == paymentQuery.ProgramId)
             .WhereIf(paymentQuery.ContractId != null, p => p.Vsd_ContractId.Id == paymentQuery.ContractId);
             //.ExcludesIf(paymentQuery.ExcludeStatusCodes != null, p => p.StatusCode, paymentQuery.ExcludeStatusCodes);
@@ -20,7 +22,7 @@ public class PaymentRepository(DatabaseContext databaseContext, IMapper mapper) 
         }
 
         var queryResults = query.ToList();
-        var payments = mapper.Map<IEnumerable<Payment>>(queryResults);
+        var payments = _mapper.Map<IEnumerable<Payment>>(queryResults);
         return new PaymentResult(payments);
     }
 }

@@ -1,17 +1,13 @@
 ﻿using Manager;
 using Manager.Contract;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using Gov.Cscp.Victims.Public.Background;
-using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Hosting;
 
 namespace Gov.Cscp.Victims.Public.Controllers

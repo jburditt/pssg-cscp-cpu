@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,18 +25,21 @@ namespace Gov.Cscp.Victims.Public.Controllers
             query.CpuCloneFlag = true;
             var result = await contractHandlers.Handle(query, _cancellationToken);
 
-            Guid? id = null;
+            List<Guid> ids = new List<Guid>();
             foreach (var contract in result.Contracts)
             {
                 // if not cloned
                 if (!await contractHandlers.Handle(contract.Id, _cancellationToken))
                 {
                     // clone the contract
-                    id = await contractHandlers.Handle(contract, _cancellationToken);
+                    var command = new CloneCommand(contract);
+                    var id = await contractHandlers.Handle(command, _cancellationToken);
+                    if (id != null) 
+                        ids.Add(id.Value);
                 }
             }
 
-            return Json(id);
+            return Json(ids);
         }
     }
 }
