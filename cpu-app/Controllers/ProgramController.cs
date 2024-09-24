@@ -32,12 +32,18 @@ namespace Gov.Cscp.Victims.Public.Controllers
             //{
             var provinceBc = Constant.ProvinceBc;
 
-            // use CurrencyQuery to query "all the currencies that match this one currency code"
-            // ok so regrettably I should have thought about what I was porting before porting it, this could probably be optimized e.g. just use the currency code directly?
-            var currencyQuery = new FindCurrencyQuery();
-            currencyQuery.StateCode = StateCode.Active;
-            currencyQuery.IsoCurrencyCode = IsoCurrencyCode.CAD.ToString();
-            var currencyResult = await mediator.Send(currencyQuery, token);
+            // query the database for CAD currency id
+            //var currencyQuery = new FindCurrencyQuery();
+            //currencyQuery.StateCode = StateCode.Active;
+            //currencyQuery.IsoCurrencyCode = IsoCurrencyCode.CAD.ToString();
+            //var currencyResult = await mediator.Send(currencyQuery, token);
+            // CAD currency is static and the same on both DEV and TEST, if you need to retrieve from database, use above code instead
+            var currency = new Currency
+            {
+                Id = Constant.CadCurrency,
+                IsoCurrencyCode = IsoCurrencyCode.CAD.ToString()
+            };
+            var currencyResult = new FindCurrencyResult(currency);
             
             var invoiceDate = GetInvoiceDate(quarter);
 

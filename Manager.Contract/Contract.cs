@@ -1,5 +1,9 @@
 ﻿namespace Manager.Contract;
 
+// TODO throughout this solution there are Dynamics values used outside of the "Database" project. The problem with this is if you ever changed database, these values would 
+// no longer make sense. It would be better to not use Dynamics specific values. The values are provided currently for ease of mapping entities to dto and vice-versa.
+// A minor improvement is to use the enum field name, but then the field names are still potentially Dynamics specific. The best solution is to manually map these values
+// and figure out a way to have build-time compilation errors on newly added enum fields that are not mapped
 public enum ContractStatusCode
 {
     Archived = 2,
