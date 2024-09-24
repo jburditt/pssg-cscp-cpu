@@ -52,7 +52,7 @@ namespace Gov.Cscp.Victims.Public
             services.AddTransient<KeycloakHandler>();
 
             services.AddHandlers();
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<HandlerAssemblyMarker>());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<InvoiceHandlers>());
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();

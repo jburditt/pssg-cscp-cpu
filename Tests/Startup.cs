@@ -16,7 +16,7 @@
 
         services.AddHandlers();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<HandlerAssemblyMarker>());
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<InvoiceHandlers>());
 
         // add dynamics database adapter
         services.AddDatabase(configuration);
