@@ -101,11 +101,11 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 var invoiceLineDetail = new InvoiceLineDetail();
                 invoiceLineDetail.Id = Guid.NewGuid();
                 invoiceLineDetail.InvoiceId = invoice.Id;
-                invoiceLineDetail.OwnerId = program.OwnerId;
+                invoiceLineDetail.OwnerId = program.OwnerId ?? default;
                 invoiceLineDetail.InvoiceType = InvoiceType.OtherPayments;
                 invoiceLineDetail.ProgramUnit = ProgramUnit.Cpu;
                 invoiceLineDetail.Approved = YesNo.Yes;
-                invoiceLineDetail.AmountSimple = scheduledPaymentAmount;
+                invoiceLineDetail.AmountSimple = scheduledPaymentAmount ?? 0;
                 invoiceLineDetail.ProvinceStateId = provinceBc;
                 invoiceLineDetail.TaxExemption = invoice.TaxExemption;
                 var invoiceLineDetailId = await mediator.Send(invoiceLineDetail);

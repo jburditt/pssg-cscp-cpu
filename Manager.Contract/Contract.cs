@@ -56,14 +56,15 @@ public record Contract : IDto
     public Guid Id { get; set; }
     public StateCode StateCode { get; set; }
     public ContractStatusCode? StatusCode { get; set; }
-
-    public MethodOfPayment? MethodOfPayment { get; set; }
-    public ContractType? ContractType { get; set; }
+    public ContractType ContractType { get; set; }
 
     // References
-    public Guid? ProgramId { get; set; }
-    public Guid? CustomerId { get; set; }
+    public Guid ProgramId { get; set; }
+    public Guid CustomerId { get; set; }
     public Guid? ClonedContractId { get; set; }
+
+    // Columns from other tables
+    public MethodOfPayment? MethodOfPayment { get; set; }   // retrieved from account or contact depending on the value from CustomerId (vsd_customer)
 }
 
 public record IsClonedCommand(Guid Id) : IRequest<bool>;

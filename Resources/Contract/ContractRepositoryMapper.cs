@@ -12,6 +12,6 @@ public class ContractRepositoryMapper : Profile
         CreateMap<Contract, Vsd_Contract>()
             .ForMember(dest => dest.Vsd_Type, opts => opts.MapFrom(src => src.ContractType))
             .ForMember(dest => dest.Vsd_ClonedContractId, opts => opts.MapFrom(src => src.ClonedContractId != null ? new EntityReference(Vsd_Contract.EntityLogicalName, src.ClonedContractId.Value) : null))
-            .ForMember(dest => dest.Vsd_Customer, opts => opts.MapFrom(src => src.CustomerId != null ? new EntityReference(Account.EntityLogicalName, src.CustomerId.Value) : null));
+            .ForMember(dest => dest.Vsd_Customer, opts => opts.MapFrom(src => new EntityReference(Account.EntityLogicalName, src.CustomerId)));
     }
 }
