@@ -29,6 +29,7 @@ using System.Net.Http;
 using Microsoft.Extensions.Hosting;
 using Database;
 using Gov.Cscp.Victims.Public.Background;
+using Manager;
 
 namespace Gov.Cscp.Victims.Public
 {
@@ -49,7 +50,9 @@ namespace Gov.Cscp.Victims.Public
 
             services.AddTransient<TokenHandler>();
             services.AddTransient<KeycloakHandler>();
+
             services.AddHandlers();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<HandlerAssemblyMarker>());
 
             services.AddHttpClient<ICOASTAuthService, COASTAuthService>();
             services.AddHttpClient<IKeycloakAuthService, KeycloakAuthService>();

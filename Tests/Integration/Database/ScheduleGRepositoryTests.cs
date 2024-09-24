@@ -1,8 +1,8 @@
 ﻿using Task = Manager.Contract.Task;
 
-public class ScheduleGTests(IContractRepository contractRepository, IProgramRepository programRepository, IScheduleGRepository scheduleGRepository, ITaskRepository taskRepository, ILoggerFactory loggerFactory)
+public class ScheduleGRepositoryTests(IContractRepository contractRepository, IProgramRepository programRepository, IScheduleGRepository scheduleGRepository, ITaskRepository taskRepository, ILoggerFactory loggerFactory)
 {
-    private readonly ILogger<ScheduleGTests> _logger = loggerFactory.CreateLogger<ScheduleGTests>();
+    private readonly ILogger<ScheduleGRepositoryTests> _logger = loggerFactory.CreateLogger<ScheduleGRepositoryTests>();
 
     // WARNING!!! these are not reliable tests, they will fail, these were shortcuts I used for building a POC, these tests will need to be adjusted in order to be idempotent
 
