@@ -20,8 +20,8 @@ namespace Gov.Cscp.Victims.Public.Controllers
         private readonly CancellationToken _cancellationToken = applicationLifetime.ApplicationStopping;
 
         // TODO add ErrorHandler ActionFilter that returns 500 status code and logs the exception
-        [HttpGet("Approved")]
-        public async Task<IActionResult> GetApproved()
+        [HttpGet("Approved/{quarter}")]
+        public async Task<IActionResult> GetApproved(int quarter)
         {
             var token = _cancellationToken;
             //await taskQueue.QueueBackgroundWorkItemAsync(GetApprovedWorkItem);
@@ -39,7 +39,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             currencyQuery.IsoCurrencyCode = IsoCurrencyCode.CAD.ToString();
             var currencyResult = await mediator.Send(currencyQuery, token);
             
-            var (quarter, invoiceDate) = GetInvoiceDate();
+            var invoiceDate = GetInvoiceDate(quarter);
 
             var dummy = new GetApprovedCommand();
             var programResult = await mediator.Send(dummy, token);
@@ -110,9 +110,7 @@ namespace Gov.Cscp.Victims.Public.Controllers
             return Json(invoices);
         }
 
-        // NOTE based from GetInvoiceData method https://jag.gov.bc.ca/jira/secure/attachment/142853/QuarterlyProgramPaymentLogic.cs
-        // what happens with dates Oct 16 to Dec 31, should it trigger quarter 1 and use next year's quarter?
-        private Tuple<short, DateTime> GetInvoiceDate()
+        private DateTime GetInvoiceDate(int quarter)
         {
             var firstQuarterDate = new DateTime(DateTime.Today.Year, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January
             var secondQuarterDate = new DateTime(DateTime.Today.Year, 4, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th April
@@ -120,27 +118,49 @@ namespace Gov.Cscp.Victims.Public.Controllers
             var fourthQuarterDate = new DateTime(DateTime.Today.Year, 10, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th October
             var fifthQuarterDate = new DateTime(DateTime.Today.Year + 1, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January next year
 
-            if (DateTime.Today > firstQuarterDate && DateTime.Today <= secondQuarterDate)
-            {
-                return new Tuple<short, DateTime>(1, secondQuarterDate.AddDays(-3));
-            }
-            else if (DateTime.Today > secondQuarterDate && DateTime.Today <= thirdQuarterDate)
-            {
-                return new Tuple<short, DateTime>(2, thirdQuarterDate.AddDays(-3));
-            }
-            else if (DateTime.Today > thirdQuarterDate && DateTime.Today <= fourthQuarterDate)
-            {
-                return new Tuple<short, DateTime>(3, fourthQuarterDate.AddDays(-3));
-            }
-            else if (DateTime.Today <= firstQuarterDate)
-            {
-                return new Tuple<short, DateTime>(4, firstQuarterDate.AddDays(-3));
-            }
+            if (quarter == 1)
+                return secondQuarterDate.AddDays(-3); //15-April-current year
+            else if (quarter == 2)
+                return thirdQuarterDate.AddDays(-3); //15-July-current year
+            else if (quarter == 3)
+                return fourthQuarterDate.AddDays(-3); //15-October-current year
+            else if (quarter == 4)
+                return firstQuarterDate.AddDays(-3); //15-January-current year
             else
-            {
-                //throw new Exception("Invalid quarter number");
-                return new Tuple<short, DateTime>(1, fifthQuarterDate.AddDays(-3));
+                throw new ArgumentException(string.Format("Invalid Quarter number '{0}'..", quarter));
             }
-        }
+
+        // NOTE use this version if quarter is not provided
+        // what happens with dates Oct 16 to Dec 31, should it trigger quarter 1 and use next year's quarter?
+        //private Tuple<short, DateTime> GetInvoiceDate()
+        //{
+        //    var firstQuarterDate = new DateTime(DateTime.Today.Year, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January
+        //    var secondQuarterDate = new DateTime(DateTime.Today.Year, 4, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th April
+        //    var thirdQuarterDate = new DateTime(DateTime.Today.Year, 7, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th July
+        //    var fourthQuarterDate = new DateTime(DateTime.Today.Year, 10, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th October
+        //    var fifthQuarterDate = new DateTime(DateTime.Today.Year + 1, 1, 15, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second, DateTimeKind.Local); //15th January next year
+
+        //    if (DateTime.Today > firstQuarterDate && DateTime.Today <= secondQuarterDate)
+        //    {
+        //        return new Tuple<short, DateTime>(1, secondQuarterDate.AddDays(-3));
+        //    }
+        //    else if (DateTime.Today > secondQuarterDate && DateTime.Today <= thirdQuarterDate)
+        //    {
+        //        return new Tuple<short, DateTime>(2, thirdQuarterDate.AddDays(-3));
+        //    }
+        //    else if (DateTime.Today > thirdQuarterDate && DateTime.Today <= fourthQuarterDate)
+        //    {
+        //        return new Tuple<short, DateTime>(3, fourthQuarterDate.AddDays(-3));
+        //    }
+        //    else if (DateTime.Today <= firstQuarterDate)
+        //    {
+        //        return new Tuple<short, DateTime>(4, firstQuarterDate.AddDays(-3));
+        //    }
+        //    else
+        //    {
+        //        //throw new Exception("Invalid quarter number");
+        //        return new Tuple<short, DateTime>(1, fifthQuarterDate.AddDays(-3));
+        //    }
+        //}
     }
 }
