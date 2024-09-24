@@ -10,11 +10,6 @@ public class ContractRepository : BaseRepository<Vsd_Contract, Contract>, IContr
             .WhereIf(contractQuery.Id != null, x => x.Id == contractQuery.Id)
             .FirstOrDefault();
 
-        if (queryResults == null)
-        {
-            return new FindContractResult(null);
-        }
-
         var contract = _mapper.Map<Contract>(queryResults);
 
         // if there is a customer, check if the customer is a reference to an account or contact, and load the corresponding method of payment from the referenced entity
