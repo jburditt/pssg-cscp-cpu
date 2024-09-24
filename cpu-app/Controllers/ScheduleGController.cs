@@ -67,8 +67,10 @@ namespace Gov.Cscp.Victims.Public.Controllers
                         scheduleG.Id = await mediator.Send(insertScheduleGCommand, _cancellationToken);
 
                         _logger.LogInformation(string.Format("Creating a new Task to Schedule G '{0}'..", scheduleG.Id));
-                        var task = new Manager.Contract.Task();
-                        task.Subject = string.Format("Schedule G - {0} - {1} Q{2}", program.Name, DateTime.Today.Year, quarter);
+                        var task = new Manager.Contract.Task
+                        {
+                            Subject = string.Format("Schedule G - {0} - {1} Q{2}", program.Name, DateTime.Today.Year, quarter)
+                        };
                         task.TaskTypeId = Constant.QuarterlyScheduleG;
                         task.ScheduledEnd = DateTime.Today.AddMonths(1);
                         task.RegardingObjectId = contract.Id;

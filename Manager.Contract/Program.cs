@@ -32,7 +32,7 @@ public record Program : IDto
     public StateCode StateCode { get; set; }
     public ProgramStatusCode? StatusCode { get; set; }
     public string? Name { get; set; }
-    public string? ProvinceState { get; set; }  // business recommended but not required
+    public string? ProvinceState { get; set; }  // business recommended but not required in Dynamics
     public DateTime? BudgetProposalSignatureDate { get; set; }
     public decimal? CpuSubtotal { get; set; }
 

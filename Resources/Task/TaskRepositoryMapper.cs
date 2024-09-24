@@ -15,7 +15,7 @@ public class TaskRepositoryMapper : Profile
 
         CreateMap<TaskDto, TaskEntity>()
             .ForMember(dest => dest.Vsd_TaskTypeId, opts => opts.MapFrom(src => src.TaskTypeId != null ? new EntityReference("vsd_tasktype", src.TaskTypeId.Value) : null))
-            .ForMember(dest => dest.RegardingObjectId, opts => opts.MapFrom(src => src.RegardingObjectId != null ? new EntityReference(Vsd_Contract.EntityLogicalName, src.RegardingObjectId.Value) : null))
+            .ForMember(dest => dest.RegardingObjectId, opts => opts.MapFrom(src => new EntityReference(Vsd_Contract.EntityLogicalName, src.RegardingObjectId)))
             .ForMember(dest => dest.Vsd_ProgramId, opts => opts.MapFrom(src => src.ProgramId != null ? new EntityReference(Vsd_Program.EntityLogicalName, src.ProgramId.Value) : null))
             .ForMember(dest => dest.Vsd_ScheduleGId, opts => opts.MapFrom(src => src.ScheduleGId != null ? new EntityReference(Vsd_ScheduleG.EntityLogicalName, src.ScheduleGId.Value) : null));
     }
