@@ -21,8 +21,6 @@ public record ProgramQuery : IRequest<ProgramResult>
     public Guid? Id { get; set; }
     public StateCode? StateCode { get; set; }
     public ProgramStatusCode? StatusCode { get; set; }
-
-    // References
     public Guid? ContractId { get; set; }
 }
 
@@ -32,14 +30,18 @@ public record Program : IDto
 {
     public Guid Id { get; set; }
     public StateCode StateCode { get; set; }
-    public ProgramStatusCode StatusCode { get; set; }
-    public string Name { get; set; }
-    public Guid? ContractId { get; set; }
-    public string ContractName { get; set; }
-    public Guid? OwnerId { get; set; }
-    public decimal CpuSubtotal { get; set; }
-    public string ProvinceState { get; set; }
+    public ProgramStatusCode? StatusCode { get; set; }
+    public string? Name { get; set; }
+    public string? ProvinceState { get; set; }  // business recommended but not required
     public DateTime? BudgetProposalSignatureDate { get; set; }
+    public decimal? CpuSubtotal { get; set; }
+
+    // References
+    public Guid? ContractId { get; set; }
+    public Guid? OwnerId { get; set; }
+
+    // Columns from other tables
+    public string? ContractName { get; set; }
 }
 
 public class GetApprovedCommand() : IRequest<ProgramResult>;

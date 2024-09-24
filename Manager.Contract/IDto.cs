@@ -2,6 +2,6 @@
 
 public interface IDto
 {
-    Guid Id { get; set; }
-    StateCode StateCode { get; set; }
+    public Guid Id { get; set; }
+    public StateCode StateCode { get; set; }
 }
