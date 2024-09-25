@@ -17,7 +17,7 @@ public abstract class BaseRepository<TEntity, TDto>
     {
         var entity = Map(dto);
         _databaseContext.AddObject(entity);
-        Save();
+        _databaseContext.SaveChanges();
         return entity.Id;
     }
 
