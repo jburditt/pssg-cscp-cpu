@@ -7,7 +7,6 @@ using Serilog;
 using System;
 using System.Linq;
 
-
 namespace Gov.Cscp.Victims.Public.Controllers
 {
 

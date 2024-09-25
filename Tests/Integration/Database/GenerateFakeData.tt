@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)\..\Tests\$(OutputPath)\Tests.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#int count = 100;#>
+public static partial class FakeData
+{
+    public static List<Manager.Contract.Program> Programs = new List<Manager.Contract.Program>
+    {
+<# for (int i = 0; i < count; i++) { #>
+        new Manager.Contract.Program
+        {
+            Id = new Guid("<#= Guid.NewGuid().ToString() #>"),
+            StateCode = StateCode.Active,
+            StatusCode = ProgramStatusCode.Completed,
+            ContractId = new Guid("ce4f37e8-7043-41b2-a0e7-23fb93fa53c9"),
+            ContractName = "123456-23",
+            OwnerId = new Guid("46fd16c0-fc6e-ea11-b818-00505683fbf4"),
+            BudgetProposalSignatureDate = new DateTime(2021, 12, 1, 10, 34, 19),
+            ProvinceState = "British Columbia",
+        },
+<# } #>
+    };
+
+    public static List<Guid> InvoiceIds = new List<Guid>
+	{
+<# for (int i = 0; i < count; i++) { #>
+        new Guid("<#= Guid.NewGuid().ToString() #>"),
+<# } #>
+    };
+
+    public static List<Guid> InvoiceLineDetailIds = new List<Guid>
+	{
+<# for (int i = 0; i < count; i++) { #>
+        new Guid("<#= Guid.NewGuid().ToString() #>"),
+<# } #>
+    };
+}
