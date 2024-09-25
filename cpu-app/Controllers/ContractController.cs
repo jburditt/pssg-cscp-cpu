@@ -35,7 +35,6 @@ namespace Gov.Cscp.Victims.Public.Controllers
                 {
                     // clone the contract
                     var command = new CloneCommand(contract);
-                    var id = await contractHandlers.Handle(command, _cancellationToken);
                     var id = await mediator.Send(command, _cancellationToken);
                     if (id != null) 
                         ids.Add(id.Value);
