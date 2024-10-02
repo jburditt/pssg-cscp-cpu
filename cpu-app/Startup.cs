@@ -102,7 +102,7 @@ namespace Gov.Cscp.Victims.Public
                     //opts.PayloadSerializerOptions.WriteIndented = true;
                 });
 
-            services.AddJwtBearerAuth(Configuration["JWT_TOKEN_KEY"], Configuration["JWT_VALID_ISSUER"]);
+            services.AddJwtBearerAuth(Configuration["JWT_TOKEN_KEY"], Configuration["JWT_VALID_ISSUER"], !string.IsNullOrEmpty(Configuration["JWT_DISABLE_ISSUER_VALIDATION"]));
             services.AddSiteminderAuth();
 
             services.RegisterPermissionHandler();
