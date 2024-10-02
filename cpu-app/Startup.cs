@@ -61,6 +61,7 @@ namespace Gov.Cscp.Victims.Public
             services.AddHttpClient<IDocumentMergeService, DocumentMergeService>().AddHttpMessageHandler<KeycloakHandler>();
 
             services.AddMemoryCache();
+
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
@@ -101,21 +102,8 @@ namespace Gov.Cscp.Victims.Public
                     //opts.PayloadSerializerOptions.WriteIndented = true;
                 });
 
-            // setup siteminder authentication (core 2.0)
-            services
-            .AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
-                options.DefaultChallengeScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
-            })
-            .AddSiteminderAuth(options => { });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Business-User", policy =>
-                policy.RequireClaim(User.UserTypeClaim, "Business"));
-            });
-            // end of siteminder section
+            services.AddJwtBearerAuth(Configuration["JWT_TOKEN_KEY"], Configuration["JWT_VALID_ISSUER"], !string.IsNullOrEmpty(Configuration["JWT_DISABLE_ISSUER_VALIDATION"]));
+            services.AddSiteminderAuth();
 
             services.RegisterPermissionHandler();
 

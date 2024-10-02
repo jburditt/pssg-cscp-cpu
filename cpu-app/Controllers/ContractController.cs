@@ -1,9 +1,10 @@
+﻿using Gov.Cscp.Victims.Public.Services;
 ﻿using Manager;
 using Manager.Contract;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Shared.Contract;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace Gov.Cscp.Victims.Public.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    [JwtAuthorize]
     public class ContractController(IHostApplicationLifetime applicationLifetime, IMediator mediator) : Controller
     {
         private readonly CancellationToken _cancellationToken = applicationLifetime.ApplicationStopping;

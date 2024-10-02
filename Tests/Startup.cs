@@ -7,7 +7,7 @@
     public void ConfigureServices(IServiceCollection services)
     {
         var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<ApplicationVersionInfo>()
+            .AddUserSecrets<Gov.Cscp.Victims.Public.Startup> ()
             .AddEnvironmentVariables()
             .Build();
         services.AddSingleton<IConfiguration>(configuration);
@@ -16,7 +16,14 @@
 
         services.AddHandlers();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<InvoiceHandlers>());
+        services.AddTransient<FakeHandlers>();
+        services.AddTransient<IFakeRepository, FakeRepository>();
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblyContaining<InvoiceHandlers>();
+            cfg.RegisterServicesFromAssemblyContaining<FakeHandlers>();
+        });
 
         // add dynamics database adapter
         services.AddDatabase(configuration);
