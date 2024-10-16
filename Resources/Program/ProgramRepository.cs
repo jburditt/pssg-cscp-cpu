@@ -13,7 +13,9 @@ public class ProgramRepository : BaseRepository<Vsd_Program, Program>, IProgramR
     {
         var queryResults = _databaseContext.Vsd_ProgramSet
             .WhereIf(programQuery.Id != null, x => x.Id == programQuery.Id)
-            .WhereIf(programQuery.StateCode != null, c => c.StateCode == _mapper.Map<Vsd_Program_StateCode>(programQuery.StateCode))
+            .WhereIf(programQuery.ContractId != null, x => x.Vsd_ContractId.Id == programQuery.ContractId)
+            .WhereIf(programQuery.StateCode != null, c => c.StateCode == (Vsd_Program_StateCode)programQuery.StateCode)
+            .WhereIf(programQuery.StatusCode != null, c => c.StatusCode == (Vsd_Program_StatusCode)programQuery.StatusCode)
             .ToList();
         var programs = _mapper.Map<IEnumerable<Program>>(queryResults);
         return new ProgramResult(programs);

@@ -41,6 +41,18 @@ public abstract class BaseRepository<TEntity, TDto>
         return entity.Id;
     }
 
+    public virtual bool Update(TEntity entity)
+    {
+        if (!_databaseContext.IsAttached(entity))
+        {
+            _databaseContext.Attach(entity);
+        }
+        _databaseContext.UpdateObject(entity);
+        return !_databaseContext
+            .SaveChanges()
+            .HasError;     
+    }
+
     public virtual bool TryDelete(Guid id)
     {
         var dto = Activator.CreateInstance<TDto>();
@@ -76,6 +88,7 @@ public abstract class BaseRepository<TEntity, TDto>
         }
         _databaseContext.DeleteObject(entity);
         _databaseContext.SaveChanges();
+        _databaseContext.Detach(entity);
         return true;
     }
 
